@@ -7,24 +7,41 @@ namespace ConsoleApplication
         int dangeonW;
         int dangeonH;
 
+        int playerX,playerY;
+        bool play;
+
         int[,] fullMap;
 
         Program(){
             dangeonH = 15;
             dangeonW = 15;
+            playerX = 1;
+            playerY = 1;
+            play = true;
             fullMap = new int[dangeonW,dangeonH];
+            fullMap[playerX,playerY] = 2;
         }
 
         static void Main(string[] args)
-        {
+        {   
+            Console.CursorVisible = false;
+            Console.Title = "DungeonSeeker";
             Program m = new Program();
-            m.fullMap[0,0] = 1;
-            m.fullMap[0,14] = 1;
-            m.fullMap[14,0] = 1;
-            m.fullMap[14,14] = 1;
-            m.DrawLine(0f,0f,5f,14f);
+            m.Maps(1);
             m.Render();
-            Console.ReadLine();
+            while(m.play){
+                if(Console.ReadKey().Key == ConsoleKey.UpArrow)
+                    m.MovePlayer(m.playerX,m.playerY - 1);
+                else if(Console.ReadKey().Key == ConsoleKey.DownArrow)
+                    m.MovePlayer(m.playerX,m.playerY + 1);
+                else if(Console.ReadKey().Key == ConsoleKey.LeftArrow)
+                    m.MovePlayer(m.playerX - 1,m.playerY);
+                else if(Console.ReadKey().Key == ConsoleKey.RightArrow)
+                    m.MovePlayer(m.playerX + 1,m.playerY);
+                else if(Console.ReadKey().Key == ConsoleKey.Escape)
+                    m.play = false;
+                m.Render();
+            }
         }
 
         void Render(){
@@ -35,8 +52,10 @@ namespace ConsoleApplication
                 {
                     if(fullMap[t,i] == 1)
                         Console.Write('#');
-                    else
-                        Console.Write('_');
+                    else if(fullMap[t,i] == 2)
+                        Console.Write('@');
+                    else   
+                        Console.Write(" ");
                 }
                 Console.WriteLine();
             }
@@ -47,7 +66,6 @@ namespace ConsoleApplication
             float L1,L2,L;
             L1 = Math.Abs(x1-x);
             L2 = Math.Abs(y1-y);
-            //Console.WriteLine(L1+"    "+L2);
             if(L1>L2)
                 L = L1 + 1;
             else
@@ -55,11 +73,33 @@ namespace ConsoleApplication
             xr = x;
             yr = y;
             for(int i = 0; i < L;i++){
-                //Console.WriteLine(xr+"  "+yr);
                 fullMap[(int)Math.Round(xr),(int)Math.Round(yr)] = 1;
-                //Console.WriteLine((x1-x)/L);
                 xr = xr + (x1-x)/L;
                 yr = yr + (y1-y)/L;
+            }
+        }
+
+        void Maps(int i){
+            switch (i)
+            {
+                case 1:
+                    DrawLine(0,0,14,0);
+                    DrawLine(0,0,0,14);
+                    DrawLine(0,14,14,14);
+                    DrawLine(14,0,14,14);
+                break;
+                default:
+
+                break;
+            }
+        }
+
+        void MovePlayer(int x,int y){
+            if(fullMap[x,y] == 0){
+                fullMap[playerX,playerY] = 0;
+                fullMap[x,y] = 2;
+                playerX = x;
+                playerY = y;
             }
         }
     }
