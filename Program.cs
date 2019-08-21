@@ -24,23 +24,32 @@ namespace ConsoleApplication
 
         static void Main(string[] args)
         {   
+            char key;
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Program m = new Program();
             m.Maps(1);
             m.Render();
             while(m.play){
-                if(Console.ReadKey().Key == ConsoleKey.UpArrow)
-                    m.MovePlayer(m.playerX,m.playerY - 1);
-                else if(Console.ReadKey().Key == ConsoleKey.DownArrow)
-                    m.MovePlayer(m.playerX,m.playerY + 1);
-                else if(Console.ReadKey().Key == ConsoleKey.LeftArrow)
-                    m.MovePlayer(m.playerX - 1,m.playerY);
-                else if(Console.ReadKey().Key == ConsoleKey.RightArrow)
-                    m.MovePlayer(m.playerX + 1,m.playerY);
-                else if(Console.ReadKey().Key == ConsoleKey.Escape)
-                    m.play = false;
                 m.Render();
+                key = Console.ReadKey().KeyChar;
+                switch(key){
+                    case 'w':
+                        m.MovePlayer(m.playerX,m.playerY - 1);
+                    break;
+                    case 's':
+                        m.MovePlayer(m.playerX,m.playerY + 1);
+                    break;
+                    case 'a':
+                        m.MovePlayer(m.playerX - 1,m.playerY);
+                    break;
+                    case 'd':
+                        m.MovePlayer(m.playerX + 1,m.playerY);
+                    break;
+                    case 'q':
+                        m.play = false;
+                    break;
+                }
             }
         }
 
