@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApplication
 {
@@ -10,9 +11,11 @@ namespace ConsoleApplication
         int playerX,playerY;    //player coordinate x         player coordinate y
         bool play;
 
-        int[,] fullMap;
+        //int[,] fullMap;
 
         int[] wallList;
+
+        Obj[,] MapObjs;
 
         Program(){
             dangeonH = 15;
@@ -20,9 +23,12 @@ namespace ConsoleApplication
             playerX = 1;
             playerY = 1;
             play = true;
-            fullMap = new int[dangeonW,dangeonH];
-            fullMap[playerX,playerY] = 100;
+            //fullMap = new int[dangeonW,dangeonH];
+            //fullMap[playerX,playerY] = 100;
             wallList = new int[11]{1,2,3,4,5,6,7,8,9,10,11}; //wall list update if need new impassable object
+            MapObjs = new Obj[dangeonW,dangeonH];
+            RefreshMap();
+            CreateObj(playerX,playerY,100);
         }
 
         static void Main(string[] args)
@@ -63,7 +69,7 @@ namespace ConsoleApplication
             {
                 for (int t = 0; t < dangeonW; t++)
                 {
-                    Console.Write(GetSimbol(fullMap[t,i]));
+                    Console.Write(MapObjs[t,i].symbol);
                 }
                 Console.WriteLine();
             }
@@ -71,7 +77,7 @@ namespace ConsoleApplication
 
         void Render(int x, int y){
             Console.SetCursorPosition(x,y);
-            Console.Write(GetSimbol(fullMap[x,y]));
+            Console.Write(MapObjs[x,y].symbol);
             Console.SetCursorPosition(0,15);
             Console.Write(' ');
         }
@@ -113,7 +119,47 @@ namespace ConsoleApplication
             }
         }
 
-        void DrawLine(float x, float y, float x1, float y1, int ID){
+        void RemoveObj(int x, int y){
+            MapObjs[x,y] = null;
+            CreateObj(x,y,0);
+        }
+
+        void CreateObj(int x, int y, int ID){
+            Obj u = new Obj();
+            u.symbol = GetSimbol(ID);
+            u.ID = ID;
+            MapObjs[x,y] = u;
+        }
+
+        void CreateObj(int x, int y, string name, int ID){
+            Obj u = new Obj();
+            u.name = name;
+            u.symbol = GetSimbol(ID);
+            u.ID = ID;
+            MapObjs[x,y] = u;
+        }
+
+        void CreateObj(int x, int y, string name, int ID, bool use, object behaviour){
+            Obj u = new Obj();
+            u.name = name;
+            u.symbol = GetSimbol(ID);
+            u.ID = ID;
+            u.use = use;
+            u.behaviour = behaviour;
+            MapObjs[x,y] = u;
+        }
+
+        void RefreshMap(){
+            for(int i = 0; i < dangeonH; i++){
+                for(int t = 0; t < dangeonW; t++){
+                    if(MapObjs[i,t] == null){
+                        CreateObj(i,t,0);
+                    }
+                }
+            }
+        }
+
+        void DrawSimpleLine(float x, float y, float x1, float y1, int ID){
             float xr,yr;
             float L1,L2,L;
             L1 = Math.Abs(x1-x);
@@ -125,14 +171,16 @@ namespace ConsoleApplication
             xr = x;
             yr = y;
             for(int i = 0; i < L;i++){
-                fullMap[(int)Math.Round(xr),(int)Math.Round(yr)] = ID;
+                //fullMap[(int)Math.Round(xr),(int)Math.Round(yr)] = ID;
+                CreateObj((int)Math.Round(xr),(int)Math.Round(yr),ID);
                 xr = xr + (x1-x)/L;
                 yr = yr + (y1-y)/L;
             }
         }
 
-        void DrawDot(int x, int y, int ID){
-            fullMap[x,y] = ID;
+        void DrawSimpleDot(int x, int y, int ID){
+            //fullMap[x,y] = ID;
+            CreateObj(x,y,ID);
             Render(x,y);
         }
 
@@ -140,19 +188,19 @@ namespace ConsoleApplication
             switch (i)
             {
                 case 1:
-                    DrawLine(0,0,14,0,1);
-                    DrawLine(0,0,0,14,2);
-                    DrawLine(0,14,14,14,1);
-                    DrawLine(14,0,14,14,2);
-                    DrawLine(0,4,9,4,1);
-                    DrawLine(10,4,14,4,1);
-                    DrawDot(0,0,3);
-                    DrawDot(14,0,4);
-                    DrawDot(0,14,5);
-                    DrawDot(14,14,6);
-                    DrawDot(0,4,7);
-                    DrawDot(14,4,8);
-                    DrawDot(9,4,12);
+                    DrawSimpleLine(0,0,14,0,1);
+                    DrawSimpleLine(0,0,0,14,2);
+                    DrawSimpleLine(0,14,14,14,1);
+                    DrawSimpleLine(14,0,14,14,2);
+                    DrawSimpleLine(0,4,9,4,1);
+                    DrawSimpleLine(10,4,14,4,1);
+                    DrawSimpleDot(0,0,3);
+                    DrawSimpleDot(14,0,4);
+                    DrawSimpleDot(0,14,5);
+                    DrawSimpleDot(14,14,6);
+                    DrawSimpleDot(0,4,7);
+                    DrawSimpleDot(14,4,8);
+                    DrawSimpleDot(9,4,12);
                 break;
                 default:
 
@@ -162,7 +210,7 @@ namespace ConsoleApplication
 
         bool WallCheck(int x, int y){
             for(int i = 0; i < wallList.Length; i++){
-                if(wallList[i] == fullMap[x,y]){
+                if(wallList[i] == MapObjs[x,y].ID){
                     return true;
                 }
             }
@@ -171,8 +219,8 @@ namespace ConsoleApplication
 
         void MovePlayer(int x,int y){
             if(WallCheck(x,y) == false){
-                fullMap[playerX,playerY] = 0;
-                fullMap[x,y] = 100;
+                RemoveObj(playerX,playerY);
+                CreateObj(x,y,100);
                 Render(playerX,playerY);
                 playerX = x;
                 playerY = y;
