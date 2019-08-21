@@ -10,7 +10,7 @@ Developer just studing C# and exploring VS Code. If someone want to help develop
 
 This is bad working "game" in where i do experiments with Windows 10 console and programming language C#.
 This game can be build in almost every platforms(besides linus and macos i think?).
-In this game you shound explore dungeon and collect items and on the way killing enemies.(soon)
+In this game you will shound explore dungeon and collect items and on the way killing enemies.
 
 # Control
 
