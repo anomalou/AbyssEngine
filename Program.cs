@@ -31,7 +31,6 @@ namespace ConsoleApplication
             m.Maps(1);
             m.Render();
             while(m.play){
-                m.Render();
                 key = Console.ReadKey().KeyChar;
                 switch(key){
                     case 'w':
@@ -59,14 +58,28 @@ namespace ConsoleApplication
             {
                 for (int t = 0; t < dangeonW; t++)
                 {
-                    if(fullMap[t,i] == 1)
-                        Console.Write('#');
-                    else if(fullMap[t,i] == 2)
-                        Console.Write('@');
-                    else   
-                        Console.Write(" ");
+                    Console.Write(GetSimbol(fullMap[i,t]));
                 }
                 Console.WriteLine();
+            }
+        }
+
+        void Render(int x, int y){
+            Console.SetCursorPosition(x,y);
+            Console.Write(GetSimbol(fullMap[x,y]));
+            Console.SetCursorPosition(0,15);
+        }
+
+        char GetSimbol(int ID){
+            switch(ID){
+                case 1:
+                    return '#';
+                case 2:
+                    return '@';
+                case 0:
+                    return ' ';
+                default:
+                    return ' ';
             }
         }
 
@@ -107,8 +120,10 @@ namespace ConsoleApplication
             if(fullMap[x,y] == 0){
                 fullMap[playerX,playerY] = 0;
                 fullMap[x,y] = 2;
+                Render(playerX,playerY);
                 playerX = x;
                 playerY = y;
+                Render(x,y);
             }
         }
     }
