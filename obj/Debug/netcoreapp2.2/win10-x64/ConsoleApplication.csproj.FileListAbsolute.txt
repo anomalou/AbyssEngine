@@ -1,0 +1,14 @@
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\hostpolicy.dll
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\hostfxr.dll
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.exe
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.deps.json
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.runtimeconfig.json
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.runtimeconfig.dev.json
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.dll
+C:\consoleapplication\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.pdb
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.csprojAssemblyReference.cache
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.csproj.CoreCompileInputs.cache
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.AssemblyInfoInputs.cache
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.AssemblyInfo.cs
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.dll
+C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.pdb
