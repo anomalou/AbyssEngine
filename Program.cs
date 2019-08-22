@@ -5,28 +5,24 @@ namespace ConsoleApplication
 {
     class Program
     {
-        int dangeonW;   //dangeon height
-        int dangeonH;   //dangeon width
+        int dungeonW;   //dangeon height
+        int dungeonH;   //dangeon width
 
         int playerX,playerY;    //player coordinate x         player coordinate y
         bool play;
 
-        //int[,] fullMap;
-
-        int[] wallList;
+        ObjsList objsList;
 
         Obj[,] MapObjs;
 
         Program(){
-            dangeonH = 15;
-            dangeonW = 15;
+            objsList = new ObjsList();
+            dungeonH = 15;
+            dungeonW = 15;
             playerX = 1;
             playerY = 1;
             play = true;
-            //fullMap = new int[dangeonW,dangeonH];
-            //fullMap[playerX,playerY] = 100;
-            wallList = new int[11]{1,2,3,4,5,6,7,8,9,10,11}; //wall list update if need new impassable object
-            MapObjs = new Obj[dangeonW,dangeonH];
+            MapObjs = new Obj[dungeonW,dungeonH];
             RefreshMap();
             CreateObj(playerX,playerY,100);
         }
@@ -65,9 +61,9 @@ namespace ConsoleApplication
 
         void Render(){
             Console.Clear();
-            for (int i = 0; i < dangeonH; i++)
+            for (int i = 0; i < dungeonH; i++)
             {
-                for (int t = 0; t < dangeonW; t++)
+                for (int t = 0; t < dungeonW; t++)
                 {
                     Console.Write(MapObjs[t,i].symbol);
                 }
@@ -82,76 +78,17 @@ namespace ConsoleApplication
             Console.Write(' ');
         }
 
-        char GetSimbol(int ID){
-            switch(ID){
-                case 1:
-                    return '\u2501';    //horizontal wall
-                case 2:
-                    return '\u2502';    //vertical wall
-                case 3:
-                    return '\u250f';    //left up angle
-                case 4:
-                    return '\u2513';    //right up angle
-                case 5:
-                    return '\u2517';    //left down angle
-                case 6:
-                    return '\u251b';    //right down angle
-                case 7:
-                    return '\u251d';    //left crossroad
-                case 8:
-                    return '\u2525';    //right crossroad
-                case 9:
-                    return '\u252f';    //up crossroad
-                case 10:
-                    return '\u253b';    //down crossroad
-                case 11:
-                    return '\u254b';    //cross
-                case 12:
-                    return '\u2509';    //horizontal door;
-                case 13:
-                    return '\u250b';    //vertical door;
-                case 100:
-                    return '@'; //player
-                case 0:
-                    return ' '; //empery cell
-                default:
-                    return ' ';
-            }
-        }
-
         void RemoveObj(int x, int y){
-            MapObjs[x,y] = null;
             CreateObj(x,y,0);
         }
 
         void CreateObj(int x, int y, int ID){
-            Obj u = new Obj();
-            u.symbol = GetSimbol(ID);
-            u.ID = ID;
-            MapObjs[x,y] = u;
-        }
-
-        void CreateObj(int x, int y, string name, int ID){
-            Obj u = new Obj();
-            u.name = name;
-            u.symbol = GetSimbol(ID);
-            u.ID = ID;
-            MapObjs[x,y] = u;
-        }
-
-        void CreateObj(int x, int y, string name, int ID, bool use, object behaviour){
-            Obj u = new Obj();
-            u.name = name;
-            u.symbol = GetSimbol(ID);
-            u.ID = ID;
-            u.use = use;
-            u.behaviour = behaviour;
-            MapObjs[x,y] = u;
+            MapObjs[x,y] = objsList.obj[ID];
         }
 
         void RefreshMap(){
-            for(int i = 0; i < dangeonH; i++){
-                for(int t = 0; t < dangeonW; t++){
+            for(int i = 0; i < dungeonH; i++){
+                for(int t = 0; t < dungeonW; t++){
                     if(MapObjs[i,t] == null){
                         CreateObj(i,t,0);
                     }
@@ -171,7 +108,6 @@ namespace ConsoleApplication
             xr = x;
             yr = y;
             for(int i = 0; i < L;i++){
-                //fullMap[(int)Math.Round(xr),(int)Math.Round(yr)] = ID;
                 CreateObj((int)Math.Round(xr),(int)Math.Round(yr),ID);
                 xr = xr + (x1-x)/L;
                 yr = yr + (y1-y)/L;
@@ -179,7 +115,6 @@ namespace ConsoleApplication
         }
 
         void DrawSimpleDot(int x, int y, int ID){
-            //fullMap[x,y] = ID;
             CreateObj(x,y,ID);
             Render(x,y);
         }
@@ -209,10 +144,8 @@ namespace ConsoleApplication
         }
 
         bool WallCheck(int x, int y){
-            for(int i = 0; i < wallList.Length; i++){
-                if(wallList[i] == MapObjs[x,y].ID){
-                    return true;
-                }
+            if(MapObjs[x,y].impassible == true){
+                return true;
             }
             return false;
         }
