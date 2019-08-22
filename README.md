@@ -1,4 +1,4 @@
-# DangeonSeeker
+# DungeonSeeker
 ConsoleGame
 
 WARNING!!! BAD CODE!!! If you just want watch the code i warned you.
@@ -20,7 +20,11 @@ On your way you can meet dotted line. It is a door. Just walk at door to open it
 # Building
 
 Download .NET Core
-Clone or download master banch. Put files launch.json and tasks.json in new directory .vscode and put it directory in directory with files Program.cs and ConsoleApplication.csproj. Open terminal in VS Code or new console window. Type: 
+Clone or download master banch. Put files launch.json and tasks.json in new directory 
+```
+.vscode 
+```
+and put it directory in directory with files Program.cs and ConsoleApplication.csproj. Open terminal in VS Code or new console window. Type: 
 
 ```
 dotnet build -r win10-x64 /proj dir/
