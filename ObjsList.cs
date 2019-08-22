@@ -17,8 +17,8 @@ namespace ConsoleApplication{
             obj[9] = new Obj(){name = "Up crossroad",symbol = '\u252f',use = false,impassible = true, behaviour = new BaseAction()};
             obj[10] = new Obj(){name = "Down crossroad",symbol = '\u253b',use = false,impassible = true, behaviour = new BaseAction()};
             obj[11] = new Obj(){name = "Cross",symbol = '\u254b',use = false,impassible = true, behaviour = new BaseAction()};
-            obj[12] = new Obj(){name = "Horizontal door",symbol = '\u2509',use = true,impassible = true, behaviour = new BaseAction()};
-            obj[13] = new Obj(){name = "Vertical door",symbol = '\u250b',use = true,impassible = true, behaviour = new BaseAction()};
+            obj[12] = new Obj(){name = "Horizontal door",symbol = '\u2509',use = true,impassible = true, behaviour = new OpenDoor()};
+            obj[13] = new Obj(){name = "Vertical door",symbol = '\u250b',use = true,impassible = true, behaviour = new OpenDoor()};
             obj[100] = new Obj(){name = "Player",symbol = '@',use = false,impassible = true, behaviour = new BaseAction()};
         }
     }

@@ -144,9 +144,14 @@ namespace ConsoleApplication
         }
 
         bool WallCheck(int x, int y){
-            if(MapObjs[x,y].impassible == true){
+            if(MapObjs[x,y].impassible == true)
                 return true;
-            }
+            return false;
+        }
+
+        bool UsableCheck(int x, int y){
+            if(MapObjs[x,y].use == true)
+                return true;
             return false;
         }
 
@@ -158,6 +163,8 @@ namespace ConsoleApplication
                 playerX = x;
                 playerY = y;
                 Render(x,y);
+            }else if(WallCheck(x,y) == true & UsableCheck(x,y) == true){
+                MapObjs[x,y].behaviour.Action(x,y);
             }
         }
     }
