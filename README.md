@@ -14,7 +14,8 @@ In this game you will shound explore dungeon and collect items and on the way ki
 
 # Control
 
-Use "WASD" buttons for character moving. Your character looks "@".
+Game control is case-sensitive!
+Use "wasd" buttons for character moving. Press "q" for quit from game. Your character looks "@".
 On your way you can meet dotted line. It is a door. Just walk at door to open it.
 
 # Building
