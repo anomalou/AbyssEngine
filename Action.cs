@@ -2,12 +2,12 @@ using System;
 
 namespace ConsoleApplication{
 
-    public class BaseAction{//base action for the most objects
+    class BaseAction:Source{//base action for the most objects
         public virtual void Action(int x,int y){}
     }
     class OpenDoor:BaseAction{//soon with this class you will can open doors
         public override void Action(int x,int y){
-            Console.Write("Yep");
+            source.RemoveObj(x,y);
         }
     }
 }

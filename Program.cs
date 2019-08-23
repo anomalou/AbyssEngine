@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ConsoleApplication
 {
-    class Program
+    class Source
     {
-        int dungeonW;   //dangeon height
-        int dungeonH;   //dangeon width
+        int dungeonH;   //dangeon height
+        int dungeonW;   //dangeon width
 
         int playerX,playerY;    //player coordinate x         player coordinate y
         bool play;
@@ -15,7 +14,10 @@ namespace ConsoleApplication
 
         Obj[,] MapObjs;
 
-        Program(){
+        public static Source source;
+
+        public Source(bool start){
+            if(start == true){
             objsList = new ObjsList();
             dungeonH = 15;
             dungeonW = 15;
@@ -23,43 +25,45 @@ namespace ConsoleApplication
             playerY = 1;
             play = true;
             MapObjs = new Obj[dungeonW,dungeonH];
-            RefreshMap();
-            CreateObj(playerX,playerY,100);
+            }
         }
+        public Source(){}
 
         static void Main(string[] args)
         {   
+            Source _source = new Source(true);
+            source = _source;
             char key;
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Program m = new Program();
-            m.Maps(1);
-            m.Render();
-            while(m.play){
+            source.RefreshMap();
+            source.CreateObj(source.playerX,source.playerY,100);
+            source.Maps(1);
+            Console.WriteLine(source.MapObjs[1,1].name);
+            while(source.play){
                 key = Console.ReadKey().KeyChar;
                 switch(key){
                     case 'w':
-                        m.MovePlayer(m.playerX,m.playerY - 1);
+                        source.MovePlayer(source.playerX,source.playerY - 1);
                     break;
                     case 's':
-                        m.MovePlayer(m.playerX,m.playerY + 1);
+                        source.MovePlayer(source.playerX,source.playerY + 1);
                     break;
                     case 'a':
-                        m.MovePlayer(m.playerX - 1,m.playerY);
+                        source.MovePlayer(source.playerX - 1,source.playerY);
                     break;
                     case 'd':
-                        m.MovePlayer(m.playerX + 1,m.playerY);
+                        source.MovePlayer(source.playerX + 1,source.playerY);
                     break;
                     case 'q':
-                        m.play = false;
+                        source.play = false;
                     break;
                 }
             }
         }
-        
 
-        void Render(){
+        public void Render(){
             Console.Clear();
             for (int i = 0; i < dungeonH; i++)
             {
@@ -71,19 +75,20 @@ namespace ConsoleApplication
             }
         }
 
-        void Render(int x, int y){
+        public void Render(int x, int y){
             Console.SetCursorPosition(x,y);
             Console.Write(MapObjs[x,y].symbol);
             Console.SetCursorPosition(0,15);
             Console.Write(' ');
         }
 
-        void RemoveObj(int x, int y){
+        public void RemoveObj(int x, int y){
             CreateObj(x,y,0);
         }
 
-        void CreateObj(int x, int y, int ID){
+        public void CreateObj(int x, int y, int ID){
             MapObjs[x,y] = objsList.obj[ID];
+            Render(x,y);
         }
 
         void RefreshMap(){
@@ -163,9 +168,9 @@ namespace ConsoleApplication
                 playerX = x;
                 playerY = y;
                 Render(x,y);
-            }else if(WallCheck(x,y) == true & UsableCheck(x,y) == true){
-                MapObjs[x,y].behaviour.Action(x,y);
-            }
+            }else if(WallCheck(x,y) == true)
+                    if(UsableCheck(x,y) == true)
+                        MapObjs[x,y].behaviour.Action(x,y);
         }
     }
 }
