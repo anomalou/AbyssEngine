@@ -1,5 +1,7 @@
 namespace ConsoleApplication{
     interface IWindow{
+
+        string name{get;set;}
         int sizeX{get;set;}
         int sizeY{get;set;}
         int positionX{get;set;}
@@ -7,7 +9,10 @@ namespace ConsoleApplication{
 
         char[,] content{get;set;}
 
-        void Fill(Source s);
-        void Update(Source s);
+        void Start(Source s);
+
+        //void Start();
+        void Control(char key);
+        void Update();
     }
 }
