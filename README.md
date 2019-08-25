@@ -1,7 +1,7 @@
 # DungeonSeeker
 ConsoleGame
 
-WARNING!!! BAD CODE!!! If you just want watch the code i warned you.
+WARNING!!! BAD CODE!!! If you just want watch the code i warned you. All new and unstable updates will be in unstable branch.
 
 This is opensource console game with RPG elements. This is personal project for education and not for commertion on anything alse. Developer just studing C# and exploring VS Code. If someone want to help developer he will be very pleasant, but he can't do anything alse in reply but just say "Thank you". Nice to meet you!
 
