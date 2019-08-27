@@ -14,7 +14,6 @@ namespace ConsoleApplication{
         int dungeonH{get;set;}   //dangeon height
         int dungeonW{get;set;}   //dangeon width
         public int playerX,playerY;    //player coordinate x         player coordinate y
-        bool play;
         ObjsList objsList;
         Obj[,] MapObjs{get;set;}
 
@@ -86,27 +85,22 @@ namespace ConsoleApplication{
             MapObjs = new Obj[dungeonW,dungeonH];
             objsList = new ObjsList();
         }
+
+        void CreateWindow(){
+            for(int i = 0; i < sizeX; i ++)
+                for(int t = 0; t < sizeY; t++)
+                    content[i,t] = '▓';
+            for(int i = 0; i < name.Length; i++)
+                content[i+1,1] = name[i];
+        }
         public void Start(Source s){
             playerX = 1;
             playerY = 1;
             RefreshMap();
             CreateObj(playerX,playerY,100);
             Maps(1);
-            for(int i = 0; i < sizeX; i ++)
-                for(int t = 0; t < sizeY; t++)
-                    content[i,t] = '#';
-            for(int i = 0; i < name.Length; i++)
-                content[i+1,1] = name[i];
-            for(int i = 0; i < mapX; i++){
-                for(int t = 0; t < mapY; t++){
-                    tx = playerX - mapX/2 + i;
-                    ty = playerY - mapY/2 + t;
-                    if(tx >= 0 & tx < dungeonW & ty >= 0 & ty < dungeonH)
-                        content[i+1,t+3] = MapObjs[tx,ty].symbol;
-                    else
-                        content[i+1,t+3] = ' ';
-                }
-            }
+            CreateWindow();
+            Update();
         }
 
         public void Update(){

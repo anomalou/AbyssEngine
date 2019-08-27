@@ -18,22 +18,19 @@ namespace ConsoleApplication
             char key;
             s.GameLaunch();
             while(true){
-                key = Console.ReadKey().KeyChar;
-                s.windowList[s.activeWindow].Control(key);
                 if(s.activeWindow != -1)
                     s.UpdateWindow(s.windowList[s.activeWindow]);
+                key = Console.ReadKey().KeyChar;
+                s.windowList[s.activeWindow].Control(key);
             }
         }
 
         void GameLaunch(){
             windowList = new IWindow[1];//how many windows have game
-            //play = true;
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            //Console.SetBufferSize(200,200);
-            //Console.SetWindowSize(100,200);
-            activeWindow = OpenWindow(20,20,new GameplayWindow());//set gameplay window as active window
+            activeWindow = OpenWindow(0,0,new GameplayWindow());//set gameplay window as active window
         }
 
         //canvas control
@@ -56,24 +53,26 @@ namespace ConsoleApplication
             sizeY = w.sizeY;
             w.positionX = x;
             w.positionY = y;
-            Console.SetCursorPosition(x,y);
+            /*Console.SetCursorPosition(x,y);
             for(int i = 0; i < sizeY; i++){
                 for(int t = 0; t < sizeX; t++){
                     Console.Write(w.content[t,i]);
                 }
                 Console.SetCursorPosition(x,y+i);
-            }
+            }*/
+            UpdateWindow(w);
         }
 
         public void UpdateWindow(IWindow w){
             w.Update();
+            Console.CursorVisible = false;
             for(int i = 0; i < w.sizeY; i++){
                 for(int t = 0; t < w.sizeX; t++){
                         Console.SetCursorPosition(t+w.positionX,i+w.positionY);
                         Console.Write(w.content[t,i]);
                 }
             }
-            Console.SetCursorPosition(0,16);
+            Console.SetCursorPosition(0,w.sizeY);
         }
 
         public void CloseWindow(int windowNumber){
@@ -103,25 +102,5 @@ namespace ConsoleApplication
                 return _windowSizeW;
             }
         }
-
-        /*public int GetDungeonH{
-            get{
-                return dungeonH;
-            }
-        }
-
-        public int GetDungeonW{
-            get{
-                return dungeonH;
-            }
-        }
-
-        public Obj[,] GetMapObj{
-            get{
-                return MapObjs;
-            }
-        }*/
-
-        //game map control
     }
 }
