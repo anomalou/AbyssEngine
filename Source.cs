@@ -90,14 +90,6 @@ namespace ConsoleApplication
             }
         }
 
-        /*public void Render(int x, int y){
-            Console.SetCursorPosition(x,y);
-            Console.Write(MapObjs[x,y].symbol);
-            Console.SetCursorPosition(0,15);
-            Console.Write(' ');
-        }*/
-
-
         //properties
 
         public int WindowSizeH{
