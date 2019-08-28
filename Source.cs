@@ -30,19 +30,29 @@ namespace ConsoleApplication
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            activeWindow = OpenWindow(0,0,new GameplayWindow());//set gameplay window as active window
+            activeWindow = OpenWindow(0,0,new GameplayWindow(), new FileManager());//set gameplay window as active window
         }
 
         //canvas control
 
         public int OpenWindow(int positionX,int positionY,IWindow window){
-            for(int i = 0; i < windowList.Length; i++){
-                if(windowList[i] == null){
-                    window.Start(source);
-                    RenderWindow(positionX,positionY,window);
-                    windowList[i] = window;
-                    return i;
-                }
+            int i = CheckFreeSpace();
+            if(i != -1){
+                window.Start(source);
+                RenderWindow(positionX,positionY,window);
+                windowList[i] = window;
+                return i;
+            }
+            return -1;
+        }
+
+        public int OpenWindow(int positionX, int positionY, IWindow w, FileManager f){
+            int i = CheckFreeSpace();
+            if(i != -1){
+                w.Start(source,f);
+                RenderWindow(positionX,positionY, w);
+                windowList[i] = w;
+                return i;
             }
             return -1;
         }
@@ -53,13 +63,6 @@ namespace ConsoleApplication
             sizeY = w.sizeY;
             w.positionX = x;
             w.positionY = y;
-            /*Console.SetCursorPosition(x,y);
-            for(int i = 0; i < sizeY; i++){
-                for(int t = 0; t < sizeX; t++){
-                    Console.Write(w.content[t,i]);
-                }
-                Console.SetCursorPosition(x,y+i);
-            }*/
             UpdateWindow(w);
         }
 
@@ -79,6 +82,15 @@ namespace ConsoleApplication
             windowList[windowNumber] = null;
             activeWindow = -1;
             ScreenUpdate();
+        }
+
+        int CheckFreeSpace(){
+            for(int i = 0; i < windowList.Length; i++){
+                if(windowList[i] == null){
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public void ScreenUpdate(){

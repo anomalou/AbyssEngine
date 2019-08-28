@@ -1,9 +1,8 @@
-using System;
-
 namespace ConsoleApplication{
     class ObjsList{ //class that have array with all objects which are you can meet on you way
-        public Obj[] obj;
-        public ObjsList(){
+        //public Obj[] obj;
+
+        /*public ObjsList(){
             obj = new Obj[101]; //how many objects do you have?
             obj[0] = new Obj(){name = "Void",symbol = ' ',use = false,impassible = false, behaviour = new BaseAction()};
             obj[1] = new Obj(){name = "Horizontal wall",symbol = '\u2501',use = false,impassible = true, behaviour = new BaseAction()};
@@ -20,6 +19,45 @@ namespace ConsoleApplication{
             obj[12] = new Obj(){name = "Horizontal door",symbol = '\u2509',use = true,impassible = true, behaviour = new OpenDoor()};
             obj[13] = new Obj(){name = "Vertical door",symbol = '\u250b',use = true,impassible = true, behaviour = new OpenDoor()};
             obj[100] = new Obj(){name = "Player",symbol = '@',use = false,impassible = true, behaviour = new BaseAction()};
+        }*/
+
+        public Obj Objs(char c){
+            Obj o = new Obj();
+            o.symbol = c;
+            switch(c){
+                case '.':
+                    o.name = "Void";
+                    o.use = false;
+                    o.impassible = false; 
+                    o.behaviour = new BaseAction();
+                    return o;
+                case '─':
+                    o.name = "Horizontal wall";
+                    o.use = false;
+                    o.impassible = true; 
+                    o.behaviour = new BaseAction();
+                    return o;
+                case '|':
+                    o.name = "Vertical wall";
+                    o.use = false;
+                    o.impassible = true; 
+                    o.behaviour = new BaseAction();
+                    return o;
+                case '#':
+                    o.name = "Door";
+                    o.use = true;
+                    o.impassible = true; 
+                    o.behaviour = new OpenDoor();
+                    return o;
+                case '@':
+                    o.name = "Player";
+                    o.use = false;
+                    o.impassible = false; 
+                    o.behaviour = new BaseAction();
+                    return o;
+                default:
+                    return o;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ConsoleApplication{
 
         void Start(Source s);
 
-        //void Start();
+        void Start(Source s, FileManager f);
         void Control(char key);
         void Update();
     }

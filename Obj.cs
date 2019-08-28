@@ -1,5 +1,3 @@
-using System;
-
 namespace ConsoleApplication{
     class Obj{//property of every object
         public string name;//name of object

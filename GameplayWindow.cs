@@ -97,8 +97,20 @@ namespace ConsoleApplication{
             playerX = 1;
             playerY = 1;
             RefreshMap();
-            CreateObj(playerX,playerY,100);
-            Maps(1);
+            CreateObj(playerX,playerY,'@');
+            CreateWindow();
+            Update();
+        }
+
+        public void Start(Source s, FileManager f){
+            playerX = 1;
+            playerY = 1;
+            string[] map = f.GetMap("room");
+            for(int i = 0; i < map.Length; i++)
+                for(int t = 0; t < map[i].Length; t++)
+                    CreateObj(t,i,map[i][t]);
+            RefreshMap();
+            CreateObj(playerX,playerY,'@');
             CreateWindow();
             Update();
         }
@@ -138,24 +150,24 @@ namespace ConsoleApplication{
         }
 
         public void RemoveObj(int x, int y){
-            CreateObj(x,y,0);
+            CreateObj(x,y,'.');
         }
 
-        public void CreateObj(int x, int y, int ID){
-            MapObjs[x,y] = objsList.obj[ID];
+        public void CreateObj(int x, int y, char c){
+            MapObjs[x,y] = objsList.Objs(c);
         }
 
         void RefreshMap(){
             for(int i = 0; i < dungeonH; i++){
                 for(int t = 0; t < dungeonW; t++){
                     if(MapObjs[t,i] == null){
-                        CreateObj(t,i,0);
+                        CreateObj(t,i,' ');
                     }
                 }
             }
         }
 
-        void DrawSimpleLine(float x, float y, float x1, float y1, int ID){
+        void DrawSimpleLine(float x, float y, float x1, float y1, char c){
             float xr,yr;
             float L1,L2,L;
             L1 = Math.Abs(x1-x);
@@ -167,67 +179,41 @@ namespace ConsoleApplication{
             xr = x;
             yr = y;
             for(int i = 0; i < L;i++){
-                CreateObj((int)Math.Round(xr),(int)Math.Round(yr),ID);
+                CreateObj((int)Math.Round(xr),(int)Math.Round(yr),c);
                 xr = xr + (x1-x)/L;
                 yr = yr + (y1-y)/L;
             }
         }
 
-        void DrawSimpleDot(int x, int y, int ID){
-            CreateObj(x,y,ID);
+        void DrawSimpleDot(int x, int y, char c){
+            CreateObj(x,y,c);
         }
 
 
         //player movement
 
         bool WallCheck(int x, int y){
-            if(MapObjs[x,y].impassible == true)
+            if(MapObjs[x,y].impassible == true || MapObjs[x,y].symbol == ' ')
                 return true;
             return false;
         }
 
         bool UsableCheck(int x, int y){
-            if(MapObjs[x,y].use == true)
-                return true;
+            if(x > -1 & x < dungeonW & y > -1 & y < dungeonH)
+                if(MapObjs[x,y].use == true)
+                    return true;
             return false;
         }
 
         void MovePlayer(int x,int y){
             if(WallCheck(x,y) == false){
                 RemoveObj(playerX,playerY);
-                CreateObj(x,y,100);
+                CreateObj(x,y,'@');
                 playerX = x;
                 playerY = y;
             }else if(WallCheck(x,y) == true)
                     if(UsableCheck(x,y) == true)
                         MapObjs[x,y].behaviour.Action(x,y,this);
-        }
-
-        void Maps(int i){
-            switch (i)
-            {
-                case 1:
-                    DrawSimpleLine(0,0,99,0,1);
-                    DrawSimpleLine(0,0,0,99,2);
-                    DrawSimpleLine(0,99,99,99,1);
-                    DrawSimpleLine(99,0,99,99,2);
-                    DrawSimpleLine(0,4,9,4,1);
-                    DrawSimpleLine(10,4,50,4,1);
-                    DrawSimpleLine(20,4,20,30,2);
-                    DrawSimpleDot(20,10,13);
-                    DrawSimpleDot(0,0,3);
-                    DrawSimpleDot(14,0,4);
-                    DrawSimpleDot(0,14,5);
-                    DrawSimpleDot(14,14,6);
-                    DrawSimpleDot(0,4,7);
-                    DrawSimpleDot(14,4,8);
-                    DrawSimpleDot(9,4,12);
-                    DrawSimpleDot(3,4,12);
-                break;
-                default:
-
-                break;
-            }
         }
     }
 }
