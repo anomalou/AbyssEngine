@@ -12,3 +12,16 @@ C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.Assem
 C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.AssemblyInfo.cs
 C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.dll
 C:\consoleapplication\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.pdb
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\hostpolicy.dll
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\hostfxr.dll
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.exe
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.deps.json
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.runtimeconfig.json
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.runtimeconfig.dev.json
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.dll
+C:\Users\John\DungeonSeeker\bin\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.pdb
+C:\Users\John\DungeonSeeker\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.csprojAssemblyReference.cache
+C:\Users\John\DungeonSeeker\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.AssemblyInfoInputs.cache
+C:\Users\John\DungeonSeeker\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.AssemblyInfo.cs
+C:\Users\John\DungeonSeeker\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.dll
+C:\Users\John\DungeonSeeker\obj\Debug\netcoreapp2.2\win10-x64\ConsoleApplication.pdb

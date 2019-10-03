@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\consoleapplication\\ConsoleApplication.csproj": {}
+    "C:\\Users\\John\\DungeonSeeker\\ConsoleApplication.csproj": {}
   },
   "projects": {
-    "C:\\consoleapplication\\ConsoleApplication.csproj": {
+    "C:\\Users\\John\\DungeonSeeker\\ConsoleApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\consoleapplication\\ConsoleApplication.csproj",
+        "projectUniqueName": "C:\\Users\\John\\DungeonSeeker\\ConsoleApplication.csproj",
         "projectName": "ConsoleApplication",
-        "projectPath": "C:\\consoleapplication\\ConsoleApplication.csproj",
+        "projectPath": "C:\\Users\\John\\DungeonSeeker\\ConsoleApplication.csproj",
         "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "C:\\consoleapplication\\obj\\",
+        "outputPath": "C:\\Users\\John\\DungeonSeeker\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,15 +41,21 @@
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.6, )",
+              "version": "[2.2.7, )",
               "autoReferenced": true
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

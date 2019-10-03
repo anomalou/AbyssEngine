@@ -13,7 +13,8 @@ namespace ConsoleApplication{
 
         int dungeonH{get;set;}   //dangeon height
         int dungeonW{get;set;}   //dangeon width
-        public int playerX,playerY;    //player coordinate x         player coordinate y
+        int playerX,playerY;    //player coordinate x         player coordinate y
+        int playerHP;
         ObjsList objsList;
         Obj[,] MapObjs{get;set;}
 
@@ -87,15 +88,21 @@ namespace ConsoleApplication{
         }
 
         void CreateWindow(){
+            string hp = "HP:" + playerHP.ToString();
             for(int i = 0; i < sizeX; i ++)
                 for(int t = 0; t < sizeY; t++)
                     content[i,t] = '▓';
             for(int i = 0; i < name.Length; i++)
                 content[i+1,1] = name[i];
+            for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
+                content[i+ mapX + 3, 4] = hp[i];
+            }
         }
         public void Start(Source s){
             playerX = 1;
             playerY = 1;
+            playerHP = 100;
+            Console.WriteLine(playerHP);
             RefreshMap();
             CreateObj(playerX,playerY,'@');
             CreateWindow();

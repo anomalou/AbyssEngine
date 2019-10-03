@@ -12,9 +12,6 @@ namespace ConsoleApplication{
         public FileManager(){
             //DataContractJsonSerializer j = new DataContractJsonSerializer(typeof(FileManager));
             //MemoryStream s = new MemoryStream();
-            DirectoryInfo d = new DirectoryInfo("maps");
-            if(!d.Exists)
-                d.Create();
             //j.WriteObject(s,this);
             //s.Close();
         }
