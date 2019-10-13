@@ -8,7 +8,7 @@ namespace ConsoleApplication{
         int _sizeY;
         int _positionX;
         int _positionY;
-        char[,] _content;
+        char[,,] _content;
 
 
         int dungeonH{get;set;}   //dangeon height
@@ -16,10 +16,13 @@ namespace ConsoleApplication{
         int playerX,playerY;    //player coordinate x         player coordinate y
         int playerHP;
         ObjsList objsList;
+        Inventory[] inventory;
         Obj[,] MapObjs{get;set;}
 
         int mapX,mapY;
         int tx,ty;
+
+        string[] text;
 
         public string name{
             get{
@@ -65,7 +68,7 @@ namespace ConsoleApplication{
             }
         }
 
-        public char[,] content{
+        public char[,,] content{
             get{
                 return _content;
             }
@@ -75,10 +78,12 @@ namespace ConsoleApplication{
         }
 
         public GameplayWindow(){
-            name = "Gameplay";
-            sizeX = 50;
-            sizeY = 30;
-            content = new char[sizeX,sizeY];
+            text = new string[2] { "Your player", "Inventroy" };
+            name = "Map";
+            sizeX = 40;
+            sizeY = 15;
+            content = new char[sizeX,sizeY,2];
+            inventory = new Inventory[6];
             mapX = sizeX/2-2;
             mapY = sizeY - 4;
             dungeonH = 100;
@@ -91,27 +96,47 @@ namespace ConsoleApplication{
             string hp = "HP:" + playerHP.ToString();
             for(int i = 0; i < sizeX; i ++)
                 for(int t = 0; t < sizeY; t++)
-                    content[i,t] = '▓';
-            for(int i = 0; i < name.Length; i++)
-                content[i+1,1] = name[i];
+                    content[i,t,0] = '▓';
+            for (int i = 0; i < name.Length; i++)
+            {
+                content[i + 1, 1, 0] = name[i];
+                content[i + 1, 1, 1] = 'b';
+            }
             for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
-                content[i+ mapX + 3, 4] = hp[i];
+                content[i+ mapX + 3, 4,0] = hp[i];
+            }
+            for(int i = 0; i < text[0].Length; i++)
+            {
+                content[i + mapX + 3, 1, 1] = 'G';
+                content[i + mapX + 3, 1, 0] = text[0][i];
+            }
+            for(int i = 0; i < text[1].Length; i++)
+            {
+                content[mapX + i + 3, 6, 0] = text[1][i];
+                content[mapX + i + 3, 6, 1] = 'G';
+            }
+            for(int i = 0; i < inventory.Length; i++)
+            {
+                for(int t = 0; t < sizeX/2 - 3; t++)
+                {
+                    content[mapX + 3 + t, i + 8, 0] = ' ';
+                    content[mapX + 3 + t, i + 8, 1] = 'b';
+                }
             }
         }
-        public void Start(Source s){
+        /*public void Start(Source s){
             playerX = 1;
             playerY = 1;
-            playerHP = 100;
-            Console.WriteLine(playerHP);
             RefreshMap();
             CreateObj(playerX,playerY,'@');
             CreateWindow();
             Update();
-        }
+        }*/
 
-        public void Start(Source s, FileManager f){
+        public void Start(Source s, MapManager f){
             playerX = 1;
             playerY = 1;
+            playerHP = 100;
             string[] map = f.GetMap("room");
             for(int i = 0; i < map.Length; i++)
                 for(int t = 0; t < map[i].Length; t++)
@@ -128,15 +153,28 @@ namespace ConsoleApplication{
                     tx = playerX - mapX/2 + i;
                     ty = playerY - mapY/2 + t;
                     if(tx >= 0 & tx < dungeonW & ty >= 0 & ty < dungeonH){
-                        content[i+1,t+3] = MapObjs[tx,ty].symbol;
+                        content[i+1,t+3,0] = MapObjs[tx,ty].symbol;
+                        content[i+1,t+3,1] = MapObjs[tx, ty].color;
                     }else{
-                        content[i+1,t+3] = ' ';
+                        content[i+1,t+3,0] = ' ';
+                        content[i+1,t+3,1] = 'W';
                     }
                 }
             }
+            string hp = playerHP.ToString();
+            for (int i = 0; i < 3; i++)
+            {
+                content[i + mapX + 6, 4, 1] = 'W';
+                content[i + mapX + 6, 4,0] = '▓';
+            }
+            for (int i = 0; i < hp.Length; i++)
+            {
+                content[i + mapX + 6, 4, 1] = 'G';
+                content[i + mapX + 6, 4,0] = hp[i];
+            }
         }
 
-        public void Control(char key){ 
+        public void Control(char key){
             switch(key){
                 case 'w':
                     MovePlayer(playerX,playerY - 1);
@@ -154,6 +192,11 @@ namespace ConsoleApplication{
                     
                 break;
             }
+        }
+
+        public void DegreeHp(int h)
+        {
+            playerHP = playerHP - h;
         }
 
         public void RemoveObj(int x, int y){
@@ -174,7 +217,7 @@ namespace ConsoleApplication{
             }
         }
 
-        void DrawSimpleLine(float x, float y, float x1, float y1, char c){
+        /*void DrawSimpleLine(float x, float y, float x1, float y1, char c){
             float xr,yr;
             float L1,L2,L;
             L1 = Math.Abs(x1-x);
@@ -194,7 +237,7 @@ namespace ConsoleApplication{
 
         void DrawSimpleDot(int x, int y, char c){
             CreateObj(x,y,c);
-        }
+        }*/
 
 
         //player movement
@@ -213,14 +256,19 @@ namespace ConsoleApplication{
         }
 
         void MovePlayer(int x,int y){
-            if(WallCheck(x,y) == false){
+            if (WallCheck(x,y) == false){
+                MapObjs[x, y].behaviour.Action(x, y, this);
                 RemoveObj(playerX,playerY);
                 CreateObj(x,y,'@');
                 playerX = x;
                 playerY = y;
-            }else if(WallCheck(x,y) == true)
-                    if(UsableCheck(x,y) == true)
-                        MapObjs[x,y].behaviour.Action(x,y,this);
+            }else
+                MapObjs[x, y].behaviour.Action(x, y, this);
         }
+    }
+    class Inventory
+    {
+        int count;
+        string name;
     }
 }

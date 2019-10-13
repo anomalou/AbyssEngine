@@ -4,12 +4,12 @@ using System.IO;
 
 namespace ConsoleApplication{
     //[DataContract]
-    class FileManager{
+    class MapManager{
 
         //[DataMember]
         string[] map;
 
-        public FileManager(){
+        public MapManager(){
             //DataContractJsonSerializer j = new DataContractJsonSerializer(typeof(FileManager));
             //MemoryStream s = new MemoryStream();
             //j.WriteObject(s,this);
@@ -20,14 +20,14 @@ namespace ConsoleApplication{
             switch(name){
                 case "room":
                     map = new string[11]{"────────────────────",
-                                         "|..................|",
+                                         "|..............,...|",
                                          "|..................|",
                                          "|───#───────────#──|",
-                                         "|.........|........|",
-                                         "|.........|........|",
+                                         "|.......,.|........|",
+                                         "|.........|....,...|",
                                          "|.........#........|",
                                          "|──────────────#───|",
-                                         "|..................|",
+                                         "|..............,...|",
                                          "─────#──────────────",
                                          "|...........       |"};
                     return map;

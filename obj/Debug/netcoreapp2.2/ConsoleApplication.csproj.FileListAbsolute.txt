@@ -9,3 +9,13 @@ c:\consoleapplication\obj\Debug\netcoreapp2.2\ConsoleApplication.AssemblyInfoInp
 c:\consoleapplication\obj\Debug\netcoreapp2.2\ConsoleApplication.AssemblyInfo.cs
 c:\consoleapplication\obj\Debug\netcoreapp2.2\ConsoleApplication.dll
 c:\consoleapplication\obj\Debug\netcoreapp2.2\ConsoleApplication.pdb
+C:\Users\John\DangeonSeeker\bin\Debug\netcoreapp2.2\ConsoleApplication.deps.json
+C:\Users\John\DangeonSeeker\bin\Debug\netcoreapp2.2\ConsoleApplication.runtimeconfig.json
+C:\Users\John\DangeonSeeker\bin\Debug\netcoreapp2.2\ConsoleApplication.runtimeconfig.dev.json
+C:\Users\John\DangeonSeeker\bin\Debug\netcoreapp2.2\ConsoleApplication.dll
+C:\Users\John\DangeonSeeker\bin\Debug\netcoreapp2.2\ConsoleApplication.pdb
+C:\Users\John\DangeonSeeker\obj\Debug\netcoreapp2.2\ConsoleApplication.csprojAssemblyReference.cache
+C:\Users\John\DangeonSeeker\obj\Debug\netcoreapp2.2\ConsoleApplication.AssemblyInfoInputs.cache
+C:\Users\John\DangeonSeeker\obj\Debug\netcoreapp2.2\ConsoleApplication.AssemblyInfo.cs
+C:\Users\John\DangeonSeeker\obj\Debug\netcoreapp2.2\ConsoleApplication.dll
+C:\Users\John\DangeonSeeker\obj\Debug\netcoreapp2.2\ConsoleApplication.pdb

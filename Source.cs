@@ -4,6 +4,7 @@ namespace ConsoleApplication
 {
     class Source
     {
+        bool isWork;
         private int _windowSizeH{get;} = 60;
         private int _windowSizeW{get;} = 30;
         IWindow[] windowList;
@@ -15,9 +16,10 @@ namespace ConsoleApplication
         {   
             Source s = new Source();
             s.source = s;
+            s.isWork = true;
             char key;
             s.GameLaunch();
-            while(true){
+            while(s.isWork){
                 if(s.activeWindow != -1)
                     s.UpdateWindow(s.windowList[s.activeWindow]);
                 key = Console.ReadKey().KeyChar;
@@ -30,12 +32,12 @@ namespace ConsoleApplication
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            activeWindow = OpenWindow(0,0,new GameplayWindow(), new FileManager());//set gameplay window as active window
+            activeWindow = OpenWindow(0,0,new GameplayWindow(), new MapManager());//set gameplay window as active window
         }
 
         //canvas control
 
-        public int OpenWindow(int positionX,int positionY,IWindow window){
+        /*public int OpenWindow(int positionX,int positionY,IWindow window){
             int i = CheckFreeSpace();
             if(i != -1){
                 window.Start(source);
@@ -44,9 +46,9 @@ namespace ConsoleApplication
                 return i;
             }
             return -1;
-        }
+        }*/
 
-        public int OpenWindow(int positionX, int positionY, IWindow w, FileManager f){
+        public int OpenWindow(int positionX, int positionY, IWindow w, MapManager f){
             int i = CheckFreeSpace();
             if(i != -1){
                 w.Start(source,f);
@@ -71,8 +73,10 @@ namespace ConsoleApplication
             Console.CursorVisible = false;
             for(int i = 0; i < w.sizeY; i++){
                 for(int t = 0; t < w.sizeX; t++){
-                        Console.SetCursorPosition(t+w.positionX,i+w.positionY);
-                        Console.Write(w.content[t,i]);
+                    Console.SetCursorPosition(t+w.positionX,i+w.positionY);
+                    Console.ForegroundColor = Colors.Color(w.content[t, i, 1]);
+                    Console.Write(w.content[t,i,0]);
+                    Console.ResetColor();
                 }
             }
             Console.SetCursorPosition(0,w.sizeY);

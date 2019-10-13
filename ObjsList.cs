@@ -28,30 +28,42 @@ namespace ConsoleApplication{
                 case '.':
                     o.name = "Void";
                     o.use = false;
+                    o.color = 'W';
                     o.impassible = false; 
                     o.behaviour = new BaseAction();
+                    return o;
+                case ',':
+                    o.name = "Trap";
+                    o.use = true;
+                    o.color = 'g';
+                    o.impassible = false;
+                    o.behaviour = new ActivateTrap();
                     return o;
                 case '─':
                     o.name = "Horizontal wall";
                     o.use = false;
+                    o.color = 'W';
                     o.impassible = true; 
                     o.behaviour = new BaseAction();
                     return o;
                 case '|':
                     o.name = "Vertical wall";
                     o.use = false;
+                    o.color = 'W';
                     o.impassible = true; 
                     o.behaviour = new BaseAction();
                     return o;
                 case '#':
                     o.name = "Door";
                     o.use = true;
+                    o.color = 'y';
                     o.impassible = true; 
                     o.behaviour = new OpenDoor();
                     return o;
                 case '@':
                     o.name = "Player";
                     o.use = false;
+                    o.color = 'r';
                     o.impassible = false; 
                     o.behaviour = new BaseAction();
                     return o;

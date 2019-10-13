@@ -10,4 +10,11 @@ namespace ConsoleApplication{
             w.RemoveObj(x,y);
         }
     }
+    class ActivateTrap : BaseAction
+    {
+        public override void Action(int x, int y, GameplayWindow w)
+        {
+            w.DegreeHp(10);
+        }
+    }
 }

@@ -7,11 +7,11 @@ namespace ConsoleApplication{
         int positionX{get;set;}
         int positionY{get;set;}
 
-        char[,] content{get;set;}
+        char[,,] content{get;set;}
 
-        void Start(Source s);
+        //void Start(Source s);
 
-        void Start(Source s, FileManager f);
+        void Start(Source s, MapManager f);
         void Control(char key);
         void Update();
     }
