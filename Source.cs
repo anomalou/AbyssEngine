@@ -17,27 +17,29 @@ namespace ConsoleApplication
             Source s = new Source();
             s.source = s;
             s.isWork = true;
-            char key;
+            ConsoleKeyInfo key;
             s.GameLaunch();
             while(s.isWork){
-                if(s.activeWindow != -1)
+                if (s.activeWindow != -1)
+                {
                     s.UpdateWindow(s.windowList[s.activeWindow]);
-                key = Console.ReadKey().KeyChar;
-                s.windowList[s.activeWindow].Control(key);
+                    key = Console.ReadKey();
+                    s.windowList[s.activeWindow].Control(key);
+                }
             }
         }
 
         void GameLaunch(){
-            windowList = new IWindow[1];//how many windows have game
+            windowList = new IWindow[2];//how many windows have game
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            activeWindow = OpenWindow(0,0,new GameplayWindow(), new MapManager());//set gameplay window as active window
+            SetActive(OpenWindow(0, 0, new GameplayWindow(), new MapManager()));//set gameplay window as active window
         }
 
         //canvas control
 
-        /*public int OpenWindow(int positionX,int positionY,IWindow window){
+        public int OpenWindow(int positionX,int positionY,IWindow window){
             int i = CheckFreeSpace();
             if(i != -1){
                 window.Start(source);
@@ -46,7 +48,7 @@ namespace ConsoleApplication
                 return i;
             }
             return -1;
-        }*/
+        }
 
         public int OpenWindow(int positionX, int positionY, IWindow w, MapManager f){
             int i = CheckFreeSpace();
@@ -79,12 +81,16 @@ namespace ConsoleApplication
                     Console.ResetColor();
                 }
             }
-            Console.SetCursorPosition(0,w.sizeY);
+            Console.SetCursorPosition(w.positionX,w.positionY);
         }
 
         public void CloseWindow(int windowNumber){
             windowList[windowNumber] = null;
-            activeWindow = -1;
+            int i = FindWindow();
+            if (i != -1)
+                SetActive(i);
+            else
+                SetActive(-1);
             ScreenUpdate();
         }
 
@@ -97,12 +103,42 @@ namespace ConsoleApplication
             return -1;
         }
 
+        int FindWindow()
+        {
+            for(int i =0; i < windowList.Length; i++)
+            {
+                if (windowList[i] != null)
+                    return i;
+            }
+            return -1;
+        }
+
         public void ScreenUpdate(){
             Console.Clear();
             for(int i = 0; i < windowList.Length; i++){
                 if(windowList[i] != null)
                     RenderWindow(windowList[i].positionX,windowList[i].positionY,windowList[i]);
             }
+        }
+
+        public void SetActive(int num)
+        {
+            activeWindow = num;
+        }
+
+        public int GetActive()
+        {
+            return activeWindow;
+        }
+
+        public IWindow windowLobby(string name)
+        {
+            for(int i = 0; i < windowList.Length; i++)
+            {
+                if (windowList[i].name == name)
+                    return windowList[i];
+            }
+            return null;
         }
 
         //properties
@@ -117,6 +153,11 @@ namespace ConsoleApplication
             get{
                 return _windowSizeW;
             }
+        }
+
+        public void Exit()
+        {
+            isWork = false;
         }
     }
 }

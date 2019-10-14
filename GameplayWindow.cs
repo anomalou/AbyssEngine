@@ -16,7 +16,8 @@ namespace ConsoleApplication{
         int playerX,playerY;    //player coordinate x         player coordinate y
         int playerHP;
         ObjsList objsList;
-        Inventory[] inventory;
+        Source source;
+        public Inventory inventory;
         Obj[,] MapObjs{get;set;}
 
         int mapX,mapY;
@@ -79,11 +80,11 @@ namespace ConsoleApplication{
 
         public GameplayWindow(){
             text = new string[2] { "Your player", "Inventroy" };
-            name = "Map";
+            name = "Game";
             sizeX = 40;
             sizeY = 15;
-            content = new char[sizeX,sizeY,2];
-            inventory = new Inventory[6];
+            content = new char[sizeX,sizeY,2];  //1 layer is content, 2 layer is his color codes
+            inventory = new Inventory();
             mapX = sizeX/2-2;
             mapY = sizeY - 4;
             dungeonH = 100;
@@ -97,6 +98,13 @@ namespace ConsoleApplication{
             for(int i = 0; i < sizeX; i ++)
                 for(int t = 0; t < sizeY; t++)
                     content[i,t,0] = '▓';
+            content[0, 0, 0] = '#';
+            content[0, 0, 1] = 'Q';
+            for (int i = 1; i < sizeX; i++)
+            {
+                content[i, 0, 0] = '=';
+                content[i, 0, 1] = 'Q';
+            }
             for (int i = 0; i < name.Length; i++)
             {
                 content[i + 1, 1, 0] = name[i];
@@ -115,13 +123,17 @@ namespace ConsoleApplication{
                 content[mapX + i + 3, 6, 0] = text[1][i];
                 content[mapX + i + 3, 6, 1] = 'G';
             }
-            for(int i = 0; i < inventory.Length; i++)
+            for(int i = 0; i < inventory.SlotSize(); i++)
             {
-                for(int t = 0; t < sizeX/2 - 3; t++)
+                for (int t = 0; t < sizeX/2 - 3; t++)
                 {
-                    content[mapX + 3 + t, i + 8, 0] = ' ';
+                    if(inventory.item[i].name.Length > t)
+                        content[mapX + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                    else
+                        content[mapX + 3 + t, i + 8, 0] = ' ';
                     content[mapX + 3 + t, i + 8, 1] = 'b';
                 }
+                
             }
         }
         /*public void Start(Source s){
@@ -134,6 +146,7 @@ namespace ConsoleApplication{
         }*/
 
         public void Start(Source s, MapManager f){
+            source = s;
             playerX = 1;
             playerY = 1;
             playerHP = 100;
@@ -172,24 +185,40 @@ namespace ConsoleApplication{
                 content[i + mapX + 6, 4, 1] = 'G';
                 content[i + mapX + 6, 4,0] = hp[i];
             }
+            for (int i = 0; i < inventory.SlotSize(); i++)
+            {
+                for (int t = 0; t < sizeX / 2 - 3; t++)
+                {
+                    if (t < inventory.item[i].name.Length)
+                        content[mapX + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                    else
+                        content[mapX + 3 + t, i + 8, 0] = ' ';
+                    content[mapX + 3 + t, i + 8, 1] = 'b';
+                }
+                //Console.WriteLine("Item + " + i + " " + inventory.item[i].name);
+            }
         }
 
-        public void Control(char key){
-            switch(key){
-                case 'w':
+        public void Control(ConsoleKeyInfo key){
+            switch(key.Key){
+                case ConsoleKey.W:
                     MovePlayer(playerX,playerY - 1);
                 break;
-                case 's':
+                case ConsoleKey.S:
                     MovePlayer(playerX,playerY + 1);
                 break;
-                case 'a':
+                case ConsoleKey.A:
                     MovePlayer(playerX - 1,playerY);
                 break;
-                case 'd':
+                case ConsoleKey.D:
                     MovePlayer(playerX + 1,playerY);
                 break;
-                case 'q':
-                    
+                case ConsoleKey.C:
+                    source.SetActive(source.OpenWindow(positionX, positionY + sizeY, new Commander()));
+                break;
+                case ConsoleKey.Escape:
+                    source.CloseWindow(source.GetActive());
+                    source.Exit();
                 break;
             }
         }
@@ -204,7 +233,8 @@ namespace ConsoleApplication{
         }
 
         public void CreateObj(int x, int y, char c){
-            MapObjs[x,y] = objsList.Objs(c);
+            if(x > -1 && x < dungeonH && y > -1 && y < dungeonW)
+                MapObjs[x,y] = objsList.Objs(c);
         }
 
         void RefreshMap(){
@@ -243,32 +273,83 @@ namespace ConsoleApplication{
         //player movement
 
         bool WallCheck(int x, int y){
-            if(MapObjs[x,y].impassible == true || MapObjs[x,y].symbol == ' ')
+            if (MapObjs[x, y].impassible == true || MapObjs[x, y].symbol == ' ')
                 return true;
             return false;
         }
 
-        bool UsableCheck(int x, int y){
+        /*bool UsableCheck(int x, int y){
             if(x > -1 & x < dungeonW & y > -1 & y < dungeonH)
                 if(MapObjs[x,y].use == true)
                     return true;
             return false;
+        }*/
+
+        public void MovePlayer(int x,int y){
+            if (x > -1 && x < dungeonH && y > -1 && y < dungeonW)
+            {
+                if (WallCheck(x, y) == false)
+                {
+                    MapObjs[x, y].behaviour.Action(x, y, this);
+                    RemoveObj(playerX, playerY);
+                    CreateObj(x, y, '@');
+                    playerX = x;
+                    playerY = y;
+                }
+                else
+                    MapObjs[x, y].behaviour.Action(x, y, this);
+            }
         }
 
-        void MovePlayer(int x,int y){
-            if (WallCheck(x,y) == false){
-                MapObjs[x, y].behaviour.Action(x, y, this);
-                RemoveObj(playerX,playerY);
-                CreateObj(x,y,'@');
-                playerX = x;
-                playerY = y;
-            }else
-                MapObjs[x, y].behaviour.Action(x, y, this);
+        public void Start(Source s)
+        {
+            
+        }
+
+        public int ReturnValue(string name)
+        {
+            switch (name)
+            {
+                case "dungH":
+                    return dungeonH;
+                case "dungW":
+                    return dungeonW;
+                default:
+                    return -1;
+            }
         }
     }
     class Inventory
     {
-        int count;
-        string name;
+        public Item[] item;
+        Items items;
+        public Inventory()
+        {
+            items = new Items();
+            item = new Item[6];
+            for(int i = 0; i < item.Length; i++)
+            {
+                Item item = items.GetItem(-1);
+                this.item[i] = item;
+            }
+        }
+
+        public int SlotSize()
+        {
+            return item.Length;
+        }
+
+        public void SetItem(int ID)
+        {
+            Console.WriteLine("Setitem");
+            for (int i = 0; i < SlotSize(); i++)
+            {
+                if(item[i].name == " ")
+                {
+                    item[i] = items.GetItem(ID);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace ConsoleApplication
                     return ConsoleColor.Blue;
                 case 'r':
                     return ConsoleColor.Red;
+                case 'Q':
+                    return ConsoleColor.DarkGreen;
                 default:
                     return ConsoleColor.White;
             }

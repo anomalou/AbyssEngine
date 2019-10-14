@@ -1,3 +1,5 @@
+using System;
+
 namespace ConsoleApplication{
     interface IWindow{
 
@@ -7,12 +9,13 @@ namespace ConsoleApplication{
         int positionX{get;set;}
         int positionY{get;set;}
 
-        char[,,] content{get;set;}
+        char[,,] content { get; set; }
 
-        //void Start(Source s);
+        void Start(Source s);
 
         void Start(Source s, MapManager f);
-        void Control(char key);
+        void Control(ConsoleKeyInfo key);
+        int ReturnValue(string name);
         void Update();
     }
 }

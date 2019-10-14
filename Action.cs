@@ -15,6 +15,7 @@ namespace ConsoleApplication{
         public override void Action(int x, int y, GameplayWindow w)
         {
             w.DegreeHp(10);
+            w.inventory.SetItem(1);
         }
     }
 }

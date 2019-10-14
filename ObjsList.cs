@@ -68,6 +68,11 @@ namespace ConsoleApplication{
                     o.behaviour = new BaseAction();
                     return o;
                 default:
+                    o.name = " ";
+                    o.use = false;
+                    o.color = 'W';
+                    o.impassible = false;
+                    o.behaviour = new BaseAction();
                     return o;
             }
         }
