@@ -12,6 +12,7 @@ namespace ConsoleApplication
         public int positionX { get; set; }
         public int positionY { get; set; }
         public char[,,] content { get; set; }
+        public char code { get; set; }
 
         Source source;
         string command;
@@ -41,6 +42,7 @@ namespace ConsoleApplication
         public Commander()
         {
             name = "/Command line/";
+            code = '>';
             text = "V Output V";
             sizeX = 40;
             sizeY = 9;
@@ -51,10 +53,11 @@ namespace ConsoleApplication
 
         void CreateWindow()
         {
-            for (int i = 0; i < sizeX; i++)
+            content = WindowBuilder.Build(sizeX, sizeY, name, code);
+            /*for (int i = 0; i < sizeX; i++)
                 for (int t = 0; t < sizeY; t++)
                     content[i, t, 0] = '▓';
-            content[0, 0, 0] = '#';
+            content[0, 0, 0] = '>';
             content[0, 0, 1] = 'Q';
             for(int i = 1; i < sizeX; i++)
             {
@@ -63,15 +66,15 @@ namespace ConsoleApplication
             }
             for (int i = 0; i < name.Length; i++)
             {
-                if(text.Length > i)
-                {
-                    content[i + 1, 5, 0] = text[i];
-                    content[i + 1, 5, 1] = 'r';
-                }
                 content[i + 1, 1, 0] = name[i];
                 content[i + 1, 1, 1] = 'b';
-            }
-            for(int i = 0; i < sizeX - 2; i++)
+            }*/
+            /*if (text.Length > i)
+            {
+                content[i + 1, 5, 0] = text[i];
+                content[i + 1, 5, 1] = 'r';
+            }*/
+            for (int i = 0; i < sizeX - 2; i++)
             {
                 content[i + 1, 3, 0] = ' ';
                 content[i + 1, 3, 1] = 'W';
@@ -109,7 +112,7 @@ namespace ConsoleApplication
         void Commands(string com)
         {
             string[] comParts = com.Split(' ');
-            if(comParts.Length > 1)
+            if(comParts.Length > 1 && comParts[1].Length > 0)
             {
                 switch (comParts[0])
                 {

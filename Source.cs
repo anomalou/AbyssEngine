@@ -9,6 +9,7 @@ namespace ConsoleApplication
         private int _windowSizeW{get;} = 30;
         IWindow[] windowList;
         int activeWindow;
+        string[] debugOutput;
 
         Source source;
 
@@ -30,7 +31,7 @@ namespace ConsoleApplication
         }
 
         void GameLaunch(){
-            windowList = new IWindow[2];//how many windows have game
+            windowList = new IWindow[3];//how many windows have game
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -62,9 +63,6 @@ namespace ConsoleApplication
         }
 
         public void RenderWindow(int x,int y,IWindow w){
-            int sizeX,sizeY;
-            sizeX = w.sizeX;
-            sizeY = w.sizeY;
             w.positionX = x;
             w.positionY = y;
             UpdateWindow(w);

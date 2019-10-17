@@ -78,9 +78,12 @@ namespace ConsoleApplication{
             }
         }
 
+        public char code { get; set; }
+
         public GameplayWindow(){
             text = new string[2] { "Your player", "Inventroy" };
             name = "Game";
+            code = '#';
             sizeX = 40;
             sizeY = 15;
             content = new char[sizeX,sizeY,2];  //1 layer is content, 2 layer is his color codes
@@ -95,21 +98,22 @@ namespace ConsoleApplication{
 
         void CreateWindow(){
             string hp = "HP:" + playerHP.ToString();
-            for(int i = 0; i < sizeX; i ++)
+            content = WindowBuilder.Build(sizeX, sizeY, name, code);
+            /*for(int i = 0; i < sizeX; i ++)
                 for(int t = 0; t < sizeY; t++)
-                    content[i,t,0] = '▓';
-            content[0, 0, 0] = '#';
-            content[0, 0, 1] = 'Q';
-            for (int i = 1; i < sizeX; i++)
+                    content[i,t,0] = '▓';*/
+            /*content[0, 0, 0] = '#';
+            content[0, 0, 1] = 'Q';*/
+            /*for (int i = 1; i < sizeX; i++)
             {
                 content[i, 0, 0] = '=';
                 content[i, 0, 1] = 'Q';
-            }
-            for (int i = 0; i < name.Length; i++)
+            }*/
+            /*for (int i = 0; i < name.Length; i++)
             {
                 content[i + 1, 1, 0] = name[i];
                 content[i + 1, 1, 1] = 'b';
-            }
+            }*/
             for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
                 content[i+ mapX + 3, 4,0] = hp[i];
             }
@@ -136,14 +140,6 @@ namespace ConsoleApplication{
                 
             }
         }
-        /*public void Start(Source s){
-            playerX = 1;
-            playerY = 1;
-            RefreshMap();
-            CreateObj(playerX,playerY,'@');
-            CreateWindow();
-            Update();
-        }*/
 
         public void Start(Source s, MapManager f){
             source = s;
@@ -195,7 +191,6 @@ namespace ConsoleApplication{
                         content[mapX + 3 + t, i + 8, 0] = ' ';
                     content[mapX + 3 + t, i + 8, 1] = 'b';
                 }
-                //Console.WriteLine("Item + " + i + " " + inventory.item[i].name);
             }
         }
 
@@ -214,11 +209,10 @@ namespace ConsoleApplication{
                     MovePlayer(playerX + 1,playerY);
                 break;
                 case ConsoleKey.C:
-                    source.SetActive(source.OpenWindow(positionX, positionY + sizeY, new Commander()));
+                    source.SetActive(source.OpenWindow(positionX, positionY, new Commander()));
                 break;
                 case ConsoleKey.Escape:
-                    source.CloseWindow(source.GetActive());
-                    source.Exit();
+                    source.SetActive(source.OpenWindow(positionX + 2, positionY + 2, new Executor()));
                 break;
             }
         }
