@@ -62,9 +62,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1 + i, 4, 1] = 'r';
+                        content[1 + i, 3, 1] = 'r';
                     }
-                    content[sizeX - 4 + i, 4, 1] = 'b';
+                    content[sizeX - 4 + i, 3, 1] = 'b';
                 }
             }
             else
@@ -73,9 +73,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1+i, 4, 1] = 'b';
+                        content[1+i, 3, 1] = 'b';
                     }
-                    content[sizeX - 4 + i, 4, 1] = 'r';
+                    content[sizeX - 4 + i, 3, 1] = 'r';
                 }
             }
             
@@ -93,11 +93,11 @@ namespace ConsoleApplication
             {
                 if(i < 2)
                 {
-                    content[1 + i, 4, 0] = text[1][i];
-                    content[1 + i, 4, 1] = 'r';
+                    content[1 + i, 3, 0] = text[1][i];
+                    content[1 + i, 3, 1] = 'r';
                 }
-                content[sizeX - 4 + i, 4, 0] = text[0][i];
-                content[sizeX - 4 + i, 4, 1] = 'b';
+                content[sizeX - 4 + i, 3, 0] = text[0][i];
+                content[sizeX - 4 + i, 3, 1] = 'b';
             }
         }
 
