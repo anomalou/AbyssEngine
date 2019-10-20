@@ -7,12 +7,10 @@ namespace ConsoleApplication
     class Commander : IWindow
     {
         public string name { get; set; }
-        public int sizeX { get; set; }
-        public int sizeY { get; set; }
-        public int positionX { get; set; }
-        public int positionY { get; set; }
         public char[,,] content { get; set; }
         public char code { get; set; }
+        public Vector size { get; set; }
+        public Vector position { get; set; }
 
         Source source;
         string command;
@@ -26,7 +24,7 @@ namespace ConsoleApplication
             {
                 case ConsoleKey.Enter:
                     Console.CursorVisible = true;
-                    Console.SetCursorPosition(positionX + 1, positionY + 3);
+                    Console.SetCursorPosition(position.X() + 1, position.Y() + 3);
                     Console.BackgroundColor = ConsoleColor.Cyan;
                     Console.ForegroundColor = ConsoleColor.Black;
                     command = Console.ReadLine();
@@ -44,16 +42,16 @@ namespace ConsoleApplication
             name = "/Command line/";
             code = '>';
             text = "V Output V";
-            sizeX = 40;
-            sizeY = 9;
+            size = new Vector(40, 9);
             output = " ";
-            content = new char[sizeX, sizeY, 2];
+            content = new char[size.X(), size.Y(), 2];
             CreateWindow();
         }
 
         void CreateWindow()
         {
-            content = WindowBuilder.Build(sizeX, sizeY, name, code);
+            content = WindowBuilder.Build(size, name, code);
+            content = WindowBuilder.PrintText(new Vector(1, 5), content, text, 'Q');
             /*for (int i = 0; i < sizeX; i++)
                 for (int t = 0; t < sizeY; t++)
                     content[i, t, 0] = '▓';
@@ -74,7 +72,7 @@ namespace ConsoleApplication
                 content[i + 1, 5, 0] = text[i];
                 content[i + 1, 5, 1] = 'r';
             }*/
-            for (int i = 0; i < sizeX - 2; i++)
+            for (int i = 0; i < size.X() - 2; i++)
             {
                 content[i + 1, 3, 0] = ' ';
                 content[i + 1, 3, 1] = 'W';
@@ -95,7 +93,7 @@ namespace ConsoleApplication
 
         public void Update()
         {
-            for (int i = 0; i < sizeX - 2; i++)
+            for (int i = 0; i < size.X() - 2; i++)
             {
                 if(output.Length > i) {
                     content[i + 1, 7, 0] = output[i];
@@ -124,6 +122,10 @@ namespace ConsoleApplication
                             {
                                 val[i] = comParts[1][i + 1];
                             }
+                            for (int i = 0; i < val.Length; i++)
+                            {
+                                val[i] = comParts[1][i + 1];
+                            }
                             IWindow w = source.windowLobby("Game");
                             output = w.ReturnValue(new string(val)).ToString();
                         }
@@ -136,7 +138,7 @@ namespace ConsoleApplication
                         if(comParts.Length == 3)
                         {
                             GameplayWindow w = source.windowLobby("Game") as GameplayWindow;
-                            w.MovePlayer(int.Parse(comParts[1]), int.Parse(comParts[2]));
+                            w.MovePlayer(new Vector(int.Parse(comParts[1]), int.Parse(comParts[2])));
                         }
                         break;
                 }

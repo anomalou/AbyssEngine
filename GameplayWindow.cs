@@ -4,25 +4,26 @@ namespace ConsoleApplication{
     class GameplayWindow:IWindow{
 
         string _name;
-        int _sizeX;
-        int _sizeY;
-        int _positionX;
-        int _positionY;
+        Vector _size;
+        Vector _position;
+
         char[,,] _content;
 
 
-        int dungeonH{get;set;}   //dangeon height
-        int dungeonW{get;set;}   //dangeon width
-        int playerX,playerY;    //player coordinate x         player coordinate y
+        Vector dungeon;
+        //int dungeonH{get;set;}   //dangeon height
+        //int dungeonW{get;set;}   //dangeon width
+        Vector playerPosition;
+        //int playerX,playerY;    //player coordinate x         player coordinate y
         int playerHP;
         ObjsList objsList;
         Source source;
         public Inventory inventory;
         Obj[,] MapObjs{get;set;}
 
-        int mapX,mapY;
-        int tx,ty;
-
+        //int mapX,mapY;
+        Vector mapSize;
+        Vector tempPos;
         string[] text;
 
         public string name{
@@ -33,39 +34,27 @@ namespace ConsoleApplication{
                 _name = value;
             }
         }
-        public int sizeX{
-            get{
-                return _sizeX;
+        public Vector size
+        {
+            get
+            {
+                return _size;
             }
-            set{
-                _sizeX = value;
-            }
-        }
-
-        public int sizeY{
-            get{
-                return _sizeY;
-            }
-            set{
-                _sizeY = value;
+            set
+            {
+                _size = value;
             }
         }
 
-        public int positionX{
-            get{
-                return _positionX;
+        public Vector position
+        {
+            get
+            {
+                return _position;
             }
-            set{
-                _positionX = value;
-            }
-        }
-
-        public int positionY{
-            get{
-                return _positionY;
-            }
-            set{
-                _positionY = value;
+            set
+            {
+                _position = value;
             }
         }
 
@@ -84,21 +73,23 @@ namespace ConsoleApplication{
             text = new string[2] { "Your player", "Inventroy" };
             name = "Game";
             code = '#';
-            sizeX = 40;
-            sizeY = 15;
-            content = new char[sizeX,sizeY,2];  //1 layer is content, 2 layer is his color codes
+            size = new Vector(40, 15);
+            position = new Vector();
+            content = new char[size.X(),size.Y(),2];  //1 layer is content, 2 layer is his color codes
             inventory = new Inventory();
-            mapX = sizeX/2-2;
-            mapY = sizeY - 4;
-            dungeonH = 100;
-            dungeonW = 100;
-            MapObjs = new Obj[dungeonW,dungeonH];
+            mapSize = new Vector(size.X() / 2 - 2, size.Y() - 4);
+            /*mapX = sizeX/2-2;
+            mapY = sizeY - 4;*/
+            dungeon = new Vector(100, 100);
+            /*dungeonH = 100;
+            dungeonW = 100;*/
+            MapObjs = new Obj[dungeon.X(),dungeon.Y()];
             objsList = new ObjsList();
         }
 
         void CreateWindow(){
             string hp = "HP:" + playerHP.ToString();
-            content = WindowBuilder.Build(sizeX, sizeY, name, code);
+            content = WindowBuilder.Build(size, name, code);
             /*for(int i = 0; i < sizeX; i ++)
                 for(int t = 0; t < sizeY; t++)
                     content[i,t,0] = '▓';*/
@@ -115,27 +106,27 @@ namespace ConsoleApplication{
                 content[i + 1, 1, 1] = 'b';
             }*/
             for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
-                content[i+ mapX + 3, 4,0] = hp[i];
+                content[i+ mapSize.X() + 3, 4,0] = hp[i];
             }
             for(int i = 0; i < text[0].Length; i++)
             {
-                content[i + mapX + 3, 1, 1] = 'G';
-                content[i + mapX + 3, 1, 0] = text[0][i];
+                content[i + mapSize.X() + 3, 1, 1] = 'G';
+                content[i + mapSize.X() + 3, 1, 0] = text[0][i];
             }
             for(int i = 0; i < text[1].Length; i++)
             {
-                content[mapX + i + 3, 6, 0] = text[1][i];
-                content[mapX + i + 3, 6, 1] = 'G';
+                content[mapSize.X() + i + 3, 6, 0] = text[1][i];
+                content[mapSize.X() + i + 3, 6, 1] = 'G';
             }
             for(int i = 0; i < inventory.SlotSize(); i++)
             {
-                for (int t = 0; t < sizeX/2 - 3; t++)
+                for (int t = 0; t < size.X()/2 - 3; t++)
                 {
                     if(inventory.item[i].name.Length > t)
-                        content[mapX + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                        content[mapSize.X() + 3 + t, i + 8, 0] = inventory.item[i].name[t];
                     else
-                        content[mapX + 3 + t, i + 8, 0] = ' ';
-                    content[mapX + 3 + t, i + 8, 1] = 'b';
+                        content[mapSize.X() + 3 + t, i + 8, 0] = ' ';
+                    content[mapSize.X() + 3 + t, i + 8, 1] = 'b';
                 }
                 
             }
@@ -143,27 +134,25 @@ namespace ConsoleApplication{
 
         public void Start(Source s, MapManager f){
             source = s;
-            playerX = 1;
-            playerY = 1;
+            playerPosition = new Vector(1, 1);
             playerHP = 100;
             string[] map = f.GetMap("room");
             for(int i = 0; i < map.Length; i++)
                 for(int t = 0; t < map[i].Length; t++)
-                    CreateObj(t,i,map[i][t]);
+                    CreateObj(new Vector(t,i),map[i][t]);
             RefreshMap();
-            CreateObj(playerX,playerY,'@');
+            CreateObj(playerPosition,'@');
             CreateWindow();
             Update();
         }
 
         public void Update(){
-            for(int i = 0; i < mapX; i++){
-                for(int t = 0; t < mapY; t++){
-                    tx = playerX - mapX/2 + i;
-                    ty = playerY - mapY/2 + t;
-                    if(tx >= 0 & tx < dungeonW & ty >= 0 & ty < dungeonH){
-                        content[i+1,t+3,0] = MapObjs[tx,ty].symbol;
-                        content[i+1,t+3,1] = MapObjs[tx, ty].color;
+            for(int i = 0; i < mapSize.X(); i++){
+                for(int t = 0; t < mapSize.Y(); t++){
+                    tempPos = new Vector(playerPosition.X() - mapSize.X() / 2 + i, playerPosition.Y() - mapSize.Y() / 2 + t);
+                    if(tempPos.X() > -1 & tempPos.X() < dungeon.X() & tempPos.Y() >-1 & tempPos.Y() < dungeon.Y()){
+                        content[i+1,t+3,0] = MapObjs[tempPos.X(), tempPos.Y()].symbol;
+                        content[i+1,t+3,1] = MapObjs[tempPos.X(), tempPos.Y()].color;
                     }else{
                         content[i+1,t+3,0] = ' ';
                         content[i+1,t+3,1] = 'W';
@@ -173,23 +162,23 @@ namespace ConsoleApplication{
             string hp = playerHP.ToString();
             for (int i = 0; i < 3; i++)
             {
-                content[i + mapX + 6, 4, 1] = 'W';
-                content[i + mapX + 6, 4,0] = '▓';
+                content[i + mapSize.X() + 6, 4, 1] = 'W';
+                content[i + mapSize.X() + 6, 4,0] = '▓';
             }
             for (int i = 0; i < hp.Length; i++)
             {
-                content[i + mapX + 6, 4, 1] = 'G';
-                content[i + mapX + 6, 4,0] = hp[i];
+                content[i + mapSize.X() + 6, 4, 1] = 'G';
+                content[i + mapSize.X() + 6, 4,0] = hp[i];
             }
             for (int i = 0; i < inventory.SlotSize(); i++)
             {
-                for (int t = 0; t < sizeX / 2 - 3; t++)
+                for (int t = 0; t < size.X() / 2 - 3; t++)
                 {
                     if (t < inventory.item[i].name.Length)
-                        content[mapX + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                        content[mapSize.X() + 3 + t, i + 8, 0] = inventory.item[i].name[t];
                     else
-                        content[mapX + 3 + t, i + 8, 0] = ' ';
-                    content[mapX + 3 + t, i + 8, 1] = 'b';
+                        content[mapSize.X() + 3 + t, i + 8, 0] = ' ';
+                    content[mapSize.X() + 3 + t, i + 8, 1] = 'b';
                 }
             }
         }
@@ -197,22 +186,22 @@ namespace ConsoleApplication{
         public void Control(ConsoleKeyInfo key){
             switch(key.Key){
                 case ConsoleKey.W:
-                    MovePlayer(playerX,playerY - 1);
+                    MovePlayer(new Vector(playerPosition.X(),playerPosition.Y() - 1));
                 break;
                 case ConsoleKey.S:
-                    MovePlayer(playerX,playerY + 1);
+                    MovePlayer(new Vector(playerPosition.X(), playerPosition.Y() + 1));
                 break;
                 case ConsoleKey.A:
-                    MovePlayer(playerX - 1,playerY);
+                    MovePlayer(new Vector(playerPosition.X() - 1, playerPosition.Y()));
                 break;
                 case ConsoleKey.D:
-                    MovePlayer(playerX + 1,playerY);
+                    MovePlayer(new Vector(playerPosition.X() + 1, playerPosition.Y()));
                 break;
                 case ConsoleKey.C:
-                    source.SetActive(source.OpenWindow(positionX, positionY, new Commander()));
+                    source.SetActive(source.OpenWindow(position, new Commander()));
                 break;
                 case ConsoleKey.Escape:
-                    source.SetActive(source.OpenWindow(positionX + 2, positionY + 2, new Executor()));
+                    source.SetActive(source.OpenWindow(new Vector(position.X() + 2, position.Y() + 2), new Executor()));
                 break;
             }
         }
@@ -222,20 +211,20 @@ namespace ConsoleApplication{
             playerHP = playerHP - h;
         }
 
-        public void RemoveObj(int x, int y){
-            CreateObj(x,y,'.');
+        public void RemoveObj(Vector vector){
+            CreateObj(vector,'.');
         }
 
-        public void CreateObj(int x, int y, char c){
-            if(x > -1 && x < dungeonH && y > -1 && y < dungeonW)
-                MapObjs[x,y] = objsList.Objs(c);
+        public void CreateObj(Vector vector, char c){
+            if(vector.X() > -1 && vector.X() < dungeon.X() && vector.Y() > -1 && vector.Y() < dungeon.Y())
+                MapObjs[vector.X(),vector.Y()] = objsList.Objs(c);
         }
 
         void RefreshMap(){
-            for(int i = 0; i < dungeonH; i++){
-                for(int t = 0; t < dungeonW; t++){
+            for(int i = 0; i < dungeon.Y(); i++){
+                for(int t = 0; t < dungeon.X(); t++){
                     if(MapObjs[t,i] == null){
-                        CreateObj(t,i,' ');
+                        CreateObj(new Vector(t, i),' ');
                     }
                 }
             }
@@ -266,8 +255,8 @@ namespace ConsoleApplication{
 
         //player movement
 
-        bool WallCheck(int x, int y){
-            if (MapObjs[x, y].impassible == true || MapObjs[x, y].symbol == ' ')
+        bool WallCheck(Vector vector){
+            if (MapObjs[vector.X(), vector.Y()].impassible == true || MapObjs[vector.X(), vector.Y()].symbol == ' ')
                 return true;
             return false;
         }
@@ -279,19 +268,18 @@ namespace ConsoleApplication{
             return false;
         }*/
 
-        public void MovePlayer(int x,int y){
-            if (x > -1 && x < dungeonH && y > -1 && y < dungeonW)
+        public void MovePlayer(Vector vector){
+            if (vector.X() > -1 && vector.X() < dungeon.X() && vector.Y() > -1 && vector.Y() < dungeon.Y())
             {
-                if (WallCheck(x, y) == false)
+                if (WallCheck(vector) == false)
                 {
-                    MapObjs[x, y].behaviour.Action(x, y, this);
-                    RemoveObj(playerX, playerY);
-                    CreateObj(x, y, '@');
-                    playerX = x;
-                    playerY = y;
+                    MapObjs[vector.X(), vector.Y()].behaviour.Action(vector, this);
+                    RemoveObj(playerPosition);
+                    CreateObj(vector, '@');
+                    playerPosition = vector;
                 }
                 else
-                    MapObjs[x, y].behaviour.Action(x, y, this);
+                    MapObjs[vector.X(), vector.Y()].behaviour.Action(vector, this);
             }
         }
 
@@ -305,9 +293,9 @@ namespace ConsoleApplication{
             switch (name)
             {
                 case "dungH":
-                    return dungeonH;
+                    return dungeon.X();
                 case "dungW":
-                    return dungeonW;
+                    return dungeon.Y();
                 default:
                     return -1;
             }

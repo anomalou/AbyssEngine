@@ -5,8 +5,8 @@ namespace ConsoleApplication
     class Source
     {
         bool isWork;
-        private int _windowSizeH{get;} = 60;
-        private int _windowSizeW{get;} = 30;
+
+        Vector windowSize;
         IWindow[] windowList;
         int activeWindow;
         string[] debugOutput;
@@ -18,6 +18,7 @@ namespace ConsoleApplication
             Source s = new Source();
             s.source = s;
             s.isWork = true;
+            s.windowSize = new Vector(30, 60);
             ConsoleKeyInfo key;
             s.GameLaunch();
             while(s.isWork){
@@ -35,51 +36,50 @@ namespace ConsoleApplication
             Console.CursorVisible = false;
             Console.Title = "DungeonSeeker";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            SetActive(OpenWindow(0, 0, new GameplayWindow(), new MapManager()));//set gameplay window as active window
+            SetActive(OpenWindow(new Vector(0,0), new GameplayWindow(), new MapManager()));//set gameplay window as active window
         }
 
         //canvas control
 
-        public int OpenWindow(int positionX,int positionY,IWindow window){
+        public int OpenWindow(Vector vector,IWindow window){
             int i = CheckFreeSpace();
             if(i != -1){
                 window.Start(source);
-                RenderWindow(positionX,positionY,window);
+                RenderWindow(vector,window);
                 windowList[i] = window;
                 return i;
             }
             return -1;
         }
 
-        public int OpenWindow(int positionX, int positionY, IWindow w, MapManager f){
+        public int OpenWindow(Vector vector, IWindow w, MapManager f){
             int i = CheckFreeSpace();
             if(i != -1){
                 w.Start(source,f);
-                RenderWindow(positionX,positionY, w);
+                RenderWindow(vector, w);
                 windowList[i] = w;
                 return i;
             }
             return -1;
         }
 
-        public void RenderWindow(int x,int y,IWindow w){
-            w.positionX = x;
-            w.positionY = y;
+        public void RenderWindow(Vector vector,IWindow w){
+            w.position = vector;
             UpdateWindow(w);
         }
 
         public void UpdateWindow(IWindow w){
             w.Update();
             Console.CursorVisible = false;
-            for(int i = 0; i < w.sizeY; i++){
-                for(int t = 0; t < w.sizeX; t++){
-                    Console.SetCursorPosition(t+w.positionX,i+w.positionY);
+            for(int i = 0; i < w.size.Y(); i++){
+                for(int t = 0; t < w.size.X(); t++){
+                    Console.SetCursorPosition(t+w.position.X(),i+w.position.Y());
                     Console.ForegroundColor = Colors.Color(w.content[t, i, 1]);
                     Console.Write(w.content[t,i,0]);
                     Console.ResetColor();
                 }
             }
-            Console.SetCursorPosition(w.positionX,w.positionY);
+            Console.SetCursorPosition(w.position.X(),w.position.Y());
         }
 
         public void CloseWindow(int windowNumber){
@@ -115,7 +115,7 @@ namespace ConsoleApplication
             Console.Clear();
             for(int i = 0; i < windowList.Length; i++){
                 if(windowList[i] != null)
-                    RenderWindow(windowList[i].positionX,windowList[i].positionY,windowList[i]);
+                    RenderWindow(windowList[i].position,windowList[i]);
             }
         }
 
@@ -141,7 +141,7 @@ namespace ConsoleApplication
 
         //properties
 
-        public int WindowSizeH{
+        /*public int WindowSizeH{
             get{
                 return _windowSizeH;
             }
@@ -151,7 +151,7 @@ namespace ConsoleApplication
             get{
                 return _windowSizeW;
             }
-        }
+        }*/
 
         public void Exit()
         {

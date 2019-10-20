@@ -5,12 +5,10 @@ namespace ConsoleApplication
     class Executor : IWindow
     {
         public string name { get; set; }
-        public int sizeX { get; set; }
-        public int sizeY { get; set; }
-        public int positionX { get; set; }
-        public int positionY { get; set; }
         public char[,,] content { get; set; }
         public char code { get; set; }
+        public Vector size { get; set; }
+        public Vector position { get; set; }
 
         Source source;
 
@@ -24,10 +22,9 @@ namespace ConsoleApplication
             code = 'E';
             text = new string[2] { "Yes", "No" };
             exit = false;
-            sizeX = 20;
-            sizeY = 5;
-            content = new char[sizeX, sizeY, 2];
-            content = WindowBuilder.Build(sizeX, sizeY, name, code);
+            size = new Vector(20, 5);
+            content = new char[size.X(), size.Y(), 2];
+            content = WindowBuilder.Build(size, name, code);
         }
 
         public void Control(ConsoleKeyInfo key)
@@ -64,7 +61,7 @@ namespace ConsoleApplication
                     {
                         content[1 + i, 3, 1] = 'r';
                     }
-                    content[sizeX - 4 + i, 3, 1] = 'b';
+                    content[size.X() - 4 + i, 3, 1] = 'b';
                 }
             }
             else
@@ -75,7 +72,7 @@ namespace ConsoleApplication
                     {
                         content[1+i, 3, 1] = 'b';
                     }
-                    content[sizeX - 4 + i, 3, 1] = 'r';
+                    content[size.X() - 4 + i, 3, 1] = 'r';
                 }
             }
             
@@ -96,8 +93,8 @@ namespace ConsoleApplication
                     content[1 + i, 3, 0] = text[1][i];
                     content[1 + i, 3, 1] = 'r';
                 }
-                content[sizeX - 4 + i, 3, 0] = text[0][i];
-                content[sizeX - 4 + i, 3, 1] = 'b';
+                content[size.X() - 4 + i, 3, 0] = text[0][i];
+                content[size.X() - 4 + i, 3, 1] = 'b';
             }
         }
 
