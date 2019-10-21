@@ -7,7 +7,7 @@ namespace ConsoleApplication{
         Vector _size;
         Vector _position;
 
-        char[,,] _content;
+        Pixel[,] _content;
 
 
         Vector dungeon;
@@ -54,7 +54,7 @@ namespace ConsoleApplication{
             }
         }
 
-        public char[,,] content{
+        public Pixel[,] content{
             get{
                 return _content;
             }
@@ -71,7 +71,7 @@ namespace ConsoleApplication{
             code = '#';
             size = new Vector(40, 15);
             position = new Vector();
-            content = new char[size.X(),size.Y(),2];  //1 layer is content, 2 layer is his color codes
+            //content = new Pixel[size.X(),size.Y()];  //1 layer is content, 2 layer is his color codes
             inventory = new Inventory();
             mapSize = new Vector(size.X() / 2 - 2, size.Y() - 4);
             dungeon = new Vector(100, 100);
@@ -83,27 +83,24 @@ namespace ConsoleApplication{
             string hp = "HP:" + playerHP.ToString();
             content = WindowBuilder.Build(size, name, code);
             for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
-                content[i+ mapSize.X() + 3, 4,0] = hp[i];
+                content[i+ mapSize.X() + 3, 4] = new Pixel(hp[i],ConsoleColor.DarkGray);
             }
             for(int i = 0; i < text[0].Length; i++)
             {
-                content[i + mapSize.X() + 3, 1, 1] = 'G';
-                content[i + mapSize.X() + 3, 1, 0] = text[0][i];
+                content[i + mapSize.X() + 3, 1] = new Pixel(text[0][i], ConsoleColor.DarkGray);
             }
             for(int i = 0; i < text[1].Length; i++)
             {
-                content[mapSize.X() + i + 3, 6, 0] = text[1][i];
-                content[mapSize.X() + i + 3, 6, 1] = 'G';
+                content[mapSize.X() + i + 3, 6] = new Pixel(text[1][i], ConsoleColor.DarkGray);
             }
             for(int i = 0; i < inventory.SlotSize(); i++)
             {
                 for (int t = 0; t < size.X()/2 - 3; t++)
                 {
                     if(inventory.item[i].name.Length > t)
-                        content[mapSize.X() + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(inventory.item[i].name[t], ConsoleColor.Blue);
                     else
-                        content[mapSize.X() + 3 + t, i + 8, 0] = ' ';
-                    content[mapSize.X() + 3 + t, i + 8, 1] = 'b';
+                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(' ', ConsoleColor.Blue);
                 }
                 
             }
@@ -128,34 +125,29 @@ namespace ConsoleApplication{
                 for(int t = 0; t < mapSize.Y(); t++){
                     tempPos = new Vector(playerPosition.X() - mapSize.X() / 2 + i, playerPosition.Y() - mapSize.Y() / 2 + t);
                     if(tempPos.X() > -1 & tempPos.X() < dungeon.X() & tempPos.Y() >-1 & tempPos.Y() < dungeon.Y()){
-                        content[i+1,t+3,0] = MapObjs[tempPos.X(), tempPos.Y()].symbol;
-                        content[i+1,t+3,1] = MapObjs[tempPos.X(), tempPos.Y()].color;
+                        content[i+1,t+3] = new Pixel(MapObjs[tempPos.X(), tempPos.Y()].symbol, MapObjs[tempPos.X(), tempPos.Y()].color);
                     }else{
-                        content[i+1,t+3,0] = ' ';
-                        content[i+1,t+3,1] = 'W';
+                        content[i+1,t+3] = new Pixel(' ', ConsoleColor.White);
                     }
                 }
             }
             string hp = playerHP.ToString();
             for (int i = 0; i < 3; i++)
             {
-                content[i + mapSize.X() + 6, 4, 1] = 'W';
-                content[i + mapSize.X() + 6, 4,0] = '▓';
+                content[i + mapSize.X() + 6, 4] = new Pixel('▓', ConsoleColor.White);
             }
             for (int i = 0; i < hp.Length; i++)
             {
-                content[i + mapSize.X() + 6, 4, 1] = 'G';
-                content[i + mapSize.X() + 6, 4,0] = hp[i];
+                content[i + mapSize.X() + 6, 4] = new Pixel(hp[i], ConsoleColor.DarkGray);
             }
             for (int i = 0; i < inventory.SlotSize(); i++)
             {
                 for (int t = 0; t < size.X() / 2 - 3; t++)
                 {
                     if (t < inventory.item[i].name.Length)
-                        content[mapSize.X() + 3 + t, i + 8, 0] = inventory.item[i].name[t];
+                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(inventory.item[i].name[t], ConsoleColor.Blue);
                     else
-                        content[mapSize.X() + 3 + t, i + 8, 0] = ' ';
-                    content[mapSize.X() + 3 + t, i + 8, 1] = 'b';
+                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(' ', ConsoleColor.Blue);
                 }
             }
         }

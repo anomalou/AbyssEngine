@@ -5,7 +5,7 @@ namespace ConsoleApplication
     class Executor : IWindow
     {
         public string name { get; set; }
-        public char[,,] content { get; set; }
+        public Pixel[,] content { get; set; }
         public char code { get; set; }
         public Vector size { get; set; }
         public Vector position { get; set; }
@@ -23,7 +23,7 @@ namespace ConsoleApplication
             text = new string[2] { "Yes", "No" };
             exit = false;
             size = new Vector(20, 5);
-            content = new char[size.X(), size.Y(), 2];
+            //content = new char[size.X(), size.Y(), 2];
             content = WindowBuilder.Build(size, name, code);
         }
 
@@ -59,9 +59,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1 + i, 3, 1] = 'r';
+                        content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Red);
                     }
-                    content[size.X() - 4 + i, 3, 1] = 'b';
+                    content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Blue);
                 }
             }
             else
@@ -70,9 +70,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1+i, 3, 1] = 'b';
+                        content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Blue);
                     }
-                    content[size.X() - 4 + i, 3, 1] = 'r';
+                    content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Red);
                 }
             }
             
@@ -90,11 +90,9 @@ namespace ConsoleApplication
             {
                 if(i < 2)
                 {
-                    content[1 + i, 3, 0] = text[1][i];
-                    content[1 + i, 3, 1] = 'r';
+                    content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Red);
                 }
-                content[size.X() - 4 + i, 3, 0] = text[0][i];
-                content[size.X() - 4 + i, 3, 1] = 'b';
+                content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Blue);
             }
         }
 

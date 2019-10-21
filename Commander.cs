@@ -7,7 +7,7 @@ namespace ConsoleApplication
     class Commander : IWindow
     {
         public string name { get; set; }
-        public char[,,] content { get; set; }
+        public Pixel[,] content { get; set; }
         public char code { get; set; }
         public Vector size { get; set; }
         public Vector position { get; set; }
@@ -44,14 +44,14 @@ namespace ConsoleApplication
             text = "V Output V";
             size = new Vector(40, 9);
             output = " ";
-            content = new char[size.X(), size.Y(), 2];
+            content = new Pixel[size.X(), size.Y()];
             CreateWindow();
         }
 
         void CreateWindow()
         {
             content = WindowBuilder.Build(size, name, code);
-            content = WindowBuilder.PrintText(new Vector(1, 5), content, text, 'Q');
+            content = WindowBuilder.PrintText(new Vector(1, 5), content, text, ConsoleColor.DarkGreen);
             /*for (int i = 0; i < sizeX; i++)
                 for (int t = 0; t < sizeY; t++)
                     content[i, t, 0] = '▓';
@@ -74,10 +74,9 @@ namespace ConsoleApplication
             }*/
             for (int i = 0; i < size.X() - 2; i++)
             {
-                content[i + 1, 3, 0] = ' ';
-                content[i + 1, 3, 1] = 'W';
-                content[i + 1, 7, 0] = ' ';
-                content[i + 1, 7, 1] = 'Q';
+                content[i + 1, 3] = new Pixel(' ', ConsoleColor.White);
+                content[i + 1, 7] = new Pixel(' ', ConsoleColor.White);
+
             }
         }
 
@@ -96,13 +95,11 @@ namespace ConsoleApplication
             for (int i = 0; i < size.X() - 2; i++)
             {
                 if(output.Length > i) {
-                    content[i + 1, 7, 0] = output[i];
-                    content[i + 1, 7, 1] = 'Q';
+                    content[i + 1, 7] = new Pixel(output[i], ConsoleColor.DarkGreen);
                 }
                 else
                 {
-                    content[i + 1, 7, 0] = ' ';
-                    content[i + 1, 7, 1] = 'Q';
+                    content[i + 1, 7] = new Pixel(' ', ConsoleColor.DarkGreen);
                 }
             }
         }

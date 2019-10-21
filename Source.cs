@@ -74,8 +74,8 @@ namespace ConsoleApplication
             for(int i = 0; i < w.size.Y(); i++){
                 for(int t = 0; t < w.size.X(); t++){
                     Console.SetCursorPosition(t+w.position.X(),i+w.position.Y());
-                    Console.ForegroundColor = Colors.Color(w.content[t, i, 1]);
-                    Console.Write(w.content[t,i,0]);
+                    Console.ForegroundColor = w.content[t,i].GetColor();
+                    Console.Write(w.content[t,i].GetCharacter());
                     Console.ResetColor();
                 }
             }
