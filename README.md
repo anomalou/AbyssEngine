@@ -1,3 +1,6 @@
+# Look at this!!!
+This repository in need in re coding! So this manifest will rewrited too.
+
 # DungeonSeeker
 ConsoleGame
 
