@@ -1,20 +1,21 @@
 using System;
 
-namespace ConsoleApplication{
+namespace AbyssBehaviours{
     class GameplayWindow:IWindow{
 
         string _name;
         Vector _size;
         Vector _position;
 
-        Pixel[,] _content;
+        //Pixel[,] _content;
+        public WindowContainer container{get;set;}
 
 
         Vector dungeon;
         Vector playerPosition;
         int playerHP;
         ObjsList objsList;
-        Source source;
+        public Source source;
         public Inventory inventory;
         Obj[,] MapObjs{get;set;}
 
@@ -54,25 +55,16 @@ namespace ConsoleApplication{
             }
         }
 
-        public Pixel[,] content{
-            get{
-                return _content;
-            }
-            set{
-                _content = value;
-            }
-        }
-
         public char code { get; set; }
+        public int WID { get; set; }
 
         public GameplayWindow(){
             text = new string[2] { "Your player", "Inventroy" };
             name = "Game";
             code = '#';
-            size = new Vector(40, 15);
+            size = new Vector(40, 39);
             position = new Vector();
             //content = new Pixel[size.X(),size.Y()];  //1 layer is content, 2 layer is his color codes
-            inventory = new Inventory();
             mapSize = new Vector(size.X() / 2 - 2, size.Y() - 4);
             dungeon = new Vector(100, 100);
             MapObjs = new Obj[dungeon.X(),dungeon.Y()];
@@ -80,34 +72,38 @@ namespace ConsoleApplication{
         }
 
         void CreateWindow(){
+            int y = 0;
             string hp = "HP:" + playerHP.ToString();
-            content = WindowBuilder.Build(size, name, code);
+            container = WindowBuilder.Build(size, name, code, WindowBuilder.State.Fill);
             for(int i = 0; i < 3 + playerHP.ToString().Length; i++){
-                content[i+ mapSize.X() + 3, 4] = new Pixel(hp[i],ConsoleColor.DarkGray);
+                container.SetPixel(new Vector(i + mapSize.X() + 3, 4), new Pixel(hp[i],ConsoleColor.DarkGray));
             }
             for(int i = 0; i < text[0].Length; i++)
             {
-                content[i + mapSize.X() + 3, 1] = new Pixel(text[0][i], ConsoleColor.DarkGray);
+                container.SetPixel(new Vector(i + mapSize.X() + 3, 1), new Pixel(text[0][i], ConsoleColor.DarkGray));
             }
             for(int i = 0; i < text[1].Length; i++)
             {
-                content[mapSize.X() + i + 3, 6] = new Pixel(text[1][i], ConsoleColor.DarkGray);
+                container.SetPixel(new Vector(mapSize.X() + i + 3, 6), new Pixel(text[1][i], ConsoleColor.DarkGray));
             }
             for(int i = 0; i < inventory.SlotSize(); i++)
             {
-                for (int t = 0; t < size.X()/2 - 3; t++)
+                y++;
+                /* for (int t = 0; t < size.X()/2 - 3; t++)
                 {
                     if(inventory.item[i].name.Length > t)
-                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(inventory.item[i].name[t], ConsoleColor.Blue);
+                        container.SetPixel(new Vector(mapSize.X() + 3 + t, i + 8), new Pixel(inventory.item[i].name[t], ConsoleColor.Blue));
                     else
-                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(' ', ConsoleColor.Blue);
-                }
-                
+                        container.SetPixel(new Vector(mapSize.X() + 3 + t, i + 8), new Pixel(' ', ConsoleColor.Blue));
+                } */
+                container = WindowBuilder.PrintText(new Vector(mapSize.X() + 3, i + 8), container, 1, y.ToString(), ConsoleColor.DarkRed);
+                container = WindowBuilder.PrintText(new Vector(mapSize.X() + 4, i + 8), container, 17, inventory.item[i].name, inventory.item[i].rarity);
             }
         }
 
         public void Start(Source s, MapManager f){
             source = s;
+            inventory = new Inventory(source);
             playerPosition = new Vector(1, 1);
             playerHP = 100;
             string[] map = f.GetMap("room");
@@ -125,30 +121,32 @@ namespace ConsoleApplication{
                 for(int t = 0; t < mapSize.Y(); t++){
                     tempPos = new Vector(playerPosition.X() - mapSize.X() / 2 + i, playerPosition.Y() - mapSize.Y() / 2 + t);
                     if(tempPos.X() > -1 & tempPos.X() < dungeon.X() & tempPos.Y() >-1 & tempPos.Y() < dungeon.Y()){
-                        content[i+1,t+3] = new Pixel(MapObjs[tempPos.X(), tempPos.Y()].symbol, MapObjs[tempPos.X(), tempPos.Y()].color);
+                        container.SetPixel(new Vector(i + 1,t + 3), new Pixel(MapObjs[tempPos.X(), tempPos.Y()].symbol, MapObjs[tempPos.X(), tempPos.Y()].color));
                     }else{
-                        content[i+1,t+3] = new Pixel(' ', ConsoleColor.White);
+                        container.SetPixel(new Vector(i + 1,t + 3), new Pixel(' ', ConsoleColor.White));
                     }
                 }
             }
             string hp = playerHP.ToString();
             for (int i = 0; i < 3; i++)
             {
-                content[i + mapSize.X() + 6, 4] = new Pixel('▓', ConsoleColor.White);
+                container.SetPixel(new Vector(i + mapSize.X() + 6, 4), new Pixel('▓', ConsoleColor.White));
             }
             for (int i = 0; i < hp.Length; i++)
             {
-                content[i + mapSize.X() + 6, 4] = new Pixel(hp[i], ConsoleColor.DarkGray);
+                container.SetPixel(new Vector(i + mapSize.X() + 6, 4), new Pixel(hp[i], ConsoleColor.DarkGray));
             }
             for (int i = 0; i < inventory.SlotSize(); i++)
             {
-                for (int t = 0; t < size.X() / 2 - 3; t++)
+                /* for (int t = 0; t < size.X() / 2 - 3; t++)
                 {
                     if (t < inventory.item[i].name.Length)
-                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(inventory.item[i].name[t], ConsoleColor.Blue);
+                        container.SetPixel(new Vector(mapSize.X() + 3 + t, i + 8), new Pixel(inventory.item[i].name[t], ConsoleColor.Blue));
                     else
-                        content[mapSize.X() + 3 + t, i + 8] = new Pixel(' ', ConsoleColor.Blue);
-                }
+                        container.SetPixel(new Vector(mapSize.X() + 3 + t, i + 8), new Pixel(' ', ConsoleColor.Blue));
+                } */
+                
+                container = WindowBuilder.PrintText(new Vector(mapSize.X() + 4, i + 8), container, size.X() / 2 - 3, inventory.item[i].name, inventory.item[i].rarity);
             }
         }
 
@@ -166,11 +164,29 @@ namespace ConsoleApplication{
                 case ConsoleKey.D:
                     MovePlayer(new Vector(playerPosition.X() + 1, playerPosition.Y()));
                 break;
+                case ConsoleKey.D1:
+                    inventory.RemoveItem(0);
+                break;
+                case ConsoleKey.D2:
+                    inventory.RemoveItem(1);
+                break;
+                case ConsoleKey.D3:
+                    inventory.RemoveItem(2);
+                break;
+                case ConsoleKey.D4:
+                    inventory.RemoveItem(3);
+                break;
+                case ConsoleKey.D5:
+                    inventory.RemoveItem(4);
+                break;
+                case ConsoleKey.D6:
+                    inventory.RemoveItem(5);
+                break;
                 case ConsoleKey.C:
-                    source.SetActive(source.OpenWindow(position, new Commander()));
+                    source.OpenWindow(position, new Commander());
                 break;
                 case ConsoleKey.Escape:
-                    source.SetActive(source.OpenWindow(new Vector(position.X() + 2, position.Y() + 2), new Executor()));
+                    source.OpenWindow(new Vector(position.X() + 2, position.Y() + 2), new Executor());
                 break;
             }
         }
@@ -249,14 +265,17 @@ namespace ConsoleApplication{
     {
         public Item[] item;
         Items items;
-        public Inventory()
+
+        Source source;
+        public Inventory(Source s)
         {
+            s.AddDebug("Inventory iteration");
+            source = s;
             items = new Items();
             item = new Item[6];
             for(int i = 0; i < item.Length; i++)
             {
-                Item item = items.GetItem(-1);
-                this.item[i] = item;
+                item[i] = items.GetItem(0);
             }
         }
 
@@ -265,17 +284,30 @@ namespace ConsoleApplication{
             return item.Length;
         }
 
+        int CheckFree(){
+            for(int i = 0; i < item.Length; i++){
+                if(item[i].count == 0){
+                    return i;
+                }else
+                    continue;
+            }
+            return -1;
+        }
+
         public void SetItem(int ID)
         {
-            Console.WriteLine("Setitem");
-            for (int i = 0; i < SlotSize(); i++)
-            {
-                if(item[i].name == " ")
-                {
-                    item[i] = items.GetItem(ID);
-                    break;
-                }
+            int t = CheckFree();
+            if(t != -1){
+                item[t] = items.GetItem(ID);
             }
+        }
+
+        public void RemoveItem(int pos){
+            item[pos] = items.GetItem(0);
+        }
+
+        public void SelectItem(){
+            
         }
     }
 }

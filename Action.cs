@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplication{
+namespace AbyssBehaviours{
 
     class BaseAction{//base action for the most objects
         public virtual void Action(Vector vector,GameplayWindow w){}
@@ -16,6 +16,7 @@ namespace ConsoleApplication{
         {
             w.DegreeHp(10);
             w.inventory.SetItem(1);
+            w.source.AddDebug("action");
         }
     }
 }

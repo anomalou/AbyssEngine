@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplication{
+namespace AbyssBehaviours{
     class ObjsList{ //class that have array with all objects which are you can meet on you way
 
         public Obj Objs(char c){

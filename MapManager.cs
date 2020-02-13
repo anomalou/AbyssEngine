@@ -2,7 +2,7 @@ using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 using System.IO;
 
-namespace ConsoleApplication{
+namespace AbyssBehaviours{
     //[DataContract]
     class MapManager{
 

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApplication
+namespace AbyssBehaviours
 {
     class Commander : IWindow
     {
         public string name { get; set; }
-        public Pixel[,] content { get; set; }
+        //public Pixel[,] content { get; set; }
+        public WindowContainer container {get;set;}
         public char code { get; set; }
         public Vector size { get; set; }
         public Vector position { get; set; }
+        public int WID { get; set; }
 
         Source source;
         string command;
@@ -44,14 +46,13 @@ namespace ConsoleApplication
             text = "V Output V";
             size = new Vector(40, 9);
             output = " ";
-            content = new Pixel[size.X(), size.Y()];
             CreateWindow();
         }
 
         void CreateWindow()
         {
-            content = WindowBuilder.Build(size, name, code);
-            content = WindowBuilder.PrintText(new Vector(1, 5), content, text, ConsoleColor.DarkGreen);
+            container = WindowBuilder.Build(size, name, code, WindowBuilder.State.Fill);
+            container = WindowBuilder.PrintText(new Vector(1, 5), container, 10, text, ConsoleColor.DarkGreen);
             /*for (int i = 0; i < sizeX; i++)
                 for (int t = 0; t < sizeY; t++)
                     content[i, t, 0] = '▓';
@@ -74,9 +75,8 @@ namespace ConsoleApplication
             }*/
             for (int i = 0; i < size.X() - 2; i++)
             {
-                content[i + 1, 3] = new Pixel(' ', ConsoleColor.White);
-                content[i + 1, 7] = new Pixel(' ', ConsoleColor.White);
-
+                container.SetPixel(new Vector(i + 1, 3), new Pixel(' ', ConsoleColor.White));
+                container.SetPixel(new Vector(i + 1, 7), new Pixel(' ', ConsoleColor.White));
             }
         }
 
@@ -95,11 +95,11 @@ namespace ConsoleApplication
             for (int i = 0; i < size.X() - 2; i++)
             {
                 if(output.Length > i) {
-                    content[i + 1, 7] = new Pixel(output[i], ConsoleColor.DarkGreen);
+                    container.SetPixel(new Vector(i + 1, 7), new Pixel(output[i], ConsoleColor.DarkGreen));
                 }
                 else
                 {
-                    content[i + 1, 7] = new Pixel(' ', ConsoleColor.DarkGreen);
+                    container.SetPixel(new Vector(i + 1, 7), new Pixel(' ', ConsoleColor.DarkGreen));
                 }
             }
         }
@@ -123,8 +123,11 @@ namespace ConsoleApplication
                             {
                                 val[i] = comParts[1][i + 1];
                             }
-                            IWindow w = source.windowLobby("Game");
-                            output = w.ReturnValue(new string(val)).ToString();
+                            IWindow w = source.windowLobby(0);
+                            if(w != null)
+                                output = w.ReturnValue(new string(val)).ToString();
+                            else
+                                source.AddDebug("(C)Error window not founded!");
                         }
                         else
                         {
@@ -134,10 +137,17 @@ namespace ConsoleApplication
                     case "tp":
                         if(comParts.Length == 3)
                         {
-                            GameplayWindow w = source.windowLobby("Game") as GameplayWindow;
+                            GameplayWindow w = source.windowLobby(0) as GameplayWindow;
                             w.MovePlayer(new Vector(int.Parse(comParts[1]), int.Parse(comParts[2])));
                         }
                         break;
+                }
+            }else if(comParts.Length == 1){
+                switch(comParts[0]){
+                    case ".output":
+                        source.CloseWindow(source.GetActive());
+                        source.OpenWindow(new Vector(0,0),new Output());
+                    break;
                 }
             }
         }

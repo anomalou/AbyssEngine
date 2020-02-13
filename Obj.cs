@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplication{
+namespace AbyssBehaviours{
     class Obj{//property of every object
         public string name;//name of object
         public char symbol;//symbol of object

@@ -1,14 +1,17 @@
 ﻿using System;
 
-namespace ConsoleApplication
+namespace AbyssBehaviours
 {
     class Executor : IWindow
     {
         public string name { get; set; }
-        public Pixel[,] content { get; set; }
+        //public Pixel[,] content { get; set; }
+
+        public WindowContainer container {get;set;}
         public char code { get; set; }
         public Vector size { get; set; }
         public Vector position { get; set; }
+        public int WID { get; set; }
 
         Source source;
 
@@ -24,7 +27,7 @@ namespace ConsoleApplication
             exit = false;
             size = new Vector(20, 5);
             //content = new char[size.X(), size.Y(), 2];
-            content = WindowBuilder.Build(size, name, code);
+            container = WindowBuilder.Build(size, name, code, WindowBuilder.State.Fill);
         }
 
         public void Control(ConsoleKeyInfo key)
@@ -40,9 +43,10 @@ namespace ConsoleApplication
                     Highlight();
                     break;
                 case ConsoleKey.Enter:
-                    if (exit == true)
-                        source.Exit();
-                    else
+                    if (exit == true){
+                        source.CloseWindow(source.GetActive() - 1);
+                        source.CloseWindow(source.GetActive());
+                    }else
                         source.CloseWindow(source.GetActive());
                     break;
                 case ConsoleKey.Escape:
@@ -59,9 +63,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Red);
+                        container.SetPixel(new Vector(1 + i, 3), new Pixel(text[1][i], ConsoleColor.Red));
                     }
-                    content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Blue);
+                    container.SetPixel(new Vector(size.X() - 4 + i, 3), new Pixel(text[0][i], ConsoleColor.Blue));
                 }
             }
             else
@@ -70,9 +74,9 @@ namespace ConsoleApplication
                 {
                     if (i < 2)
                     {
-                        content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Blue);
+                        container.SetPixel(new Vector(1 + i, 3), new Pixel(text[1][i], ConsoleColor.Blue));
                     }
-                    content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Red);
+                    container.SetPixel(new Vector(size.X() - 4 + i, 3), new Pixel(text[0][i], ConsoleColor.Red));
                 }
             }
             
@@ -90,9 +94,9 @@ namespace ConsoleApplication
             {
                 if(i < 2)
                 {
-                    content[1 + i, 3] = new Pixel(text[1][i], ConsoleColor.Red);
+                    container.SetPixel(new Vector(1 + i, 3), new Pixel(text[1][i], ConsoleColor.Red));
                 }
-                content[size.X() - 4 + i, 3] = new Pixel(text[0][i], ConsoleColor.Blue);
+                container.SetPixel(new Vector(size.X() - 4 + i, 3), new Pixel(text[0][i], ConsoleColor.Blue));
             }
         }
 

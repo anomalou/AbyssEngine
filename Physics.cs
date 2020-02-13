@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApplication
+namespace AbyssBehaviours
 {
     class Vector
     {
@@ -18,7 +18,8 @@ namespace ConsoleApplication
         
         public Vector()
         {
-
+            x = 0;
+            y = 0;
         }
         public Vector(int x, int y)
         {
