@@ -1,0 +1,13 @@
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\hostpolicy.dll
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\hostfxr.dll
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.exe
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.deps.json
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.runtimeconfig.json
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.runtimeconfig.dev.json
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.dll
+C:\Users\John\AbyssGraphics\bin\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.pdb
+C:\Users\John\AbyssGraphics\obj\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.csprojAssemblyReference.cache
+C:\Users\John\AbyssGraphics\obj\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.AssemblyInfoInputs.cache
+C:\Users\John\AbyssGraphics\obj\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.AssemblyInfo.cs
+C:\Users\John\AbyssGraphics\obj\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.dll
+C:\Users\John\AbyssGraphics\obj\Debug\netcoreapp2.0\win10-x64\AbyssGraphics.pdb
