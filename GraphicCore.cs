@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace AbyssBehavior
 {
@@ -18,7 +19,9 @@ namespace AbyssBehavior
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             
+            
             textures = new Textures();
+            Control.InitializateConfig();
         }
 
         protected override void Initialize()
@@ -37,12 +40,14 @@ namespace AbyssBehavior
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            Control.pressedKeys = Keyboard.GetState().GetPressedKeys();
-            
+            // if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //     Exit();
+            Control.Controlling(Keyboard.GetState().GetPressedKeys());
+            Time.msc = (long)(gameTime.TotalGameTime.TotalMilliseconds);
+            Time.seconds = (int)gameTime.TotalGameTime.Seconds;
+            Time.minutes = (int)gameTime.TotalGameTime.Minutes;
+            Time.hours = (long)gameTime.TotalGameTime.Hours;
             Core.Update();
-
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -52,9 +57,11 @@ namespace AbyssBehavior
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            if(Control.pressedKeys.Length > 0)
-                spriteBatch.DrawString(debugFont, Control.pressedKeys[0].ToString(), new Vector2(0,0), Color.Black);
-            spriteBatch.DrawString(debugFont, gameTime.TotalGameTime.Seconds.ToString(), new Vector2(0,20), Color.Black);
+            spriteBatch.DrawString(debugFont, Control.action.ToString(), new Vector2(0,0), Color.Black);
+            spriteBatch.DrawString(debugFont, Time.msc.ToString(), new Vector2(0,40), Color.Black);
+            spriteBatch.DrawString(debugFont, Control.couldownTime.ToString(), new Vector2(0,60), Color.Black);
+            spriteBatch.DrawString(debugFont, Control.couldown.ToString(), new Vector2(0,80), Color.Black);
+            spriteBatch.DrawString(debugFont, Core.testWindow.selectedElement, new Vector2(0,20), Color.Black);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

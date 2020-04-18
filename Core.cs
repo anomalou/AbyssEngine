@@ -1,11 +1,16 @@
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace AbyssBehavior{
     static class Core{
 
-        public static Time time;
-
         public static Buffer buffer;
+        public static GraphicRender graphicCore;
+
+        public static Window testWindow;//окно для теста. В будущем будет удалено
+
+        public static bool active;
         static void Main(string[] arg)
         {
             Initialization();
@@ -13,39 +18,99 @@ namespace AbyssBehavior{
 
         static void Initialization(){
             buffer = new Buffer();
-            using (var graphic = new GraphicRender())
-                graphic.Run();
+            testWindow = new Window();
+            active = true;
+            using(graphicCore = new GraphicRender())
+                graphicCore.Run();
         }
 
         public static void Update(){
             Render();
-            
+            testWindow.DefaultUpdate();//тестовое обновление окна
         }
 
         static void Render(){
-
-        }
-
-        static void OpenWindow(){
+            //тестовый рендер для проверки работы окна
             
         }
 
-        static void OpenWindow(Vector position){
+        public static void OpenWindow(){
+            
+        }
+
+        public static void OpenWindow(Vector position){
 
         }
 
-        static void OpenInfo(string text){
+        public static void OpenInfo(string text){
 
         }
 
-        //управление
+        public static void CloseWindow(){
 
+        }
 
+        public static void ThrowError(int errorCode){
+
+        }
     }
 
     static class Control{
-        public static Keys[] pressedKeys;
+
+        public enum Actions{
+            None = 0,
+            Accept = 1,
+            Deny = 2,
+            MoveUp = 3,
+            MoveDown = 4,
+            MoveLeft = 5,
+            MoveRight = 6,
+            CursoreUp = 7,
+            CursoreDown = 8,
+            CursoreLeft = 9,
+            CursoreRight = 10
+        }
+        const int couldownTimeMax = 10;
+        static Dictionary<Keys, Actions> configurations;
+
+        public static Actions action;
+        static KeyboardState state;
+        public static bool couldown;
+        public static int couldownTime;
         
+        
+        public static void InitializateConfig(){
+            couldown = false;
+            couldownTime = 0;
+            configurations = new Dictionary<Keys, Actions>();
+            configurations.Add(Keys.Enter, Actions.Accept);
+            configurations.Add(Keys.Escape, Actions.Deny);
+            configurations.Add(Keys.Up, Actions.CursoreUp);
+            configurations.Add(Keys.Down, Actions.CursoreDown);
+        }
+
+        
+        public static void Controlling(Keys[] keys){
+            state = Keyboard.GetState();
+            if(keys.Length != 0 && Core.active == true && couldown == false){
+                if(configurations.ContainsKey(keys[keys.Length-1])){
+                    if(state.IsKeyDown(keys[keys.Length - 1])){
+                        action = configurations[keys[keys.Length - 1]];
+                        couldown = true;
+                    }
+                }
+            }
+            else{
+                action = Actions.None;
+                if(couldown == true){
+                    couldownTime++;
+                    if(couldownTime > couldownTimeMax){
+                        couldownTime = 0;
+                        couldown = false;
+                    }
+                }
+            }
+        }
     }
 
     class Transform{
@@ -119,11 +184,12 @@ namespace AbyssBehavior{
         }
     }
 
-    class Time{
+    static class Time{
 
-        int msc;
-        int seconds;
-        int minutes;
-        int hours;
+        static long _msc;
+        public static long msc{get{return _msc;}set{if(value > 1000000000000) _msc = 0; else _msc = value;}}
+        public static int seconds;
+        public static int minutes;
+        public static long hours;
     }
 }

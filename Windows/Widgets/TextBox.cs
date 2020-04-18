@@ -1,5 +1,0 @@
-namespace AbyssBehavior{
-    class TextBox{
-        
-    }
-}
