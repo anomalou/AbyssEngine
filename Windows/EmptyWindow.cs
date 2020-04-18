@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+
 namespace AbyssBehavior{
-    class BlankWindow{
+    class Window{
 
         /*В данном пустом окне описан пример создания простейшего окна, которе сможет отобразить ядро Abyss.
         Каждое новое окно должно создаваться основываясь на данном примере и должно следовать данной структуре.
@@ -20,43 +22,103 @@ namespace AbyssBehavior{
         const int width = 10;//ширина
         public Transform transform;
         public Canvas canvas;
-        Logic logic;
+        public Logic logic;
+
+        Dictionary<string, Widget> widgets;
+        public List<string> menu;
+        public string selectedElement;
 
 
-        public BlankWindow(){
+        public Window(){
             transform = new Transform(Vector.zero(), new Vector(width,heigth));
-            Initialization();
+            DefaultInitialization();
         }
 
-        public BlankWindow(Vector position){
+        public Window(Vector position){
             transform = new Transform(position, new Vector(width,heigth));
-            Initialization();
+            DefaultInitialization();
         }
 
-        //Метод иницализации полей окна
-        public void Initialization(){
-            logic = new Logic();//Заменить на свою логику
+        //Стандартный метод иницализации полей окна. Его трогать нельзя
+        protected void DefaultInitialization(){
             canvas = new Canvas(heigth, width);
+            widgets = new Dictionary<string, Widget>();
+            menu = new List<string>();
+            Initialization();
+            if(logic == null){
+                Core.ThrowError(1);
+                Core.CloseWindow();
+            }
+            if(menu.Count != 0){
+                selectedElement = menu[0];
+            }else{
+                selectedElement = "None";
+            }
         }
+
+        //Пользовательский метод инциальзации. Его можно переписать под себя
+        protected virtual void Initialization(){
+            logic = new Logic(this);//Заменить на свою логику
+            menu.Add("one");
+            menu.Add("two");
+            menu.Add("three");
+            menu.Add("four");
+        }
+
         //Метод которые производит обновление содержимого и виджетов окна.
-        public void Update(){
-            logic.Update();
+        public void DefaultUpdate(){
+            if(logic != null)
+                logic.DefaultUpdate();
+            Update();
+        }
+
+        protected virtual void Update(){
+
+        }
+
+        //Метод добавления нового виджета на окно
+        protected void AddWidget(string name, Widget widget, Vector position, bool menu = false){
+            widgets.Add(name, widget);
+            if(menu == true){
+                this.menu.Add(name);
+            }
         }
     }
 
     class Canvas{
 
-        const int layers = 2; //слои
+        const int layers = 4; //слои
         Point[,,] canvas;
-        
+
+        Canvas(){
+
+        }
+
         public Canvas(int heigth, int width){//инициальзация сетки
             canvas = new Point[heigth, width, layers];
             for(int i = 0; i < heigth; i++){
                 for(int t = 0; t < width; t++){
-                    canvas[i,t,0] = new Point();
-                    canvas[i,t,1] = new Point();
+                    for(int f = 0; f < layers; f++){
+                        canvas[i,t,f] = new Point();
+                    }
                 }
             }
+        }
+
+        public Point GetStaticPoint(Vector pos){
+            return canvas[pos.x, pos.y, 0];
+        }
+
+        public Point GetWidgetPoint0(Vector pos){
+            return canvas[pos.x, pos.y, 1];
+        }
+
+        public Point GetWidgetPoint1(Vector pos){
+            return canvas[pos.x, pos.y, 2];
+        }
+
+        public Point GetCursorePoint(Vector pos){
+            return canvas[pos.x, pos.y, 4];
         }
     }
 }

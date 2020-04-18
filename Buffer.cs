@@ -6,7 +6,12 @@ namespace AbyssBehavior{
 
         const int width = 64; //ширина
         const int heigth = 36; //высота
-        const int layers = 2; //глубина
+
+        /*Разные слои для интерфейса, активных элементов и элементов управления.
+        На 0 уровне находится статичная графика, которая в ходе работы никак не меняется.
+        На 1-2 уровне находятся активные элементы, которые могут меняться в ходе работы.
+        На 3 уровне находятся элементы управления, которые могут накладываться на активные элементы. К примеру это курсор*/
+        const int layers = 4; //слои
 
         Cursore cursore;
 
@@ -19,8 +24,9 @@ namespace AbyssBehavior{
             consoleLike = false;
             for(int i = 0; i < width; i++){
                 for(int t = 0; t < heigth; t++){
-                    buffer[i,t,0] = new Point();
-                    buffer[i,t,1] = new Point();
+                    for(int f = 0; f < layers; f++){
+                        buffer[i,t,f] = new Point();
+                    }
                 }
             }
         }
