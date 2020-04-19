@@ -10,25 +10,25 @@ namespace AbyssBehavior{
         protected action menuDown;
 
         protected Dictionary<Control.Actions, action> control;
-
-        protected bool wait;
-        public int waitTime;
         
         public Logic(Window parent = null){
             this.parent = parent;
             menuUp = MenuUp;
             menuDown = MenuDown;
             control = new Dictionary<Control.Actions, action>();
-            wait = false;
-            waitTime = 0;
             control.Add(Control.Actions.CursoreUp, menuUp);
             control.Add(Control.Actions.CursoreDown, menuDown);
+            Initalization();
         }
         public void DefaultUpdate(){
             if(control.ContainsKey(Control.action)){
                 control[Control.action]();
             }
             Update();
+        }
+
+        protected virtual void Initalization(){
+
         }
         
         protected virtual void Update(){

@@ -18,7 +18,7 @@ namespace AbyssBehavior{
 
         static void Initialization(){
             buffer = new Buffer();
-            testWindow = new Window();
+            testWindow = new TestWindow();
             active = true;
             using(graphicCore = new GraphicRender())
                 graphicCore.Run();
@@ -31,7 +31,15 @@ namespace AbyssBehavior{
 
         static void Render(){
             //тестовый рендер для проверки работы окна
-            
+            for(int i = 0; i < testWindow.transform.scale.y; i++){
+                for(int t = 0; t < testWindow.transform.scale.x; t++){
+                    for(int f = 0; f < testWindow.canvas.layers; f++){
+                        //System.Console.WriteLine(i+" "+t+" "+f);
+                        buffer.SetCursore(new Vector(t,i)+testWindow.transform.position,f);
+                        buffer.SetPoint(testWindow.canvas.GetPoint(new Vector(t,i),f));
+                    }
+                }
+            }
         }
 
         public static void OpenWindow(){
@@ -87,6 +95,8 @@ namespace AbyssBehavior{
             configurations.Add(Keys.Escape, Actions.Deny);
             configurations.Add(Keys.Up, Actions.CursoreUp);
             configurations.Add(Keys.Down, Actions.CursoreDown);
+            configurations.Add(Keys.A, Actions.MoveLeft);
+            configurations.Add(Keys.D, Actions.MoveRight);
         }
 
         
@@ -117,6 +127,9 @@ namespace AbyssBehavior{
         public class Position{
             int _x;
             int _y;
+
+            public int x{get{return _x;}}
+            public int y{get{return _y;}}
             public static implicit operator Position(Vector v){
                 return new Position{_x = v.x, _y = v.y};
             }
@@ -125,6 +138,9 @@ namespace AbyssBehavior{
                 return  _x+"-"+_y;
             }
 
+            public static Vector operator+(Vector v, Position p){
+                return new Vector(v.x+p._x,v.y+p._y);
+            }
             Position(){
 
             }
@@ -133,6 +149,9 @@ namespace AbyssBehavior{
         public class Scale{
             int _x;
             int _y;
+
+            public int x{get{return _x;}}
+            public int y{get{return _y;}}
             public static implicit operator Scale(Vector v){
                 return new Scale{_x = v.x, _y = v.y};
             }
@@ -156,9 +175,21 @@ namespace AbyssBehavior{
             _scale = new Vector(1,1);
         }
 
+        public Transform(Vector position){
+            _position = position;
+        }
+
         public Transform(Vector position, Vector scale){
             _position = position;
             _scale = scale;
+        }
+
+        public bool SetupScale(Vector scale){
+            if(this._scale == null){
+                _scale = scale;
+                return true;
+            }
+            return false;
         }
 
     }

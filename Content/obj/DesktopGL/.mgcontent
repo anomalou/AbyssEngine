@@ -5,8 +5,44 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/John/AbyssGraphics/Content/baseFont.spritefont</File>
+    <File>C:/Users/John/AbyssGraphics/Content/notexture.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/null.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word0.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word1.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word2.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word3.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word4.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word5.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word6.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word7.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word8.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/word9.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/worda.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/wordb.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/wordc.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/wordd.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/worde.png</File>
+    <File>C:/Users/John/AbyssGraphics/Content/words/wordf.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
