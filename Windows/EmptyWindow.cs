@@ -18,8 +18,6 @@ namespace AbyssBehavior{
         //Для изменения его содержимого должны использоваться, так называемые Widgets. Они могут спокойно редакитировать
         //canvas, но получить с него сведения нет.
 
-        const int heigth = 3;//высота
-        const int width = 10;//ширина
         public Transform transform;
         public Canvas canvas;
         public Logic logic;
@@ -30,21 +28,25 @@ namespace AbyssBehavior{
 
 
         public Window(){
-            transform = new Transform(Vector.zero(), new Vector(width,heigth));
+            transform = new Transform(Vector.zero());
             DefaultInitialization();
         }
 
         public Window(Vector position){
-            transform = new Transform(position, new Vector(width,heigth));
+            transform = new Transform(position);
             DefaultInitialization();
         }
 
         //Стандартный метод иницализации полей окна. Его трогать нельзя
         protected void DefaultInitialization(){
-            canvas = new Canvas(heigth, width);
+            
             widgets = new Dictionary<string, Widget>();
             menu = new List<string>();
             Initialization();
+            if(transform.scale != null)
+                canvas = new Canvas(transform.scale.x, transform.scale.y);
+            else
+                canvas = new Canvas(1, 1);
             if(logic == null){
                 Core.ThrowError(1);
                 Core.CloseWindow();
@@ -58,18 +60,24 @@ namespace AbyssBehavior{
 
         //Пользовательский метод инциальзации. Его можно переписать под себя
         protected virtual void Initialization(){
+            transform.SetupScale(new Vector(10,3));//установить размер окна
             logic = new Logic(this);//Заменить на свою логику
-            menu.Add("one");
-            menu.Add("two");
-            menu.Add("three");
-            menu.Add("four");
+            // menu.Add("one");
+            // menu.Add("two");
+            // menu.Add("three");
+            // menu.Add("four");
         }
 
         //Метод которые производит обновление содержимого и виджетов окна.
         public void DefaultUpdate(){
             if(logic != null)
                 logic.DefaultUpdate();
+            foreach(Widget w in widgets.Values){
+                w.Update();
+            }
             Update();
+            ClearLayers();
+            RenderWidgets();
         }
 
         protected virtual void Update(){
@@ -77,17 +85,51 @@ namespace AbyssBehavior{
         }
 
         //Метод добавления нового виджета на окно
-        protected void AddWidget(string name, Widget widget, Vector position, bool menu = false){
+        protected void AddWidget(string name, Widget widget, bool menu = false){
             widgets.Add(name, widget);
             if(menu == true){
                 this.menu.Add(name);
+            }
+        }
+
+        public Widget GetWidget(string name){
+            if(widgets.ContainsKey(name))
+                return widgets[name];
+            else
+                return null;
+        }
+
+        void ClearLayers(){
+            for(int x = 0; x < transform.scale.x; x++){
+                for(int y = 0; y < transform.scale.y; y++){
+                    for(int l = 1; l < canvas.layers; l++){
+                        canvas.Set(new Vector(x,y),l,"null");
+                    }
+                }
+            }
+        }
+
+        void RenderWidgets(){
+            foreach(Widget w in widgets.Values){
+                //System.Console.WriteLine(w.transform.scale.x);
+                for(int x = 0; x < w.transform.scale.x; x++){
+                    if(x+w.transform.position.x < transform.scale.x){
+                        for(int y = 0; y < w.transform.scale.y; y++){
+                            if(y+w.transform.position.y < transform.scale.y){
+                                canvas.Set(new Vector(x+w.transform.position.x,y+w.transform.position.y), 1, w.GetPoint(new Vector(x,y)));
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
     class Canvas{
 
-        const int layers = 4; //слои
+        public int layers{get;} //слои
+        public int height{get;}
+        public int width{get;}
         Point[,,] canvas;
 
         Canvas(){
@@ -95,6 +137,9 @@ namespace AbyssBehavior{
         }
 
         public Canvas(int heigth, int width){//инициальзация сетки
+            this.height = height;
+            this.width = width;
+            layers = Core.buffer.layers;
             canvas = new Point[heigth, width, layers];
             for(int i = 0; i < heigth; i++){
                 for(int t = 0; t < width; t++){
@@ -105,20 +150,24 @@ namespace AbyssBehavior{
             }
         }
 
-        public Point GetStaticPoint(Vector pos){
-            return canvas[pos.x, pos.y, 0];
+        public void LoadCanvas(string[,,] textures){
+            if(textures.Length == canvas.Length){
+                for(int x = 0; x < width; x++){
+                    for(int y = 0; y < height; y++){
+                        for(int l = 0; l < layers; l++){
+                            canvas[x,y,l].SetupPoint(textures[x,y,l]);
+                        }
+                    }
+                }
+            }
         }
 
-        public Point GetWidgetPoint0(Vector pos){
-            return canvas[pos.x, pos.y, 1];
+        public void Set(Vector pos, int layer, string texture){
+            canvas[pos.x, pos.y, layer].SetupPoint(texture);
         }
 
-        public Point GetWidgetPoint1(Vector pos){
-            return canvas[pos.x, pos.y, 2];
-        }
-
-        public Point GetCursorePoint(Vector pos){
-            return canvas[pos.x, pos.y, 4];
+        public string GetPoint(Vector pos, int layer){
+            return canvas[pos.x, pos.y, layer].texture;
         }
     }
 }
