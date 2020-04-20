@@ -53,13 +53,13 @@ namespace AbyssBehavior{
             }
         }
 
-        public void SetPoint(Point p){
-            buffer[cursore.x, cursore.y, cursore.layer].SetupPoint(p);
+        // public void SetPoint(Point p){
+        //     buffer[cursore.x, cursore.y, cursore.layer].SetupPoint(p);
             
-            if(consoleLike == true){
-                cursore.Move();
-            }
-        }
+        //     if(consoleLike == true){
+        //         cursore.Move();
+        //     }
+        // }
 
         public void SetCursore(int x, int y, int layer){
             while(x >= width || x < 0){
@@ -112,35 +112,30 @@ namespace AbyssBehavior{
     }
 
     class Point{
-        Color color;
         string texture_name;
 
         public string texture{get{return texture_name;}}
         public Point(){
-            color = Color.White;
             texture_name = "null";
         }
         public Point(string texture_name){
-            color = Color.White;
             this.texture_name = texture_name;
         }
-        public Point(Color color, string texture_name){
-            this.color = color;
-            this.texture_name = texture_name;
-        }
+        // public Point(Color color, string texture_name){
+        //     this.color = color;
+        //     this.texture_name = texture_name;
+        // }
         public void SetupPoint(){
-            color = Color.White;
             texture_name = "null";
         }
         public void SetupPoint(string texture_name){
-            color = Color.White;
             this.texture_name = texture_name;
         }
 
-        public void SetupPoint(Point p){
-            color = p.color;
-            texture_name = p.texture_name;
-        }
+        // public void SetupPoint(Point p){
+        //     color = p.color;
+        //     texture_name = p.texture_name;
+        // }
     }
 
     class Cursore{

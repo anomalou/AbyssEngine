@@ -18,9 +18,9 @@ namespace AbyssBehavior
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1280;
+            // graphics.IsFullScreen = true;
             
             textures = new Textures();
             Control.InitializateConfig();
@@ -52,6 +52,11 @@ namespace AbyssBehavior
             textures.textures.Add("word7",Content.Load<Texture2D>("words/word7"));
             textures.textures.Add("word8",Content.Load<Texture2D>("words/word8"));
             textures.textures.Add("word9",Content.Load<Texture2D>("words/word9"));
+
+            //курсор
+            textures.textures.Add("cursoreL",Content.Load<Texture2D>("cursoreL"));
+            textures.textures.Add("cursoreR",Content.Load<Texture2D>("cursoreR"));
+
             //буквы
             textures.textures.Add("worda",Content.Load<Texture2D>("words/worda"));
             textures.textures.Add("wordb",Content.Load<Texture2D>("words/wordb"));
@@ -59,6 +64,27 @@ namespace AbyssBehavior
             textures.textures.Add("wordd",Content.Load<Texture2D>("words/wordd"));
             textures.textures.Add("worde",Content.Load<Texture2D>("words/worde"));
             textures.textures.Add("wordf",Content.Load<Texture2D>("words/wordf"));
+            textures.textures.Add("wordg",Content.Load<Texture2D>("words/wordg"));
+            textures.textures.Add("wordh",Content.Load<Texture2D>("words/wordh"));
+            textures.textures.Add("wordi",Content.Load<Texture2D>("words/wordi"));
+            textures.textures.Add("wordj",Content.Load<Texture2D>("words/wordj"));
+            textures.textures.Add("wordk",Content.Load<Texture2D>("words/wordk"));
+            textures.textures.Add("wordl",Content.Load<Texture2D>("words/wordl"));
+            textures.textures.Add("wordm",Content.Load<Texture2D>("words/wordm"));
+            textures.textures.Add("wordn",Content.Load<Texture2D>("words/wordn"));
+            textures.textures.Add("wordo",Content.Load<Texture2D>("words/wordo"));
+            textures.textures.Add("wordp",Content.Load<Texture2D>("words/wordp"));
+            textures.textures.Add("wordq",Content.Load<Texture2D>("words/wordq"));
+            textures.textures.Add("wordr",Content.Load<Texture2D>("words/wordr"));
+            textures.textures.Add("words",Content.Load<Texture2D>("words/words"));
+            textures.textures.Add("wordt",Content.Load<Texture2D>("words/wordt"));
+            textures.textures.Add("wordu",Content.Load<Texture2D>("words/wordu"));
+            textures.textures.Add("wordv",Content.Load<Texture2D>("words/wordv"));
+            textures.textures.Add("wordw",Content.Load<Texture2D>("words/wordw"));
+            textures.textures.Add("wordx",Content.Load<Texture2D>("words/wordx"));
+            textures.textures.Add("wordy",Content.Load<Texture2D>("words/wordy"));
+            textures.textures.Add("wordz",Content.Load<Texture2D>("words/wordz"));
+            textures.textures.Add("word ",Content.Load<Texture2D>("words/word "));
             // TODO: use this.Content to load your game content here
             debugFont = Content.Load<SpriteFont>("baseFont");
         }
@@ -97,11 +123,11 @@ namespace AbyssBehavior
                 }
             }
 
-            spriteBatch.DrawString(debugFont, Control.action.ToString(), new Vector2(0,0), Color.White);
-            spriteBatch.DrawString(debugFont, Time.msc.ToString(), new Vector2(0,40), Color.White);
-            spriteBatch.DrawString(debugFont, Control.couldownTime.ToString(), new Vector2(0,60), Color.White);
-            spriteBatch.DrawString(debugFont, Control.couldown.ToString(), new Vector2(0,80), Color.White);
-            spriteBatch.DrawString(debugFont, Core.testWindow.selectedElement, new Vector2(0,20), Color.White);
+            spriteBatch.DrawString(debugFont, Control.action.ToString(), new Vector2(0,0), Color.Black);
+            //spriteBatch.DrawString(debugFont, Time.msc.ToString(), new Vector2(0,40), Color.White);
+            spriteBatch.DrawString(debugFont, Control.couldownTime.ToString(), new Vector2(0,40), Color.Black);
+            spriteBatch.DrawString(debugFont, Control.couldown.ToString(), new Vector2(0,60), Color.Black);
+            spriteBatch.DrawString(debugFont, Core.testWindow.selectedElement, new Vector2(0,20), Color.Black);
 
             spriteBatch.End();
             // TODO: Add your drawing code here

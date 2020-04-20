@@ -78,6 +78,7 @@ namespace AbyssBehavior{
             Update();
             ClearLayers();
             RenderWidgets();
+            RenderCursore();
         }
 
         protected virtual void Update(){
@@ -85,11 +86,21 @@ namespace AbyssBehavior{
         }
 
         //Метод добавления нового виджета на окно
-        protected void AddWidget(string name, Widget widget, bool menu = false){
-            widgets.Add(name, widget);
-            if(menu == true){
-                this.menu.Add(name);
-            }
+        protected void AddWidget(string name, Widget widget, object widgetData){
+            if(widgets.ContainsKey(name) == false){
+                widgets.Add(name, widget);
+                widgets[name].SetData(widgetData);
+            }else
+                Core.ThrowError(4);
+        }
+
+        protected void AddMenu(string name, Widget widget, object widgetData){
+            if(widgets.ContainsKey(name) == false){
+                widgets.Add(name, widget);
+                menu.Add(name);
+                widgets[name].SetData(widgetData);
+            }else
+                Core.ThrowError(4);
         }
 
         public Widget GetWidget(string name){
@@ -103,7 +114,7 @@ namespace AbyssBehavior{
             for(int x = 0; x < transform.scale.x; x++){
                 for(int y = 0; y < transform.scale.y; y++){
                     for(int l = 1; l < canvas.layers; l++){
-                        canvas.Set(new Vector(x,y),l,"null");
+                        canvas.Set(x,y,l,"null");
                     }
                 }
             }
@@ -116,11 +127,24 @@ namespace AbyssBehavior{
                     if(x+w.transform.position.x < transform.scale.x){
                         for(int y = 0; y < w.transform.scale.y; y++){
                             if(y+w.transform.position.y < transform.scale.y){
-                                canvas.Set(new Vector(x+w.transform.position.x,y+w.transform.position.y), 1, w.GetPoint(new Vector(x,y)));
+                                canvas.Set(x+w.transform.position.x,y+w.transform.position.y, 1, w.GetPoint(x,y));
                             }
+                            else
+                                break;
                         }
-                    }
+                    }else
+                        break;
                 }
+            }
+        }
+
+        void RenderCursore(){
+            if(selectedElement != "None"){
+                Vector pos,scale;
+                pos = new Vector(widgets[selectedElement].transform.position.x, widgets[selectedElement].transform.position.y);
+                scale = new Vector(widgets[selectedElement].transform.scale.x, widgets[selectedElement].transform.scale.y);
+                canvas.Set(pos.x, pos.y + scale.y - 1, 3, "cursoreL");
+                canvas.Set(pos.x+scale.x - 1, pos.y+scale.y - 1, 3, "cursoreR");
             }
         }
     }
@@ -150,24 +174,22 @@ namespace AbyssBehavior{
             }
         }
 
-        public void LoadCanvas(string[,,] textures){
+        public void LoadCanvas(string[,] textures){
             if(textures.Length == canvas.Length){
                 for(int x = 0; x < width; x++){
                     for(int y = 0; y < height; y++){
-                        for(int l = 0; l < layers; l++){
-                            canvas[x,y,l].SetupPoint(textures[x,y,l]);
-                        }
+                        canvas[x,y,0].SetupPoint(textures[x,y]);
                     }
                 }
             }
         }
 
-        public void Set(Vector pos, int layer, string texture){
-            canvas[pos.x, pos.y, layer].SetupPoint(texture);
+        public void Set(int x, int y, int layer, string texture_name){
+            canvas[x, y, layer].SetupPoint(texture_name);
         }
 
-        public string GetPoint(Vector pos, int layer){
-            return canvas[pos.x, pos.y, layer].texture;
+        public string GetPoint(int x, int y, int layer){
+            return canvas[x, y, layer].texture;
         }
     }
 }

@@ -34,9 +34,8 @@ namespace AbyssBehavior{
             for(int i = 0; i < testWindow.transform.scale.y; i++){
                 for(int t = 0; t < testWindow.transform.scale.x; t++){
                     for(int f = 0; f < testWindow.canvas.layers; f++){
-                        //System.Console.WriteLine(i+" "+t+" "+f);
-                        buffer.SetCursore(new Vector(t,i)+testWindow.transform.position,f);
-                        buffer.SetPoint(testWindow.canvas.GetPoint(new Vector(t,i),f));
+                        buffer.SetCursore(t+testWindow.transform.position.x,i+testWindow.transform.position.y,f);
+                        buffer.SetPoint(testWindow.canvas.GetPoint(t,i,f));
                     }
                 }
             }

@@ -4,9 +4,7 @@ namespace AbyssBehavior{
         string _text;
         public string text{get{return _text;}}
 
-        public TextBox(Vector position, Vector scale, string text, Window parent = null):base(position, scale, parent){
-            SetData(text);
-        }
+        public TextBox(Vector position, Vector scale):base(position, scale){}
 
         protected override void Behaviour(){
             for(int x = 0; x < text.Length; x++){
