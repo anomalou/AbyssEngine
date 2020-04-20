@@ -4,23 +4,18 @@ namespace AbyssBehavior{
         public Transform transform;
         protected Point [,] canvas;
 
-        protected Window parent;
-
         public Widget(){
             transform = new Transform(new Vector(0,0), new Vector(1,1));
-            parent = null;
             Initializtion();
         }
 
-        public Widget(Vector position, Vector scale, Window parent = null){
+        public Widget(Vector position, Vector scale){
             transform = new Transform(position, scale);
-            if(parent != null)
-                this.parent = parent;
             Initializtion();
         }
 
-        public string GetPoint(Vector pos){
-            return canvas[pos.x, pos.y].texture;
+        public string GetPoint(int x, int y){
+            return canvas[x, y].texture;
         }
 
         void Initializtion(){
