@@ -8,10 +8,73 @@ namespace AbyssBehavior{
         // public int textureNumber{get{return _textureNumber;}}
         // Texture[] _textures;
         // public Texture[] textures{get{return _textures;}}
-        public Dictionary<string, Texture2D> textures;
+        public Dictionary<string, Texture2D> _textures;
+        public Dictionary<string, string> textures;
+        
 
         public Textures(){
-            textures = new Dictionary<string, Texture2D>();
+            _textures = new Dictionary<string, Texture2D>();
+            textures = new Dictionary<string, string>();
+            AddTexture("notexture", "notexture");
+            AddTexture("null", "null");
+            Initialization();
+        }
+
+        void Initialization(){
+            AddTexture("cursoreL", "cursoreL");
+            AddTexture("cursoreR", "cursoreR");
+
+            AddTexture("UL","windows_parts/UL");
+            AddTexture("U","windows_parts/U");
+            AddTexture("UR","windows_parts/UR");
+            AddTexture("L","windows_parts/L");
+            AddTexture("F","windows_parts/F");
+            AddTexture("R","windows_parts/R");
+            AddTexture("DL","windows_parts/DL");
+            AddTexture("D","windows_parts/D");
+            AddTexture("DR","windows_parts/DR");
+
+            AddTexture("word0", "words/word0");
+            AddTexture("word1", "words/word1");
+            AddTexture("word2", "words/word2");
+            AddTexture("word3", "words/word3");
+            AddTexture("word4", "words/word4");
+            AddTexture("word5", "words/word5");
+            AddTexture("word6", "words/word6");
+            AddTexture("word7", "words/word7");
+            AddTexture("word8", "words/word8");
+            AddTexture("word9", "words/word9");
+
+            AddTexture("worda", "words/worda");
+            AddTexture("wordb", "words/wordb");
+            AddTexture("wordc", "words/wordc");
+            AddTexture("wordd", "words/wordd");
+            AddTexture("worde", "words/worde");
+            AddTexture("wordf", "words/wordf");
+            AddTexture("wordg", "words/wordg");
+            AddTexture("wordh", "words/wordh");
+            AddTexture("wordi", "words/wordi");
+            AddTexture("wordk", "words/wordk");
+            AddTexture("wordl", "words/wordl");
+            AddTexture("wordm", "words/wordm");
+            AddTexture("wordn", "words/wordn");
+            AddTexture("wordo", "words/wordo");
+            AddTexture("wordp", "words/wordp");
+            AddTexture("wordq", "words/wordq");
+            AddTexture("wordr", "words/wordr");
+            AddTexture("words", "words/words");
+            AddTexture("wordt", "words/wordt");
+            AddTexture("wordu", "words/wordu");
+            AddTexture("wordv", "words/wordv");
+            AddTexture("wordw", "words/wordw");
+            AddTexture("wordx", "words/wordx");
+            AddTexture("wordy", "words/wordy");
+            AddTexture("wordz", "words/wordz");
+            AddTexture("word ", "words/word ");
+        }
+
+        void AddTexture(string name, string path){
+            textures.Add(name, path);
         }
 
         // public Textures(){//иниацилизация и загрузка из файла имена текстур и их символы
