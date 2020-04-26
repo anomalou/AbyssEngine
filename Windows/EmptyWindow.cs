@@ -51,11 +51,13 @@ namespace AbyssBehavior{
                 Core.ThrowError(1);
                 Core.CloseWindow();
             }
+            System.Console.WriteLine("init");
             if(menu.Count != 0){
                 selectedElement = menu[0];
             }else{
                 selectedElement = "None";
             }
+            PostInitialization();
         }
 
         //Пользовательский метод инциальзации. Его можно переписать под себя
@@ -66,6 +68,10 @@ namespace AbyssBehavior{
             // menu.Add("two");
             // menu.Add("three");
             // menu.Add("four");
+        }
+
+        protected virtual void PostInitialization(){
+
         }
 
         //Метод которые производит обновление содержимого и виджетов окна.
@@ -152,21 +158,21 @@ namespace AbyssBehavior{
     class Canvas{
 
         public int layers{get;} //слои
-        public int height{get;}
+        public int heigth{get;}
         public int width{get;}
-        Point[,,] canvas;
+        public Point[,,] canvas;
 
         Canvas(){
 
         }
 
-        public Canvas(int heigth, int width){//инициальзация сетки
-            this.height = height;
+        public Canvas(int width, int heigth){//инициальзация сетки
+            this.heigth = heigth;
             this.width = width;
             layers = Core.buffer.layers;
-            canvas = new Point[heigth, width, layers];
-            for(int i = 0; i < heigth; i++){
-                for(int t = 0; t < width; t++){
+            canvas = new Point[width, heigth, layers];
+            for(int i = 0; i < width; i++){
+                for(int t = 0; t < heigth; t++){
                     for(int f = 0; f < layers; f++){
                         canvas[i,t,f] = new Point();
                     }
@@ -175,10 +181,10 @@ namespace AbyssBehavior{
         }
 
         public void LoadCanvas(string[,] textures){
-            if(textures.Length == canvas.Length){
+            if(textures.Length == canvas.Length / layers){
                 for(int x = 0; x < width; x++){
-                    for(int y = 0; y < height; y++){
-                        canvas[x,y,0].SetupPoint(textures[x,y]);
+                    for(int y = 0; y < heigth; y++){
+                        canvas[x,y,0].SetupPoint(textures[y,x]);
                     }
                 }
             }
