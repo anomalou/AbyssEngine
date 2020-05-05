@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/John/AbyssGraphics/Content/baseFont.spritefont</SourceFile>
-  <SourceTime>2020-04-01T13:42:33.3184389+03:00</SourceTime>
-  <DestFile>C:/Users/John/AbyssGraphics/Content/bin/DesktopGL/Content/baseFont.xnb</DestFile>
-  <DestTime>2020-04-01T13:47:53.5433955+03:00</DestTime>
+  <SourceFile>C:/Users/John/Documents/GitHub/AbyssEngine/Content/baseFont.spritefont</SourceFile>
+  <SourceTime>2020-05-02T22:13:51.9490727+03:00</SourceTime>
+  <DestFile>C:/Users/John/Documents/GitHub/AbyssEngine/Content/bin/DesktopGL/Content/baseFont.xnb</DestFile>
+  <DestTime>2020-05-04T13:05:43.9142128+03:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-01-13T19:18:24+03:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
