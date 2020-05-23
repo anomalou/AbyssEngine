@@ -4,12 +4,13 @@ using Microsoft.Xna.Framework;
 namespace AbyssBehavior{
     class Buffer{
 
-        const int _width = 51; //ширина
-        const int _heigth = 28; //высота
+        const int _width = 64; //ширина
+        const int _heigth = 36; //высота
 
         public int width{get{return _width;}}
         public int heigth{get{return _heigth;}}
         
+        public Vector scale{get;}
 
         /*Разные слои для интерфейса, активных элементов и элементов управления.
         На 0 уровне находится статичная графика, которая в ходе работы никак не меняется.
@@ -30,6 +31,7 @@ namespace AbyssBehavior{
         public Buffer(){
             cursore = new Cursore();
             buffer = new Point[width, heigth, layers];
+            scale = new Vector(width, heigth);
             consoleLike = false;
             for(int i = 0; i < width; i++){
                 for(int t = 0; t < heigth; t++){
@@ -108,6 +110,17 @@ namespace AbyssBehavior{
                 layer = 0;
             cursore.chPos(x,y,layer);
 
+        }
+
+        public void Clear(){
+            for(int x = 0; x < width; x++){
+                for(int y = 0; y < heigth; y++){
+                    for(int l = 0; l < layers; l++){
+                        SetCursore(x, y, l);
+                        SetPoint();
+                    }
+                }
+            }
         }
     }
 

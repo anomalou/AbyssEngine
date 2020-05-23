@@ -1,19 +1,21 @@
 namespace AbyssBehavior{
     class TestLogic:Logic{
 
-        protected action plus, minus;
+        protected action plus, minus, close;
 
         int num;
 
         public TestLogic(Window parent):base(parent){
-
+            
         }
         protected override void Initalization(){
             num = 0;
             plus = Plus;
             minus = Minus;
+            close = Close;
             control.Add(Control.Actions.MoveLeft, minus);
             control.Add(Control.Actions.MoveRight, plus);
+            control.Add(Control.Actions.Deny, close);
         }
 
         void Plus(){
@@ -33,6 +35,10 @@ namespace AbyssBehavior{
                     parent.GetWidget("counter").SetData(num.ToString());
             }
             
+        }
+
+        void Close(){
+            Core.CloseWindow(parent);
         }
     }
 }

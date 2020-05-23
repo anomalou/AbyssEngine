@@ -6,9 +6,10 @@ namespace AbyssBehavior{
     static class Core{
 
         public static Buffer buffer;
-        public static GraphicRender graphicCore;
+        static GraphicRender graphicCore;
 
-        public static Window testWindow;//окно для теста. В будущем будет удалено
+        public static List<Window> windowQueue;
+        public static Window currentWindow;
 
         public static bool active;
         static void Main(string[] arg)
@@ -18,47 +19,67 @@ namespace AbyssBehavior{
 
         static void Initialization(){
             buffer = new Buffer();
-            testWindow = new TestWindow();
+            windowQueue = new List<Window>();
             active = true;
+            OpenWindow(new MainMenu());
             using(graphicCore = new GraphicRender())
                 graphicCore.Run();
+            
         }
 
         public static void Update(){
-            Render();
-            testWindow.DefaultUpdate();//тестовое обновление окна
+            if(windowQueue.Count > 0 && currentWindow != null){
+                Render();
+                foreach(Window w in windowQueue.ToArray()){
+                    w.DefaultUpdate();
+                }
+            }
         }
 
         static void Render(){
-            //тестовый рендер для проверки работы окна
-            for(int i = 0; i < testWindow.transform.scale.y; i++){
-                for(int t = 0; t < testWindow.transform.scale.x; t++){
-                    for(int f = 0; f < testWindow.canvas.layers; f++){
-                        buffer.SetCursore(t+testWindow.transform.position.x,i+testWindow.transform.position.y,f);
-                        buffer.SetPoint(testWindow.canvas.GetPoint(t,i,f));
+            for(int i = 0; i < currentWindow.transform.scale.y; i++){
+                for(int t = 0; t < currentWindow.transform.scale.x; t++){
+                    for(int f = 0; f < currentWindow.canvas.layers; f++){
+                        buffer.SetCursore(t+currentWindow.transform.position.x,i+currentWindow.transform.position.y,f);
+                        buffer.SetPoint(currentWindow.canvas.GetPoint(t,i,f));
                     }
                 }
             }
         }
 
-        public static void OpenWindow(){
-            
-        }
-
-        public static void OpenWindow(Vector position){
-
+        public static void OpenWindow(Window window, Window parent = null){
+            windowQueue.Add(window);
+            currentWindow = window;
+            if(parent != null){
+                currentWindow.parent = parent;
+            }
+            System.Console.WriteLine("Queue size: " + windowQueue.Count);
         }
 
         public static void OpenInfo(string text){
 
         }
 
-        public static void CloseWindow(){
-
+        public static void CloseWindow(Window window){
+            if(window == currentWindow)
+                if(window.parent != null)
+                    currentWindow = window.parent;
+                else
+                    if(windowQueue.Count > 0)
+                        currentWindow = windowQueue[0];
+                    else
+                        currentWindow = null;
+            windowQueue.Remove(window);
+            System.Console.WriteLine("Queue size: " + windowQueue.Count);
+            buffer.Clear();
         }
 
         public static void ThrowError(int errorCode){
 
+        }
+
+        public static void Exit(){
+            graphicCore.Exit();
         }
     }
 

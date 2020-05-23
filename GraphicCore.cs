@@ -18,9 +18,9 @@ namespace AbyssBehavior
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.PreferredBackBufferWidth = 1280;
-            // graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.IsFullScreen = true;
             
             textures = new Textures();
             Control.InitializateConfig();
@@ -29,7 +29,7 @@ namespace AbyssBehavior
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+
             base.Initialize();
         }
 
@@ -45,8 +45,8 @@ namespace AbyssBehavior
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            // if (Keyboard.GetState().IsKeyDown(Keys.C))
+            //     Exit();
             Control.Controlling(Keyboard.GetState().GetPressedKeys());
             Time.msc = (long)(gameTime.TotalGameTime.TotalMilliseconds);
             Time.seconds = (int)gameTime.TotalGameTime.Seconds;
@@ -60,7 +60,7 @@ namespace AbyssBehavior
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
             
             

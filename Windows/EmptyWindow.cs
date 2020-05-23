@@ -21,6 +21,7 @@ namespace AbyssBehavior{
         public Transform transform;
         public Canvas canvas;
         public Logic logic;
+        public Window parent;
 
         Dictionary<string, Widget> widgets;
         public List<string> menu;
@@ -39,7 +40,6 @@ namespace AbyssBehavior{
 
         //Стандартный метод иницализации полей окна. Его трогать нельзя
         protected void DefaultInitialization(){
-            
             widgets = new Dictionary<string, Widget>();
             menu = new List<string>();
             Initialization();
@@ -49,9 +49,8 @@ namespace AbyssBehavior{
                 canvas = new Canvas(1, 1);
             if(logic == null){
                 Core.ThrowError(1);
-                Core.CloseWindow();
+                Core.CloseWindow(this);
             }
-            System.Console.WriteLine("init");
             if(menu.Count != 0){
                 selectedElement = menu[0];
             }else{
@@ -76,15 +75,17 @@ namespace AbyssBehavior{
 
         //Метод которые производит обновление содержимого и виджетов окна.
         public void DefaultUpdate(){
-            if(logic != null)
+            if(Core.currentWindow == this){
+                if(logic != null)
                 logic.DefaultUpdate();
-            foreach(Widget w in widgets.Values){
-                w.Update();
+                foreach(Widget w in widgets.Values){
+                    w.Update();
+                }
+                Update();
+                ClearLayers();
+                RenderWidgets();
+                RenderCursore();
             }
-            Update();
-            ClearLayers();
-            RenderWidgets();
-            RenderCursore();
         }
 
         protected virtual void Update(){
@@ -184,7 +185,7 @@ namespace AbyssBehavior{
             if(textures.Length == canvas.Length / layers){
                 for(int x = 0; x < width; x++){
                     for(int y = 0; y < heigth; y++){
-                        canvas[x,y,0].SetupPoint(textures[y,x]);
+                        canvas[x,y,0].SetupPoint(textures[x,y]);
                     }
                 }
             }

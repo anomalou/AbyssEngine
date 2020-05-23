@@ -8,23 +8,31 @@ namespace AbyssBehavior{
         
         protected action menuUp;
         protected action menuDown;
+        protected action select;
 
         protected Dictionary<Control.Actions, action> control;
-        
-        public Logic(Window parent = null){
+
+        protected Dictionary<string, action> menu;
+
+        public Logic(Window parent){
             this.parent = parent;
             menuUp = MenuUp;
             menuDown = MenuDown;
+            select = Select;
             control = new Dictionary<Control.Actions, action>();
+            menu = new Dictionary<string, action>();
             control.Add(Control.Actions.CursoreUp, menuUp);
             control.Add(Control.Actions.CursoreDown, menuDown);
+            control.Add(Control.Actions.Accept, select);
             Initalization();
         }
         public void DefaultUpdate(){
-            if(control.ContainsKey(Control.action)){
+            if(Core.currentWindow == parent){
+                if(control.ContainsKey(Control.action)){
                 control[Control.action]();
+                }
+                Update();
             }
-            Update();
         }
 
         protected virtual void Initalization(){
@@ -60,6 +68,13 @@ namespace AbyssBehavior{
             }else{
                 Core.ThrowError(3);
             }
+        }
+
+        protected void Select(){
+            if(menu.ContainsKey(parent.selectedElement)){
+                menu[parent.selectedElement]();
+            }else
+                Core.ThrowError(6);
         }
     }
 }
