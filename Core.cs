@@ -115,6 +115,8 @@ namespace AbyssBehavior{
             configurations.Add(Keys.Escape, Actions.Deny);
             configurations.Add(Keys.Up, Actions.CursoreUp);
             configurations.Add(Keys.Down, Actions.CursoreDown);
+            configurations.Add(Keys.Left, Actions.CursoreLeft);
+            configurations.Add(Keys.Right, Actions.CursoreRight);
             configurations.Add(Keys.A, Actions.MoveLeft);
             configurations.Add(Keys.D, Actions.MoveRight);
         }
