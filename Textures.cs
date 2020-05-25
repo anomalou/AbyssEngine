@@ -89,6 +89,7 @@ namespace AbyssBehavior{
             AddTexture("word ", "words/word ");
 
             AddTexture("abyss", "textures/abyss");
+            AddTexture("dark", "textures/dark");
         }
 
         void AddTexture(string name, string path){
