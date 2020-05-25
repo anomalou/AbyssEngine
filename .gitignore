@@ -2,4 +2,4 @@ $ cat .gitignore
 
 bin
 obj
-windows_parts.*
+windows_parts.png

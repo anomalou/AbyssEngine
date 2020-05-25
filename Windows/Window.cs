@@ -15,8 +15,8 @@ namespace AbyssBehavior{
 
         //Canvas это сетка окна. В ней находится все его содержимое, которое затем отобразится на экране.
         //Его можно изменить напрямую, но делать это не желательно, так как в дальнейшем может возникнуть путаница.
-        //Для изменения его содержимого должны использоваться, так называемые Widgets. Они могут спокойно редакитировать
-        //canvas, но получить с него сведения нет.
+        //Для изменения его содержимого должны использоваться, так называемые Widgets. Они могут менять свой canvas, а уже
+        //окно будет выводить их canvas на свой.
 
         public Transform transform;
         public Canvas canvas;
@@ -134,7 +134,10 @@ namespace AbyssBehavior{
                     if(x+w.transform.position.x < transform.scale.x){
                         for(int y = 0; y < w.transform.scale.y; y++){
                             if(y+w.transform.position.y < transform.scale.y){
-                                canvas.Set(x+w.transform.position.x,y+w.transform.position.y, 1, w.GetPoint(x,y));
+                                for(int l = 0; l < w.layers; l++){
+                                    canvas.Set(x+w.transform.position.x,y+w.transform.position.y, l+1, w.GetPoint(x,y,l));
+                                }
+                                
                             }
                             else
                                 break;
@@ -154,6 +157,31 @@ namespace AbyssBehavior{
                 canvas.Set(pos.x+scale.x - 1, pos.y+scale.y - 1, 3, "cursoreR");
             }
         }
+
+        protected string[,] FillBackground(){
+            string[,] canvas = new string[transform.scale.x, transform.scale.y];
+            for(int x = 0; x < Core.buffer.scale.x; x++){
+                for(int y = 0; y < Core.buffer.scale.y; y++){
+                    if(x == 0){
+                        canvas[x, y] = "L";
+                    }else if(x == Core.buffer.scale.x - 1){
+                        canvas[x, y] = "R";
+                    }else if(y == 0){
+                        canvas[x, y] = "U";
+                    }else if(y == Core.buffer.scale.y - 1){
+                        canvas[x, y] = "D";
+                    }else{
+                        canvas[x, y] = "F";
+                    }
+                }
+            }
+
+            canvas[0, 0] = "UL";
+            canvas[Core.buffer.scale.x - 1, 0] = "UR";
+            canvas[0, Core.buffer.scale.y - 1] = "DL";
+            canvas[Core.buffer.scale.x - 1, Core.buffer.scale.y - 1] = "DR";
+            return canvas;
+        }
     }
 
     class Canvas{
@@ -163,6 +191,8 @@ namespace AbyssBehavior{
         public int width{get;}
         public Point[,,] canvas;
 
+        public Vector scale{get;}
+
         Canvas(){
 
         }
@@ -170,6 +200,7 @@ namespace AbyssBehavior{
         public Canvas(int width, int heigth){//инициальзация сетки
             this.heigth = heigth;
             this.width = width;
+            scale = new Vector(width, heigth);
             layers = Core.buffer.layers;
             canvas = new Point[width, heigth, layers];
             for(int i = 0; i < width; i++){

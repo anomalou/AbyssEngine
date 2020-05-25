@@ -33,6 +33,22 @@ namespace AbyssBehavior{
             AddTexture("DL","windows_parts/DL");
             AddTexture("D","windows_parts/D");
             AddTexture("DR","windows_parts/DR");
+            AddTexture("IUL","windows_parts/IUL");
+            AddTexture("IUR","windows_parts/IUR");
+            AddTexture("IU","windows_parts/IU");
+            AddTexture("IL","windows_parts/IL");
+            AddTexture("IR","windows_parts/IR");
+            AddTexture("IDL","windows_parts/IDL");
+            AddTexture("ID","windows_parts/ID");
+            AddTexture("IDR","windows_parts/IDR");
+            AddTexture("IOUL","windows_parts/IOUL");
+            AddTexture("IOUR","windows_parts/IOUR");
+            AddTexture("IOU","windows_parts/IOU");
+            AddTexture("IOL","windows_parts/IOL");
+            AddTexture("IOR","windows_parts/IOR");
+            AddTexture("IOD","windows_parts/IOD");
+            AddTexture("IODL","windows_parts/IODL");
+            AddTexture("IODR","windows_parts/IODR");
 
             AddTexture("word0", "words/word0");
             AddTexture("word1", "words/word1");
@@ -71,6 +87,8 @@ namespace AbyssBehavior{
             AddTexture("wordy", "words/wordy");
             AddTexture("wordz", "words/wordz");
             AddTexture("word ", "words/word ");
+
+            AddTexture("abyss", "textures/abyss");
         }
 
         void AddTexture(string name, string path){

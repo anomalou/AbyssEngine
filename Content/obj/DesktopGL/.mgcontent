@@ -4,62 +4,98 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/John/AbyssGraphics/Content/baseFont.spritefont</File>
-    <File>C:/Users/John/AbyssGraphics/Content/cursoreL.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/cursoreR.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/notexture.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/null.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/C.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/D.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/DL.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/DR.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/F.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/H.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/L.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/R.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/U.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/UL.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/UR.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/windows_parts/V.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word .png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word0.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word1.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word2.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word3.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word4.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word5.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word6.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word7.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word8.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/word9.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/worda.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordb.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordc.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordd.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/worde.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordf.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordg.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordh.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordi.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordj.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordk.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordl.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordm.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordn.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordo.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordp.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordq.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordr.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/words.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordt.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordu.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordv.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordw.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordx.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordy.png</File>
-    <File>C:/Users/John/AbyssGraphics/Content/words/wordz.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/baseFont.spritefont</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/cursoreL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/cursoreR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/notexture.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/null.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/abyss.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/dark.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/C.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/D.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/DL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/DR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/F.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/H.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/ID.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IDL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IDR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOD.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IODL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IODR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOU.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOUL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IOUR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IU.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IUL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/IUR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/L.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/R.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/U.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/UL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/UR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/V.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word .png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word0.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word1.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word2.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word3.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word4.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word5.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word6.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word7.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word8.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/word9.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/worda.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordb.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordc.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordd.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/worde.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordf.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordg.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordh.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordi.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordj.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordk.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordl.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordm.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordn.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordo.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordp.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordq.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordr.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/words.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordt.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordu.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordv.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordw.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordx.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordy.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordz.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

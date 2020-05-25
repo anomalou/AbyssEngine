@@ -22,6 +22,7 @@ namespace AbyssBehavior{
             windowQueue = new List<Window>();
             active = true;
             OpenWindow(new MainMenu());
+            Objects.Initalization();
             using(graphicCore = new GraphicRender())
                 graphicCore.Run();
             
@@ -53,7 +54,6 @@ namespace AbyssBehavior{
             if(parent != null){
                 currentWindow.parent = parent;
             }
-            System.Console.WriteLine("Queue size: " + windowQueue.Count);
         }
 
         public static void OpenInfo(string text){
@@ -70,7 +70,6 @@ namespace AbyssBehavior{
                     else
                         currentWindow = null;
             windowQueue.Remove(window);
-            System.Console.WriteLine("Queue size: " + windowQueue.Count);
             buffer.Clear();
         }
 
@@ -223,6 +222,10 @@ namespace AbyssBehavior{
         public Vector(){
             _x = 0;
             _y = 0;
+        }
+        public Vector(Vector v){
+            _x = v.x;
+            _y = v.y;
         }
         public Vector(int x, int y){
             _x = x;

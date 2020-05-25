@@ -57,7 +57,7 @@ namespace AbyssBehavior{
             currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
             foreach(var widget in parent.menu){
                 position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.x > currentPosition.x - 2 && position.x < currentPosition.x + 2 && position.y < currentPosition.y){
+                if(position.y < currentPosition.y){
                     x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                     y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
                     if(x_d <= mx_d && y_d <= my_d){
@@ -90,7 +90,7 @@ namespace AbyssBehavior{
             currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
             foreach(var widget in parent.menu){
                 position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.x > currentPosition.x - 2 && position.x < currentPosition.x + 2 && position.y > currentPosition.y){
+                if(position.y > currentPosition.y){
                     x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                     y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
                     if(x_d <= mx_d && y_d <= my_d){
@@ -124,7 +124,7 @@ namespace AbyssBehavior{
             currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
             foreach(var widget in parent.menu){
                 position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.y > currentPosition.y - 2 && position.y < currentPosition.y + 2 && position.x < currentPosition.x){
+                if(position.x < currentPosition.x){
                     x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                     y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
                     if(x_d <= mx_d && y_d <= my_d){
@@ -146,7 +146,7 @@ namespace AbyssBehavior{
             currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
             foreach(var widget in parent.menu){
                 position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.y > currentPosition.y - 2 && position.y < currentPosition.y + 2 && position.x > currentPosition.x){
+                if(position.x > currentPosition.x){
                     x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                     y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
                     if(x_d <= mx_d && y_d <= my_d){
