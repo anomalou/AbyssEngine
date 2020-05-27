@@ -10,7 +10,11 @@
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/notexture.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/null.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/abyss.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/benchH.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/benchV.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/dark.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/grass.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/player.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/C.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/D.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/windows_parts/DL.png</File>
@@ -78,6 +82,10 @@
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordz.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -15,6 +15,7 @@ namespace AbyssBehavior{
         protected Dictionary<Control.Actions, action> control;
 
         protected Dictionary<string, action> menu;
+        
 
         public Logic(Window parent){
             this.parent = parent;
@@ -44,32 +45,38 @@ namespace AbyssBehavior{
         protected virtual void Initalization(){
 
         }
+        public virtual void PostInitialization(){
+
+        }
         
         protected virtual void Update(){
 
         }
 
         protected void MenuUp(){
-            string next = "null";
-            uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
-            Vector position;
-            Vector currentPosition;
-            currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
-            foreach(var widget in parent.menu){
-                position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.y < currentPosition.y){
-                    x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                    y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                    if(x_d <= mx_d && y_d <= my_d){
-                        mx_d = x_d;
-                        my_d = y_d;
-                        next = widget;
+            if(parent.menu.Count > 0){
+                string next = "null";
+                uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
+                Vector position;
+                Vector currentPosition;
+                currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
+                foreach(var widget in parent.menu){
+                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                    if(position.y < currentPosition.y){
+                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                        if(x_d <= mx_d && y_d <= my_d){
+                            mx_d = x_d;
+                            my_d = y_d;
+                            next = widget;
+                        }
                     }
                 }
-            }
-            if(next != "null")
-                parent.selectedElement = next;
+                if(next != "null")
+                    parent.selectedElement = next;
 
+            }
+            
             // int index;
             // if(parent.menu.Contains(parent.selectedElement) && parent.menu.Count > 0){
             //     index = parent.menu.IndexOf(parent.selectedElement);
@@ -83,25 +90,28 @@ namespace AbyssBehavior{
             // }
         }
         protected void MenuDown(){
-            string next = "null";
-            uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
-            Vector position;
-            Vector currentPosition;
-            currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
-            foreach(var widget in parent.menu){
-                position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.y > currentPosition.y){
-                    x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                    y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                    if(x_d <= mx_d && y_d <= my_d){
-                        mx_d = x_d;
-                        my_d = y_d;
-                        next = widget;
+            if(parent.menu.Count > 0){
+                string next = "null";
+                uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
+                Vector position;
+                Vector currentPosition;
+                currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
+                foreach(var widget in parent.menu){
+                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                    if(position.y > currentPosition.y){
+                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                        if(x_d <= mx_d && y_d <= my_d){
+                            mx_d = x_d;
+                            my_d = y_d;
+                            next = widget;
+                        }
                     }
                 }
+                if(next != "null")
+                    parent.selectedElement = next;
             }
-            if(next != "null")
-                parent.selectedElement = next;
+            
 
             // int index;
             // if(parent.menu.Contains(parent.selectedElement) && parent.menu.Count > 0){
@@ -117,47 +127,53 @@ namespace AbyssBehavior{
         }
 
         protected void MenuLeft(){
-            string next = "null";
-            uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
-            Vector position;
-            Vector currentPosition;
-            currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
-            foreach(var widget in parent.menu){
-                position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.x < currentPosition.x){
-                    x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                    y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                    if(x_d <= mx_d && y_d <= my_d){
-                        mx_d = x_d;
-                        my_d = y_d;
-                        next = widget;
+            if(parent.menu.Count > 0){
+                string next = "null";
+                uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
+                Vector position;
+                Vector currentPosition;
+                currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
+                foreach(var widget in parent.menu){
+                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                    if(position.x < currentPosition.x){
+                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                        if(x_d <= mx_d && y_d <= my_d){
+                            mx_d = x_d;
+                            my_d = y_d;
+                            next = widget;
+                        }
                     }
                 }
+                if(next != "null")
+                    parent.selectedElement = next;
             }
-            if(next != "null")
-                parent.selectedElement = next;
+            
         }
 
         protected void MenuRight(){
-            string next = "null";
-            uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
-            Vector position;
-            Vector currentPosition;
-            currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
-            foreach(var widget in parent.menu){
-                position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                if(position.x > currentPosition.x){
-                    x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                    y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                    if(x_d <= mx_d && y_d <= my_d){
-                        mx_d = x_d;
-                        my_d = y_d;
-                        next = widget;
+            if(parent.menu.Count > 0){
+                string next = "null";
+                uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
+                Vector position;
+                Vector currentPosition;
+                currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
+                foreach(var widget in parent.menu){
+                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                    if(position.x > currentPosition.x){
+                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                        if(x_d <= mx_d && y_d <= my_d){
+                            mx_d = x_d;
+                            my_d = y_d;
+                            next = widget;
+                        }
                     }
                 }
+                if(next != "null")
+                    parent.selectedElement = next;
             }
-            if(next != "null")
-                parent.selectedElement = next;
+            
         }
 
         protected void Select(){

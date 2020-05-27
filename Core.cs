@@ -95,7 +95,8 @@ namespace AbyssBehavior{
             CursoreUp = 7,
             CursoreDown = 8,
             CursoreLeft = 9,
-            CursoreRight = 10
+            CursoreRight = 10,
+            Action = 11
         }
         const int couldownTimeMax = 10;
         static Dictionary<Keys, Actions> configurations;
@@ -116,6 +117,9 @@ namespace AbyssBehavior{
             configurations.Add(Keys.Down, Actions.CursoreDown);
             configurations.Add(Keys.Left, Actions.CursoreLeft);
             configurations.Add(Keys.Right, Actions.CursoreRight);
+            configurations.Add(Keys.P, Actions.Action);
+            configurations.Add(Keys.W, Actions.MoveUp);
+            configurations.Add(Keys.S, Actions.MoveDown);
             configurations.Add(Keys.A, Actions.MoveLeft);
             configurations.Add(Keys.D, Actions.MoveRight);
         }

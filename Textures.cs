@@ -90,6 +90,10 @@ namespace AbyssBehavior{
 
             AddTexture("abyss", "textures/abyss");
             AddTexture("dark", "textures/dark");
+            AddTexture("player", "textures/player");
+            AddTexture("grass", "textures/grass");
+            AddTexture("benchH", "textures/benchH");
+            AddTexture("benchV", "textures/benchV");
         }
 
         void AddTexture(string name, string path){

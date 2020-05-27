@@ -56,6 +56,7 @@ namespace AbyssBehavior{
             }else{
                 selectedElement = "None";
             }
+            logic.PostInitialization();
             PostInitialization();
         }
 
@@ -97,6 +98,13 @@ namespace AbyssBehavior{
             if(widgets.ContainsKey(name) == false){
                 widgets.Add(name, widget);
                 widgets[name].SetData(widgetData);
+            }else
+                Core.ThrowError(4);
+        }
+
+        protected void AddWidget(string name, Widget widget){
+            if(widgets.ContainsKey(name) == false){
+                widgets.Add(name, widget);
             }else
                 Core.ThrowError(4);
         }

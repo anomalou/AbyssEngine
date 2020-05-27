@@ -41,7 +41,7 @@ namespace AbyssBehavior{
         public static void Initalization(){
             objects = new Dictionary<string, Object>();
             /////////////////////////////////////////////
-
+            
 
         }
     }

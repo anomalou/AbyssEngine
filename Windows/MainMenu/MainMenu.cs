@@ -7,7 +7,7 @@ namespace AbyssBehavior{
             logic = new MenuLogic(this);
 
             AddWidget("title", new TextBox(new Vector(1,1), new Vector(Core.buffer.scale.x - 2, 1)), "main menu");
-            AddWidget("icon", new Image(new Vector(11,1)), "abyss");
+            AddWidget("icon", new Image(new Vector(11,1)), "player");
             AddMenu("start", new TextBox(new Vector(1, 4), new Vector(10, 1)), "start");
             AddMenu("test1", new TextBox(new Vector(1, 5), new Vector(10, 1)), "test 1");
             AddMenu("test2", new TextBox(new Vector(1, 6), new Vector(10, 1)), "test 2");
