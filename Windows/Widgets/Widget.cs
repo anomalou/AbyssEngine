@@ -11,15 +11,15 @@ namespace AbyssBehavior{
             Initializtion();
         }
 
-        public Widget(Vector position){
-            transform = new Transform(position, new Vector(1,1));
-            Initializtion();
-        }
+        // public Widget(Vector position){
+        //     transform = new Transform(position, new Vector(1,1));
+        //     Initializtion();
+        // }
 
-        public Widget(Vector position, Vector scale){
-            transform = new Transform(position, scale);
-            Initializtion();
-        }
+        // public Widget(Vector position, Vector scale){
+        //     transform = new Transform(position, scale);
+        //     Initializtion();
+        // }
 
         public string GetPoint(int x, int y, int l){
             return canvas[x, y, l].texture;
@@ -50,6 +50,15 @@ namespace AbyssBehavior{
                     }
                 }
             }
+        }
+
+        public void SetSize(Vector size){
+            transform.SetupScale(size);
+            Initializtion();
+        }
+
+        public void SetPosition(Vector position){
+            transform.position = position;
         }
 
         public virtual void SetData(object data){

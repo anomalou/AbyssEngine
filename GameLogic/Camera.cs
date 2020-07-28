@@ -14,10 +14,10 @@ namespace AbyssBehavior{
             _scale = new Vector(2,2);
         }
 
-        public Camera(int x, int y){
-            _canvas = new Canvas(x,y);
-            _scale = new Vector(x,y);
-        }
+        // public Camera(int x, int y){
+        //     _canvas = new Canvas(x,y);
+        //     _scale = new Vector(x,y);
+        // }
 
         public Camera(Vector scale){
             _canvas = new Canvas(scale.x, scale.y);
@@ -33,20 +33,23 @@ namespace AbyssBehavior{
         }
 
         public void Update(){
-            for(int x = 0; x < scale.x; x++){
-                for(int y = 0; y < scale.y; y++){
-                    Vector temp = new Vector(spectrate.position.x - canvas.scale.x / 2 + x, spectrate.position.y - canvas.scale.y / 2 + y);
-                    for(int l = 0; l < location.layers; l++){
-                        if(temp.x > -1 && temp.x < location.scale.x && temp.y > -1 && temp.y < location.scale.y)
-                            if(location.GetObject(temp.x,temp.y,l) != null)
-                                canvas.Set(x,y,l,location.GetObject(temp.x,temp.y,l).texture);
+            if(spectrate != null && location != null){
+                for(int x = 0; x < scale.x; x++){
+                    for(int y = 0; y < scale.y; y++){
+                        Vector temp = new Vector(spectrate.position.x - canvas.scale.x / 2 + x, spectrate.position.y - canvas.scale.y / 2 + y);
+                        for(int l = 0; l < location.layers; l++){
+                            if(temp.x > -1 && temp.x < location.scale.x && temp.y > -1 && temp.y < location.scale.y)
+                                if(location.GetObject(temp.x,temp.y,l) != null)
+                                    canvas.Set(x,y,l,location.GetObject(temp.x,temp.y,l).texture);
+                                else
+                                    continue;
                             else
-                                continue;
-                        else
-                            canvas.Set(x,y,l,"dark");
+                                canvas.Set(x,y,l,"dark");
+                        }
                     }
                 }
-            }
+            }else
+                Core.ThrowError(7);
         }
     }
 }

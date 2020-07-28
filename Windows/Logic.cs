@@ -31,7 +31,6 @@ namespace AbyssBehavior{
             control.Add(Control.Actions.CursoreLeft, menuLeft);
             control.Add(Control.Actions.CursoreRight, menuRight);
             control.Add(Control.Actions.Accept, select);
-            Initalization();
         }
         public void DefaultUpdate(){
             if(Core.currentWindow == parent){
@@ -42,10 +41,7 @@ namespace AbyssBehavior{
             }
         }
 
-        protected virtual void Initalization(){
-
-        }
-        public virtual void PostInitialization(){
+        public virtual void Initialization(){
 
         }
         

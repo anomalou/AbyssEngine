@@ -8,9 +8,9 @@ namespace AbyssBehavior{
             
         }
 
-        protected override void Initalization(){
+        public override void Initialization(){
             location = new Location(20, 20, 2);
-            camera = new Camera(Core.buffer.scale.x/2, Core.buffer.scale.y - 2);
+            camera = new Camera(new Vector(Core.buffer.scale.x/2, Core.buffer.scale.y - 2));
             player = new Object("player", "player", 100);
             exit = Exit;
             up = MoveUp;
@@ -33,6 +33,7 @@ namespace AbyssBehavior{
             }
             
             location.Set(new Vector(1,1),1, player);
+            parent.GetWidget("screen").SetData(camera);
         }
 
         protected override void Update(){
@@ -60,9 +61,6 @@ namespace AbyssBehavior{
             System.Console.WriteLine("Player pos: " + player.position.x + " " + player.position.y);
             location.Move(new Vector(player.position.x + 1, player.position.y), 1, player);
         }
-        public override void PostInitialization(){
-            parent.GetWidget("screen").SetData(camera);
-        }   
 
         void Exit(){
             Core.CloseWindow(parent);

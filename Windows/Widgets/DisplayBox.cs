@@ -2,9 +2,8 @@ namespace AbyssBehavior{
     class DisplayBox:Widget{
         Camera camera;
 
-        public DisplayBox(Vector position, Vector scale):base(position, scale){
-            
-        }
+        public DisplayBox(Camera camera):base(){this.camera = camera;}
+        public DisplayBox():base(){}
 
         protected override void Behaviour(){
             if(camera != null){
@@ -16,7 +15,8 @@ namespace AbyssBehavior{
                         }
                     }
                 }
-            }
+            }else
+                Core.ThrowError(8);
         }
 
         public override void SetData(object data){

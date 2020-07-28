@@ -19,6 +19,8 @@ namespace AbyssBehavior{
         //окно будет выводить их canvas на свой.
 
         public Transform transform;
+
+        private string[,] background;
         public Canvas canvas;
         public Logic logic;
         public Window parent;
@@ -56,8 +58,8 @@ namespace AbyssBehavior{
             }else{
                 selectedElement = "None";
             }
-            logic.PostInitialization();
-            PostInitialization();
+            logic.Initialization();
+            canvas.LoadCanvas(background);
         }
 
         //Пользовательский метод инциальзации. Его можно переписать под себя
@@ -70,9 +72,9 @@ namespace AbyssBehavior{
             // menu.Add("four");
         }
 
-        protected virtual void PostInitialization(){
+        // protected virtual void PostInitialization(){
 
-        }
+        // }
 
         //Метод которые производит обновление содержимого и виджетов окна.
         public void DefaultUpdate(){
@@ -94,14 +96,6 @@ namespace AbyssBehavior{
         }
 
         //Метод добавления нового виджета на окно
-        protected void AddWidget(string name, Widget widget, object widgetData){
-            if(widgets.ContainsKey(name) == false){
-                widgets.Add(name, widget);
-                widgets[name].SetData(widgetData);
-            }else
-                Core.ThrowError(4);
-        }
-
         protected void AddWidget(string name, Widget widget){
             if(widgets.ContainsKey(name) == false){
                 widgets.Add(name, widget);
@@ -109,11 +103,10 @@ namespace AbyssBehavior{
                 Core.ThrowError(4);
         }
 
-        protected void AddMenu(string name, Widget widget, object widgetData){
+        protected void AddMenu(string name, Widget widget){
             if(widgets.ContainsKey(name) == false){
                 widgets.Add(name, widget);
                 menu.Add(name);
-                widgets[name].SetData(widgetData);
             }else
                 Core.ThrowError(4);
         }
@@ -137,7 +130,6 @@ namespace AbyssBehavior{
 
         void RenderWidgets(){
             foreach(Widget w in widgets.Values){
-                //System.Console.WriteLine(w.transform.scale.x);
                 for(int x = 0; x < w.transform.scale.x; x++){
                     if(x+w.transform.position.x < transform.scale.x){
                         for(int y = 0; y < w.transform.scale.y; y++){
@@ -163,6 +155,16 @@ namespace AbyssBehavior{
                 scale = new Vector(widgets[selectedElement].transform.scale.x, widgets[selectedElement].transform.scale.y);
                 canvas.Set(pos.x, pos.y + scale.y - 1, 3, "cursoreL");
                 canvas.Set(pos.x+scale.x - 1, pos.y+scale.y - 1, 3, "cursoreR");
+            }
+        }
+
+        protected void SetupBackground(string[,] canvas){
+            background = new string[transform.scale.x, transform.scale.y];
+            if(canvas.Length <= transform.scale.x * transform.scale.y)
+            for(int x = 0; x < transform.scale.x; x++){
+                for(int y = 0; y < transform.scale.y; y++){
+                    background[x,y] = canvas[x,y];
+                }
             }
         }
 

@@ -18,9 +18,9 @@ namespace AbyssBehavior
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 840;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.IsFullScreen = false;
             
             textures = new Textures();
             Control.InitializateConfig();

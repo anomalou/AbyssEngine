@@ -160,7 +160,7 @@ namespace AbyssBehavior{
             }
 
             public override string ToString(){
-                return  _x+"-"+_y;
+                return  _x+" - "+_y;
             }
 
             public static Vector operator+(Vector v, Position p){
@@ -209,12 +209,8 @@ namespace AbyssBehavior{
             _scale = scale;
         }
 
-        public bool SetupScale(Vector scale){
-            if(this._scale == null){
-                _scale = scale;
-                return true;
-            }
-            return false;
+        public void SetupScale(Vector scale){
+            _scale = scale;
         }
 
     }
@@ -234,6 +230,10 @@ namespace AbyssBehavior{
         public Vector(int x, int y){
             _x = x;
             _y = y;
+        }
+
+        public override string ToString(){
+                return  _x+"-"+_y;
         }
 
         public int x{get{return _x;}}

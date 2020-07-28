@@ -3,7 +3,9 @@ namespace AbyssBehavior{
 
         string image_name;
 
-        public Image(Vector position):base(position){}
+        public Image(string texture_name):base(){
+            image_name = texture_name;
+        }
         protected override void Behaviour(){
             canvas[0,0,0].SetupPoint(image_name);
         }

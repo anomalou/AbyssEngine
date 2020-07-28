@@ -8,7 +8,7 @@ namespace AbyssBehavior{
 
         }
 
-        protected override void Initalization(){
+        public override void Initialization(){
             test1 = OpenTest;
             exit = Exit;
             start = Start;

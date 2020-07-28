@@ -8,7 +8,7 @@ namespace AbyssBehavior{
         public TestLogic(Window parent):base(parent){
             
         }
-        protected override void Initalization(){
+        public override void Initialization(){
             num = 0;
             plus = Plus;
             minus = Minus;
