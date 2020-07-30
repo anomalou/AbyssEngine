@@ -55,8 +55,9 @@ namespace AbyssBehavior{
             }
             if(menu.Count != 0){
                 selectedElement = menu[0];
+                widgets[selectedElement].SetInFocus(true);
             }else{
-                selectedElement = "None";
+                selectedElement = "";
             }
             logic.Initialization();
             canvas.LoadCanvas(background);
@@ -130,26 +131,28 @@ namespace AbyssBehavior{
 
         void RenderWidgets(){
             foreach(Widget w in widgets.Values){
-                for(int x = 0; x < w.transform.scale.x; x++){
-                    if(x+w.transform.position.x < transform.scale.x){
-                        for(int y = 0; y < w.transform.scale.y; y++){
-                            if(y+w.transform.position.y < transform.scale.y){
-                                for(int l = 0; l < w.layers; l++){
-                                    canvas.Set(x+w.transform.position.x,y+w.transform.position.y, l+1, w.GetPoint(x,y,l));
+                if(w.isVisible == true){
+                    for(int x = 0; x < w.transform.scale.x; x++){
+                        if(x+w.transform.position.x < transform.scale.x){
+                            for(int y = 0; y < w.transform.scale.y; y++){
+                                if(y+w.transform.position.y < transform.scale.y){
+                                    for(int l = 0; l < w.layers; l++){
+                                        canvas.Set(x+w.transform.position.x,y+w.transform.position.y, l+1, w.GetPoint(x,y,l));
+                                    }
+
                                 }
-                                
+                                else
+                                    break;
                             }
-                            else
-                                break;
-                        }
-                    }else
-                        break;
+                        }else
+                            break;
+                    }
                 }
             }
         }
 
         void RenderCursore(){
-            if(selectedElement != "None"){
+            if(selectedElement != "" && menu.Contains(selectedElement)){
                 Vector pos,scale;
                 pos = new Vector(widgets[selectedElement].transform.position.x, widgets[selectedElement].transform.position.y);
                 scale = new Vector(widgets[selectedElement].transform.scale.x, widgets[selectedElement].transform.scale.y);

@@ -57,19 +57,26 @@ namespace AbyssBehavior{
                 Vector currentPosition;
                 currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
                 foreach(var widget in parent.menu){
-                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                    if(position.y < currentPosition.y){
-                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                        if(x_d <= mx_d && y_d <= my_d){
-                            mx_d = x_d;
-                            my_d = y_d;
-                            next = widget;
+                    if(parent.GetWidget(widget).isVisible == true){
+                        position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                        if(position.y < currentPosition.y){
+                            x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                            y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                            if(x_d <= mx_d && y_d <= my_d){
+                                mx_d = x_d;
+                                my_d = y_d;
+                                next = widget;
+                            }
                         }
                     }
+                    
                 }
-                if(next != "null")
+                if(next != "null"){
+                    if(parent.selectedElement != "")
+                        parent.GetWidget(parent.selectedElement).SetInFocus(false);
                     parent.selectedElement = next;
+                    parent.GetWidget(parent.selectedElement).SetInFocus(true);
+                }
 
             }
             
@@ -93,19 +100,25 @@ namespace AbyssBehavior{
                 Vector currentPosition;
                 currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
                 foreach(var widget in parent.menu){
-                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                    if(position.y > currentPosition.y){
-                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                        if(x_d <= mx_d && y_d <= my_d){
-                            mx_d = x_d;
-                            my_d = y_d;
-                            next = widget;
+                    if(parent.GetWidget(widget).isVisible == true){
+                        position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                        if(position.y > currentPosition.y){
+                            x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                            y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                            if(x_d <= mx_d && y_d <= my_d){
+                                mx_d = x_d;
+                                my_d = y_d;
+                                next = widget;
+                            }
                         }
                     }
                 }
-                if(next != "null")
+                if(next != "null"){
+                    if(parent.selectedElement != "")
+                        parent.GetWidget(parent.selectedElement).SetInFocus(false);
                     parent.selectedElement = next;
+                    parent.GetWidget(parent.selectedElement).SetInFocus(true);
+                }
             }
             
 
@@ -130,19 +143,25 @@ namespace AbyssBehavior{
                 Vector currentPosition;
                 currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
                 foreach(var widget in parent.menu){
-                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                    if(position.x < currentPosition.x){
-                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                        if(x_d <= mx_d && y_d <= my_d){
-                            mx_d = x_d;
-                            my_d = y_d;
-                            next = widget;
+                    if(parent.GetWidget(widget).isVisible == true){
+                        position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                        if(position.x < currentPosition.x){
+                            x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                            y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                            if(x_d <= mx_d && y_d <= my_d){
+                                mx_d = x_d;
+                                my_d = y_d;
+                                next = widget;
+                            }
                         }
                     }
                 }
-                if(next != "null")
+                if(next != "null"){
+                    if(parent.selectedElement != "")
+                        parent.GetWidget(parent.selectedElement).SetInFocus(false);
                     parent.selectedElement = next;
+                    parent.GetWidget(parent.selectedElement).SetInFocus(true);
+                }
             }
             
         }
@@ -155,19 +174,25 @@ namespace AbyssBehavior{
                 Vector currentPosition;
                 currentPosition = new Vector(parent.GetWidget(parent.selectedElement).transform.position.x, parent.GetWidget(parent.selectedElement).transform.position.y);
                 foreach(var widget in parent.menu){
-                    position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
-                    if(position.x > currentPosition.x){
-                        x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
-                        y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
-                        if(x_d <= mx_d && y_d <= my_d){
-                            mx_d = x_d;
-                            my_d = y_d;
-                            next = widget;
+                    if(parent.GetWidget(widget).isVisible == true){
+                        position = new Vector(parent.GetWidget(widget).transform.position.x, parent.GetWidget(widget).transform.position.y);
+                        if(position.x > currentPosition.x){
+                            x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
+                            y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
+                            if(x_d <= mx_d && y_d <= my_d){
+                                mx_d = x_d;
+                                my_d = y_d;
+                                next = widget;
+                            }
                         }
                     }
                 }
-                if(next != "null")
+                if(next != "null"){
+                    if(parent.selectedElement != "")
+                        parent.GetWidget(parent.selectedElement).SetInFocus(false);
                     parent.selectedElement = next;
+                    parent.GetWidget(parent.selectedElement).SetInFocus(true);
+                }
             }
             
         }

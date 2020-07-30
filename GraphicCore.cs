@@ -19,7 +19,7 @@ namespace AbyssBehavior
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             graphics.PreferredBackBufferHeight = 840;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferWidth = 1980;
             graphics.IsFullScreen = false;
             
             textures = new Textures();

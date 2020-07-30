@@ -6,8 +6,19 @@ namespace AbyssBehavior{
         public Transform transform;
         protected Point [,,] canvas;
 
+
+        // widget parametrs
+
+        protected bool _isVisible;
+        public bool isVisible{get{return _isVisible;}}
+
+        protected bool _inFocus;
+        public bool inFocus{get{return _inFocus;}}
+
         public Widget(){
             transform = new Transform(new Vector(0,0), new Vector(1,1));
+            _isVisible = true;
+            _inFocus = false;
             Initializtion();
         }
 
@@ -40,6 +51,7 @@ namespace AbyssBehavior{
         public void Update(){
             ClearCanvas();
             Behaviour();
+            Render();
         }
 
         void ClearCanvas(){
@@ -57,6 +69,14 @@ namespace AbyssBehavior{
             Initializtion();
         }
 
+        public void SetVisible(bool state){
+            _isVisible = state;
+        }
+
+        public void SetInFocus(bool state){
+            _inFocus = state;
+        }
+
         public void SetPosition(Vector position){
             transform.position = position;
         }
@@ -66,6 +86,10 @@ namespace AbyssBehavior{
         }
 
         protected virtual void Behaviour(){
+
+        }
+
+        protected virtual void Render(){
 
         }
     }

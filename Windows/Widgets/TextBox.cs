@@ -4,9 +4,9 @@ namespace AbyssBehavior{
         string _text;
         public string text{get{return _text;}}
 
-        public TextBox(string text):base(){ _text = text;}
+        public TextBox(string text):base(){ _text = text; SizeToText();}
 
-        protected override void Behaviour(){
+        protected override void Render(){
             for(int x = 0, y = 0, l = 0; l < text.Length;){
                 if(x < transform.scale.x && y < transform.scale.y){
                     canvas[x, y, 0].SetupPoint("word"+text[l]);
@@ -19,7 +19,6 @@ namespace AbyssBehavior{
                     }else
                         break;
             }
-
         }
 
         public void SizeToText(){

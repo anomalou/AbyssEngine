@@ -48,7 +48,6 @@ namespace AbyssBehavior{
             }
         }
         public void SetPoint(string texture_name){
-            //Console.WriteLine(texture_name);
             buffer[cursore.x, cursore.y, cursore.layer].SetupPoint(texture_name);
             if(consoleLike == true){
                 cursore.Move();

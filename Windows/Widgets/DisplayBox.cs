@@ -5,7 +5,7 @@ namespace AbyssBehavior{
         public DisplayBox(Camera camera):base(){this.camera = camera;}
         public DisplayBox():base(){}
 
-        protected override void Behaviour(){
+        protected override void Render(){
             if(camera != null){
                 for(int x = 0; x < transform.scale.x; x++){
                     for(int y = 0; y < transform.scale.y; y++){

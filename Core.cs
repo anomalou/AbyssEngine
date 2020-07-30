@@ -163,6 +163,10 @@ namespace AbyssBehavior{
                 return  _x+" - "+_y;
             }
 
+            public Vector ToVector(){
+                return new Vector(_x, _y);
+            }
+
             public static Vector operator+(Vector v, Position p){
                 return new Vector(v.x+p._x,v.y+p._y);
             }
@@ -234,6 +238,10 @@ namespace AbyssBehavior{
 
         public override string ToString(){
                 return  _x+"-"+_y;
+        }
+
+        public static Vector operator +(Vector v1, Vector v2){
+            return new Vector(v1.x + v2.x, v1.y + v2.y);
         }
 
         public int x{get{return _x;}}
