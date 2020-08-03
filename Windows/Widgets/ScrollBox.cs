@@ -3,12 +3,7 @@ using System.Collections.Generic;
 namespace AbyssBehavior{
     class ScrollBox:Widget{
 
-        struct Cell{
-            public int height;
-            public int fullHeight;
-        }
         List<Widget> items;
-        List<Cell> cells;
         int currentScroll;
         int maxScroll;
         int spacing;
@@ -21,12 +16,16 @@ namespace AbyssBehavior{
             currentScroll = 0;
             maxScroll = 0;
             items = new List<Widget>();
-            cells = new List<Cell>();
+            SetSize(new Vector(1, 3));
         }
 
         protected override void Behaviour(){
             Vector prevPosition = new Vector(transform.position.x, transform.position.y - spacing);
             foreach(Widget w in items){
+                if(w.transform.scale.x > transform.scale.x)
+                    SetSize(new Vector(w.transform.scale.x, transform.scale.y));
+                if(w.transform.scale.y > transform.scale.y)
+                    SetSize(new Vector(transform.scale.x, w.transform.scale.y));
                 if(w.inFocus){
                     currentScroll = items.IndexOf(w);
                 }
@@ -72,11 +71,7 @@ namespace AbyssBehavior{
         }
 
         public void AddItem(Widget item){
-            Cell cell;
-            cell.height = item.transform.scale.y;
-            cell.fullHeight = cell.height + spacing;
             items.Add(item);
-            cells.Add(cell);
             maxScroll++;
         }
 
@@ -84,13 +79,14 @@ namespace AbyssBehavior{
             if(items.Contains(item)){
                 int index = items.IndexOf(item);
                 items.Remove(item);
-                cells.RemoveAt(index);
                 maxScroll--;
             }else
                 Core.ThrowError(9);
         }
 
         public void SetSpacing(int width){
+            if(transform.scale.ToVector() == new Vector(1, (spacing + 1) * 3))
+                SetSize(new Vector(1, (width + 1) * 3));
             spacing = width;
         }
     }

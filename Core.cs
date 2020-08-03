@@ -188,6 +188,10 @@ namespace AbyssBehavior{
             public override string ToString(){
                 return  _x+"-"+_y;
             }
+
+            public Vector ToVector(){
+                return new Vector(_x, _y);
+            }
             Scale(){
 
             }
@@ -244,11 +248,34 @@ namespace AbyssBehavior{
             return new Vector(v1.x + v2.x, v1.y + v2.y);
         }
 
+        public static bool operator !=(Vector v1, Vector v2){
+            if(v1.x != v2.x || v1.y != v2.y)
+                return true;
+            else
+                return false;
+        }
+        public static bool operator ==(Vector v1, Vector v2){
+            if(v1.x == v2.x && v1.y == v2.y)
+                return true;
+            else
+                return false;
+        }
+
         public int x{get{return _x;}}
         public int y{get{return _y;}}
 
         public static Vector zero(){
             return new Vector(0,0);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 
