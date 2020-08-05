@@ -1,3 +1,5 @@
+using AbyssLibraries;
+
 namespace AbyssBehavior{
     class GameLogic:Logic{
         action exit, up, down, left, right, setBlock;
@@ -18,12 +20,12 @@ namespace AbyssBehavior{
             left = MoveLeft;
             right = MoveRight;
             setBlock = SetBlock;
-            control.Add(Control.Actions.Deny, exit);
-            control.Add(Control.Actions.MoveUp, up);
-            control.Add(Control.Actions.MoveDown, down);
-            control.Add(Control.Actions.MoveLeft, left);
-            control.Add(Control.Actions.MoveRight, right);
-            control.Add(Control.Actions.Action, setBlock);
+            control.Add(KeysToAction.Actions.Deny, exit);
+            control.Add(KeysToAction.Actions.MoveUp, up);
+            control.Add(KeysToAction.Actions.MoveDown, down);
+            control.Add(KeysToAction.Actions.MoveLeft, left);
+            control.Add(KeysToAction.Actions.MoveRight, right);
+            control.Add(KeysToAction.Actions.Action, setBlock);
             camera.SetLocation(location);
             camera.SetSpectrate(player);
             for(int x = 0; x < 20; x++){
@@ -41,24 +43,19 @@ namespace AbyssBehavior{
         }
 
         void SetBlock(){
-            System.Console.WriteLine("placed!");
             location.Set(new Vector(player.position.x, player.position.y - 1), 1, new Object("bench", "benchH", 10));
         }
 
         void MoveUp(){
-            System.Console.WriteLine("Player pos: " + player.position.x + " " + player.position.y);
             location.Move(new Vector(player.position.x, player.position.y - 1), 1, player);
         }
         void MoveDown(){
-            System.Console.WriteLine("Player pos: " + player.position.x + " " + player.position.y);
             location.Move(new Vector(player.position.x, player.position.y + 1), 1, player);
         }
         void MoveLeft(){
-            System.Console.WriteLine("Player pos: " + player.position.x + " " + player.position.y);
             location.Move(new Vector(player.position.x - 1, player.position.y), 1, player);
         }
         void MoveRight(){
-            System.Console.WriteLine("Player pos: " + player.position.x + " " + player.position.y);
             location.Move(new Vector(player.position.x + 1, player.position.y), 1, player);
         }
 

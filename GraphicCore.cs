@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using AbyssLibraries;
 
 namespace AbyssBehavior
 {
@@ -64,9 +65,9 @@ namespace AbyssBehavior
             spriteBatch.Begin();
             
             
-            for(int x = 0; x < Core.buffer.width; x++){
-                for(int y = 0; y < Core.buffer.heigth; y++){
-                    for(int l = 0; l < Core.buffer.layers; l++){
+            for(int x = 0; x < ScreenBufferParam.width; x++){
+                for(int y = 0; y < ScreenBufferParam.height; y++){
+                    for(int l = 0; l < ScreenBufferParam.layers; l++){
                         if(textures.textures.ContainsKey(Core.buffer.GetTexture(x,y,l))){
                             spriteBatch.Draw(textures._textures[Core.buffer.GetTexture(x,y,l)], new Vector2(x*30, y*30), Color.White);
                         }else{

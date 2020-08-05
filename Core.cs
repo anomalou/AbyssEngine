@@ -1,15 +1,14 @@
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Threading;
+using AbyssLibraries;
 
 namespace AbyssBehavior{
     static class Core{
-
         public static Buffer buffer;
         static GraphicRender graphicCore;
 
-        public static List<Window> windowQueue;
-        public static Window currentWindow;
+        public static List<IWindow> windowQueue;
+        public static IWindow currentWindow;
 
         public static bool active;
         static void Main(string[] arg)
@@ -19,7 +18,7 @@ namespace AbyssBehavior{
 
         static void Initialization(){
             buffer = new Buffer();
-            windowQueue = new List<Window>();
+            windowQueue = new List<IWindow>();
             active = true;
             OpenWindow(new MainMenu());
             Objects.Initalization();
@@ -31,7 +30,7 @@ namespace AbyssBehavior{
         public static void Update(){
             if(windowQueue.Count > 0 && currentWindow != null){
                 Render();
-                foreach(Window w in windowQueue.ToArray()){
+                foreach(IWindow w in windowQueue.ToArray()){
                     w.DefaultUpdate();
                 }
             }
@@ -48,9 +47,12 @@ namespace AbyssBehavior{
             }
         }
 
-        public static void OpenWindow(Window window, Window parent = null){
+        public static void OpenWindow(IWindow window, IWindow parent = null){
             windowQueue.Add(window);
+            if(currentWindow != null)
+                currentWindow.SetFocus(false);
             currentWindow = window;
+            window.SetFocus(true);
             if(parent != null){
                 currentWindow.parent = parent;
             }
@@ -60,15 +62,18 @@ namespace AbyssBehavior{
 
         }
 
-        public static void CloseWindow(Window window){
+        public static void CloseWindow(IWindow window){
             if(window == currentWindow)
-                if(window.parent != null)
+                if(window.parent != null){
                     currentWindow = window.parent;
-                else
-                    if(windowQueue.Count > 0)
+                    window.parent.SetFocus(true);
+                }else
+                    if(windowQueue.Count > 0){
                         currentWindow = windowQueue[0];
-                    else
+                        windowQueue[0].SetFocus(true);
+                    }else
                         currentWindow = null;
+            window.SetFocus(false);
             windowQueue.Remove(window);
             buffer.Clear();
         }
@@ -84,24 +89,10 @@ namespace AbyssBehavior{
 
     static class Control{
 
-        public enum Actions{
-            None = 0,
-            Accept = 1,
-            Deny = 2,
-            MoveUp = 3,
-            MoveDown = 4,
-            MoveLeft = 5,
-            MoveRight = 6,
-            CursoreUp = 7,
-            CursoreDown = 8,
-            CursoreLeft = 9,
-            CursoreRight = 10,
-            Action = 11
-        }
         const int couldownTimeMax = 10;
-        static Dictionary<Keys, Actions> configurations;
+        static Dictionary<Keys, KeysToAction.Actions> configurations;
 
-        public static Actions action;
+        // public static Actions action;
         static KeyboardState state;
         public static bool couldown;
         public static int couldownTime;
@@ -110,18 +101,18 @@ namespace AbyssBehavior{
         public static void InitializateConfig(){
             couldown = false;
             couldownTime = 0;
-            configurations = new Dictionary<Keys, Actions>();
-            configurations.Add(Keys.Enter, Actions.Accept);
-            configurations.Add(Keys.Escape, Actions.Deny);
-            configurations.Add(Keys.Up, Actions.CursoreUp);
-            configurations.Add(Keys.Down, Actions.CursoreDown);
-            configurations.Add(Keys.Left, Actions.CursoreLeft);
-            configurations.Add(Keys.Right, Actions.CursoreRight);
-            configurations.Add(Keys.P, Actions.Action);
-            configurations.Add(Keys.W, Actions.MoveUp);
-            configurations.Add(Keys.S, Actions.MoveDown);
-            configurations.Add(Keys.A, Actions.MoveLeft);
-            configurations.Add(Keys.D, Actions.MoveRight);
+            configurations = new Dictionary<Keys, KeysToAction.Actions>();
+            configurations.Add(Keys.Enter, KeysToAction.Actions.Accept);
+            configurations.Add(Keys.Escape, KeysToAction.Actions.Deny);
+            configurations.Add(Keys.Up, KeysToAction.Actions.CursoreUp);
+            configurations.Add(Keys.Down, KeysToAction.Actions.CursoreDown);
+            configurations.Add(Keys.Left, KeysToAction.Actions.CursoreLeft);
+            configurations.Add(Keys.Right, KeysToAction.Actions.CursoreRight);
+            configurations.Add(Keys.P, KeysToAction.Actions.Action);
+            configurations.Add(Keys.W, KeysToAction.Actions.MoveUp);
+            configurations.Add(Keys.S, KeysToAction.Actions.MoveDown);
+            configurations.Add(Keys.A, KeysToAction.Actions.MoveLeft);
+            configurations.Add(Keys.D, KeysToAction.Actions.MoveRight);
         }
 
         
@@ -130,13 +121,17 @@ namespace AbyssBehavior{
             if(keys.Length != 0 && Core.active == true && couldown == false){
                 if(configurations.ContainsKey(keys[keys.Length-1])){
                     if(state.IsKeyDown(keys[keys.Length - 1])){
-                        action = configurations[keys[keys.Length - 1]];
+                        // action = configurations[keys[keys.Length - 1]];
+                        if(Core.currentWindow != null)
+                            Core.currentWindow.logic.SetCurrentAction(configurations[keys[keys.Length - 1]]);
                         couldown = true;
                     }
                 }
             }
             else{
-                action = Actions.None;
+                if(Core.currentWindow != null)
+                    Core.currentWindow.logic.SetCurrentAction(KeysToAction.Actions.None);
+                // action = Actions.None;
                 if(couldown == true){
                     couldownTime++;
                     if(couldownTime > couldownTimeMax){
@@ -145,137 +140,6 @@ namespace AbyssBehavior{
                     }
                 }
             }
-        }
-    }
-
-    class Transform{
-        public class Position{
-            int _x;
-            int _y;
-
-            public int x{get{return _x;}}
-            public int y{get{return _y;}}
-            public static implicit operator Position(Vector v){
-                return new Position{_x = v.x, _y = v.y};
-            }
-
-            public override string ToString(){
-                return  _x+" - "+_y;
-            }
-
-            public Vector ToVector(){
-                return new Vector(_x, _y);
-            }
-
-            public static Vector operator+(Vector v, Position p){
-                return new Vector(v.x+p._x,v.y+p._y);
-            }
-            Position(){
-
-            }
-        }
-
-        public class Scale{
-            int _x;
-            int _y;
-
-            public int x{get{return _x;}}
-            public int y{get{return _y;}}
-            public static implicit operator Scale(Vector v){
-                return new Scale{_x = v.x, _y = v.y};
-            }
-            
-            public override string ToString(){
-                return  _x+"-"+_y;
-            }
-
-            public Vector ToVector(){
-                return new Vector(_x, _y);
-            }
-            Scale(){
-
-            }
-        }
-
-        Position _position;
-        Scale _scale;
-        public Position position{get{return _position;}set{_position = value;}}
-        public Scale scale{get{return _scale;}}
-
-        
-        public Transform(){
-            _position = new Vector();
-            _scale = new Vector(1,1);
-        }
-
-        public Transform(Vector position){
-            _position = position;
-        }
-
-        public Transform(Vector position, Vector scale){
-            _position = position;
-            _scale = scale;
-        }
-
-        public void SetupScale(Vector scale){
-            _scale = scale;
-        }
-
-    }
-
-    class Vector{
-        int _x;
-        int _y;
-
-        public Vector(){
-            _x = 0;
-            _y = 0;
-        }
-        public Vector(Vector v){
-            _x = v.x;
-            _y = v.y;
-        }
-        public Vector(int x, int y){
-            _x = x;
-            _y = y;
-        }
-
-        public override string ToString(){
-                return  _x+"-"+_y;
-        }
-
-        public static Vector operator +(Vector v1, Vector v2){
-            return new Vector(v1.x + v2.x, v1.y + v2.y);
-        }
-
-        public static bool operator !=(Vector v1, Vector v2){
-            if(v1.x != v2.x || v1.y != v2.y)
-                return true;
-            else
-                return false;
-        }
-        public static bool operator ==(Vector v1, Vector v2){
-            if(v1.x == v2.x && v1.y == v2.y)
-                return true;
-            else
-                return false;
-        }
-
-        public int x{get{return _x;}}
-        public int y{get{return _y;}}
-
-        public static Vector zero(){
-            return new Vector(0,0);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 

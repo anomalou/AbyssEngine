@@ -1,3 +1,5 @@
+using AbyssLibraries;
+
 namespace AbyssBehavior{
     class TestLogic:Logic{
 
@@ -13,9 +15,9 @@ namespace AbyssBehavior{
             plus = Plus;
             minus = Minus;
             close = Close;
-            control.Add(Control.Actions.MoveLeft, minus);
-            control.Add(Control.Actions.MoveRight, plus);
-            control.Add(Control.Actions.Deny, close);
+            control.Add(KeysToAction.Actions.MoveLeft, minus);
+            control.Add(KeysToAction.Actions.MoveRight, plus);
+            control.Add(KeysToAction.Actions.Deny, close);
         }
 
         void Plus(){

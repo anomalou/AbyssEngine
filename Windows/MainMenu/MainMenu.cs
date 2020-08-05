@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using AbyssLibraries;
 
 namespace AbyssBehavior{
     class MainMenu: Window{
@@ -46,6 +46,10 @@ namespace AbyssBehavior{
 
             // canvas.LoadCanvas(FillBackground());
             SetupBackground(FillBackground());
+        }
+
+        protected override void Update(){
+            System.Console.WriteLine("window");
         }
     }
 }

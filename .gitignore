@@ -3,3 +3,5 @@ $ cat .gitignore
 bin
 obj
 windows_parts.png
+AbyssLibraries.pdb
+AbyssLibraries.deps.json
