@@ -5,3 +5,8 @@ Type in terminal `dotnet build -r win10-x64 <path to repositiry>`
 
 # Link to libraries repository
 [AbyssLibraries](https://github.com/calcq/AbyssLibraries)
+
+# How to install plugins
+Open and close application  
+Find in application's root folder the folder `plugins`  
+Puts all your `*.dll` plugins in this folder  
