@@ -16,6 +16,9 @@ namespace AbyssBehavior{
             AddWidget("scrollBox", scrollBoxTest);
 
             TextBox text = new TextBox("test");
+            TextBox hp = new TextBox("hp");
+            hp.SetPosition(new Vector(Core.buffer.scale.x/2 + 10, 1));
+            AddWidget("hpBar", hp);
 
             for(int i = 0; i < 30; i++){
                 TextBox t = new TextBox("text"+i);

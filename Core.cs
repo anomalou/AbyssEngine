@@ -11,6 +11,7 @@ namespace AbyssBehavior{
         public static IWindow currentWindow;
 
         public static bool active;
+        
         static void Main(string[] arg)
         {
             Initialization();
@@ -20,6 +21,9 @@ namespace AbyssBehavior{
             buffer = new Buffer();
             windowQueue = new List<IWindow>();
             active = true;
+            GameCore.Initialization();
+            PluginManager.PrepareSpace();
+            PluginManager.LoadPlugins();
             OpenWindow(new MainMenu());
             Objects.Initalization();
             using(graphicCore = new GraphicRender())
@@ -28,6 +32,7 @@ namespace AbyssBehavior{
         }
 
         public static void Update(){
+            GameCore.Update();
             if(windowQueue.Count > 0 && currentWindow != null){
                 Render();
                 foreach(IWindow w in windowQueue.ToArray()){

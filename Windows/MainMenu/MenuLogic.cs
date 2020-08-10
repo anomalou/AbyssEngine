@@ -3,7 +3,7 @@ using AbyssLibraries;
 namespace AbyssBehavior{
     class MenuLogic:Logic{
 
-        protected action exit, start;
+        protected action exit, start, plugins;
         public MenuLogic(Window parent):base(parent){
 
         }
@@ -11,12 +11,18 @@ namespace AbyssBehavior{
         public override void Initialization(){
             exit = Exit;
             start = Start;
+            plugins = Plugins;
             menu.Add("exit", exit);
             menu.Add("start", start);
+            menu.Add("plugins", plugins);
         }
 
         protected void Start(){
             Core.OpenWindow(new GameWindow(), parent);
+        }
+
+        protected void Plugins(){
+            Core.OpenWindow(new PluginsList(), parent);
         }
 
         protected void Exit(){

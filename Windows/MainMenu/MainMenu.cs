@@ -17,23 +17,18 @@ namespace AbyssBehavior{
 
             AddWidget("menu", menuList);
             TextBox start = new TextBox("start");
-            TextBox test1 = new TextBox("display box");
-            TextBox test2 = new TextBox("counter");
-            TextBox test3 = new TextBox("very long text that can be store in text box but can scroll box display it");
-            test3.SetSize(new Vector(10,8));
+            TextBox plugins = new TextBox("plugins");
+            
+            
             TextBox exit = new TextBox("exit");
             
             AddWidget("title", title);
             AddWidget("icon", icon);
             AddMenu("start", start);
-            AddMenu("test1", test1);
-            AddMenu("test2", test2);
-            AddMenu("test3", test3);
+            AddMenu("plugins", plugins);
             AddMenu("exit", exit);
             menuList.AddItem(start);
-            menuList.AddItem(test1);
-            menuList.AddItem(test2);
-            menuList.AddItem(test3);
+            menuList.AddItem(plugins);
             menuList.AddItem(exit);
 
             // AddWidget("title", new TextBox(new Vector(1,1), new Vector(Core.buffer.scale.x - 2, 1)), "main menu");
@@ -46,10 +41,6 @@ namespace AbyssBehavior{
 
             // canvas.LoadCanvas(FillBackground());
             SetupBackground(FillBackground());
-        }
-
-        protected override void Update(){
-            System.Console.WriteLine("window");
         }
     }
 }

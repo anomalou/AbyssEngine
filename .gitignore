@@ -5,3 +5,6 @@ obj
 windows_parts.png
 AbyssLibraries.pdb
 AbyssLibraries.deps.json
+AbyssPlugins.pdb
+AbyssPlugins.deps.json
+plugins/*

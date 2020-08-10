@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <DefaultItemExcludes>${workspaceFolder}/AbyssPlugins</DefaultItemExcludes>
   </PropertyGroup>
   <ItemGroup>
     <MonoGameContentReference Include="**\*.mgcb" />
@@ -15,6 +16,11 @@
   <ItemGroup>
     <Reference Include="AbyssLibraries">
       <HintPath>./Libraries/AbyssLibraries.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AbyssPlugins">
+      <HintPath>./Libraries/AbyssPlugins.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
