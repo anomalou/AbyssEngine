@@ -18,11 +18,11 @@ namespace AbyssBehavior{
         }
 
         protected void Start(){
-            Core.OpenWindow(new GameWindow(), parent);
+            Core.OpenWindow(new GameWindow(), window);
         }
 
         protected void Plugins(){
-            Core.OpenWindow(new PluginsList(), parent);
+            Core.OpenWindow(new PluginsList(), window);
         }
 
         protected void Exit(){

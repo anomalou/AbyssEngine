@@ -8,7 +8,7 @@ namespace AbyssBehavior{
         }
 
         protected void Exit(){
-            Core.CloseWindow(parent);
+            Core.CloseWindow(window);
         }
     }
 }

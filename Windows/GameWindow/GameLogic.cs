@@ -6,7 +6,7 @@ namespace AbyssBehavior{
         Location location;
         Camera camera;
         Object player;
-        public GameLogic(Window parent):base(parent){
+        public GameLogic(Window window):base(window){
             
         }
 
@@ -35,16 +35,16 @@ namespace AbyssBehavior{
             }
             
             location.Set(new Vector(1,1),1, player);
-            parent.GetWidget("screen").SetData(camera);
+            window.GetWidget("screen").SetData(camera);
         }
 
         protected override void Update(){
             camera.Update();
             if(GameCore.gameRuleControl.GetStat("hp") != null)
-                parent.GetWidget("hpBar").SetData(GameCore.gameRuleControl.GetStat("hp").value);
+                window.GetWidget("hpBar").SetData(GameCore.gameRuleControl.GetStat("hp").value);
             else{
-                Core.CloseWindow(parent);
-                Core.OpenWindow(new ErrorWithPlugin(), parent.parent);
+                Core.CloseWindow(window);
+                Core.OpenWindow(new ErrorWithPlugin(), window.parent);
             }
         }
 
@@ -67,7 +67,7 @@ namespace AbyssBehavior{
         }
 
         void Exit(){
-            Core.CloseWindow(parent);
+            Core.CloseWindow(window);
         }
     }
 }

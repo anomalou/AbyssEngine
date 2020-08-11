@@ -19,7 +19,7 @@ namespace AbyssBehavior
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
-            graphics.PreferredBackBufferHeight = 840;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1980;
             graphics.IsFullScreen = false;
             
@@ -49,10 +49,6 @@ namespace AbyssBehavior
             // if (Keyboard.GetState().IsKeyDown(Keys.C))
             //     Exit();
             Control.Controlling(Keyboard.GetState().GetPressedKeys());
-            Time.msc = (long)(gameTime.TotalGameTime.TotalMilliseconds);
-            Time.seconds = (int)gameTime.TotalGameTime.Seconds;
-            Time.minutes = (int)gameTime.TotalGameTime.Minutes;
-            Time.hours = (long)gameTime.TotalGameTime.Hours;
             Core.Update();
             // TODO: Add your update logic here
 

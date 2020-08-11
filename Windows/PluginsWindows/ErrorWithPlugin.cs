@@ -4,7 +4,7 @@ namespace AbyssBehavior{
     class ErrorWithPlugin:Window{
         protected override void Initialization(){
             logic = new ErrorWithPluginLogic(this);
-            transform.SetupScale(Core.buffer.scale);
+            transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 
             TextBox excep1 = new TextBox("detected error with some plugins");

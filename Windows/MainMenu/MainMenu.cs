@@ -3,7 +3,7 @@ using AbyssLibraries;
 namespace AbyssBehavior{
     class MainMenu: Window{
         protected override void Initialization(){
-            transform.SetupScale(Core.buffer.scale);
+            transform.SetScale(Core.buffer.scale);
             logic = new MenuLogic(this);
             TextBox title = new TextBox("main menu");
             title.SetPosition(new Vector(1,1));

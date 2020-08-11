@@ -3,7 +3,7 @@ using AbyssLibraries;
 namespace AbyssBehavior{
     class GameWindow:Window{
         protected override void Initialization(){
-            transform.SetupScale(Core.buffer.scale);
+            transform.SetScale(Core.buffer.scale);
             logic = new GameLogic(this);
             DisplayBox displayBox = new DisplayBox();
             displayBox.SetPosition(new Vector(1,1));

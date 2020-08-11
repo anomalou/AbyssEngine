@@ -21,6 +21,7 @@ namespace AbyssBehavior{
             buffer = new Buffer();
             windowQueue = new List<IWindow>();
             active = true;
+            SwapBuffer.Initialization();
             GameCore.Initialization();
             PluginManager.PrepareSpace();
             PluginManager.LoadPlugins();
@@ -146,14 +147,5 @@ namespace AbyssBehavior{
                 }
             }
         }
-    }
-
-    static class Time{
-
-        static long _msc;
-        public static long msc{get{return _msc;}set{if(value > 1000000000000) _msc = 0; else _msc = value;}}
-        public static int seconds;
-        public static int minutes;
-        public static long hours;
     }
 }

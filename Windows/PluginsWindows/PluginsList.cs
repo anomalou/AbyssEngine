@@ -4,13 +4,17 @@ namespace AbyssBehavior{
     class PluginsList:Window{
         protected override void Initialization(){
             logic = new PluginsListLogic(this);
-            transform.SetupScale(Core.buffer.scale);
+            transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 
+            TextBox window = new TextBox("plugins list");
+            window.SetPosition(new Vector(1,1));
+
             ScrollBox group = new ScrollBox();
-            group.SetPosition(new Vector(1,1));
+            group.SetPosition(new Vector(1,3));
             group.SetSize(new Vector(ScreenBufferParam.width - 2, ScreenBufferParam.height - 2));
             AddWidget("group", group);
+            AddWidget("window",window);
             if(PluginManager.plugins.Count > 0){
                 for(int i = 0; i < PluginManager.plugins.Count; i++){
                     TextBox plugin = new TextBox(PluginManager.plugins[i].name);
