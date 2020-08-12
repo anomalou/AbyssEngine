@@ -3,7 +3,8 @@ using AbyssLibraries;
 namespace AbyssBehavior{
     class PluginsList:Window{
         protected override void Initialization(){
-            logic = new PluginsListLogic(this);
+            SetLogic(new PluginsListLogic(this));
+            // logic = new PluginsListLogic(this);
             transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 

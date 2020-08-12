@@ -63,7 +63,7 @@ namespace AbyssBehavior
             
             for(int x = 0; x < ScreenBufferParam.width; x++){
                 for(int y = 0; y < ScreenBufferParam.height; y++){
-                    for(int l = 0; l < ScreenBufferParam.layers; l++){
+                    for(int l = 0; l < ScreenBufferParam.depth; l++){
                         if(textures.textures.ContainsKey(Core.buffer.GetTexture(x,y,l))){
                             spriteBatch.Draw(textures._textures[Core.buffer.GetTexture(x,y,l)], new Vector2(x*30, y*30), Color.White);
                         }else{

@@ -4,7 +4,8 @@ namespace AbyssBehavior{
     class GameWindow:Window{
         protected override void Initialization(){
             transform.SetScale(Core.buffer.scale);
-            logic = new GameLogic(this);
+            SetLogic(new GameLogic(this));
+            // logic = new GameLogic(this);
             DisplayBox displayBox = new DisplayBox();
             displayBox.SetPosition(new Vector(1,1));
             displayBox.SetSize(new Vector(Core.buffer.scale.x/2, Core.buffer.scale.y - 2));

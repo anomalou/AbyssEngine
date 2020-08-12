@@ -5,7 +5,8 @@ namespace AbyssBehavior{
     class PluginDescription:Window{
 
         protected override void Initialization(){
-            logic = new PluginDescriptionLogic(this);
+            SetLogic(new PluginDescriptionLogic(this));
+            // logic = new PluginDescriptionLogic(this);
             transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 

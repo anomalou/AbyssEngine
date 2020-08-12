@@ -45,9 +45,9 @@ namespace AbyssBehavior{
         static void Render(){
             for(int i = 0; i < currentWindow.transform.scale.y; i++){
                 for(int t = 0; t < currentWindow.transform.scale.x; t++){
-                    for(int f = 0; f < currentWindow.canvas.layers; f++){
+                    for(int f = 0; f < currentWindow.canvas.depth; f++){
                         buffer.SetCursore(t+currentWindow.transform.position.x,i+currentWindow.transform.position.y,f);
-                        buffer.SetPoint(currentWindow.canvas.GetPoint(t,i,f));
+                        buffer.SetPoint(currentWindow.canvas.Get(t,i,f));
                     }
                 }
             }

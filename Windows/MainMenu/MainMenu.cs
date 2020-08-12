@@ -4,7 +4,8 @@ namespace AbyssBehavior{
     class MainMenu: Window{
         protected override void Initialization(){
             transform.SetScale(Core.buffer.scale);
-            logic = new MenuLogic(this);
+            SetLogic(new MenuLogic(this));
+            // logic = new MenuLogic(this);
             TextBox title = new TextBox("main menu");
             title.SetPosition(new Vector(1,1));
             title.SetSize(new Vector(Core.buffer.scale.x - 2, 1));

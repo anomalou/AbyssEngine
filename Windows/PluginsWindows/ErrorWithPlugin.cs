@@ -3,7 +3,8 @@ using AbyssLibraries;
 namespace AbyssBehavior{
     class ErrorWithPlugin:Window{
         protected override void Initialization(){
-            logic = new ErrorWithPluginLogic(this);
+            SetLogic(new ErrorWithPluginLogic(this));
+            // logic = new ErrorWithPluginLogic(this);
             transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 

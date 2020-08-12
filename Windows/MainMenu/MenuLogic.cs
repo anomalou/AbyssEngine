@@ -4,10 +4,10 @@ namespace AbyssBehavior{
     class MenuLogic:Logic{
 
         protected action exit, start, plugins;
-        public MenuLogic(Window parent):base(parent){
+
+        public MenuLogic(IWindow window):base(window){
 
         }
-
         public override void Initialization(){
             exit = Exit;
             start = Start;
