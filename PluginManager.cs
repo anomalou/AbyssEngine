@@ -32,13 +32,13 @@ namespace AbyssBehavior{
                                 IPlugin pluginInfo = (IPlugin)Activator.CreateInstance(type);
                                 plugins.Add(pluginInfo);
                             }else if(typeof(IStat).IsAssignableFrom(type)){
-                                IStat stat = (IStat)Activator.CreateInstance(type);
-                                stat.control = GameCore.statControl;
-                                GameCore.stats.Add(stat);
+                                GameCore.statsList.Add((IStat)Activator.CreateInstance(type));
                             }else if(typeof(IGameRule).IsAssignableFrom(type)){
-                                IGameRule gameRule = (IGameRule)Activator.CreateInstance(type);
-                                gameRule.control = GameCore.gameRuleControl;
-                                GameCore.gameRules.Add(gameRule);
+                                GameCore.gameRulesList.Add((IGameRule)Activator.CreateInstance(type));
+                            }else if(typeof(IGameObject).IsAssignableFrom(type)){
+                                GameCore.gameObjectsList.Add((IGameObject)Activator.CreateInstance(type));
+                            }else if(typeof(IMap).IsAssignableFrom(type)){
+                                GameCore.mapsList.Add((IMap)Activator.CreateInstance(type));
                             }
                         }
                     }else

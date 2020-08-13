@@ -40,8 +40,8 @@ namespace AbyssBehavior{
 
         protected override void Update(){
             camera.Update();
-            if(GameCore.gameRuleControl.GetStat("hp") != null)
-                window.GetWidget("hpBar").SetData(GameCore.gameRuleControl.GetStat("hp").value);
+            if(GameCore.controller.GetStat("hp") != null)
+                window.GetWidget("hpBar").SetData(GameCore.controller.GetStat("hp").value);
             else{
                 Core.CloseWindow(window);
                 Core.OpenWindow(new ErrorWithPlugin(), window.parent);
@@ -50,7 +50,7 @@ namespace AbyssBehavior{
 
         void SetBlock(){
             // location.Set(new Vector(player.position.x, player.position.y - 1), 1, new Object("bench", "benchH", 10));
-            GameCore.gameRuleControl.GetStat("hp").SubValue(1);
+            GameCore.controller.GetStat("hp").SubValue(1);
         }
 
         void MoveUp(){
