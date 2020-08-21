@@ -14,7 +14,7 @@ namespace AbyssBehavior{
             errorList.SetSpacing(1);
             
             errorList.SetPosition(new Vector(1, 3));
-            errorList.SetSize(new Vector(ScreenBufferParam.width - 2, ScreenBufferParam.height - 5));
+            errorList.SetSize(new Vector(Core.buffer.width - 2, Core.buffer.height - 5));
 
             AddWidget("text", text);
             AddWidget("errorList", errorList);
@@ -48,7 +48,7 @@ namespace AbyssBehavior{
             int i = 1;
             foreach(Exception e in msgs){
                 TextBox error = new TextBox(i+":"+e.Message+" in "+e.Source);
-                error.SetSize(new Vector(ScreenBufferParam.width - 2, 1));
+                error.SetSize(new Vector(Core.buffer.width - 2, 1));
                 window.GetWidget<ScrollBox>("errorList").AddChild(error);
                 eL.AddItem(error);
                 window.AddMenu("e"+i, error);

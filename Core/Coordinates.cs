@@ -58,18 +58,18 @@
         public Transform(){
             _position = new Vector();
             _scale = new Vector(1,1);
-            _maxScale = new Vector(ScreenBufferParam.width, ScreenBufferParam.height);
+            _maxScale = new Vector(Core.buffer.width, Core.buffer.height);
         }
 
         public Transform(Vector position){
             _position = position;
-            _maxScale = new Vector(ScreenBufferParam.width, ScreenBufferParam.height);
+            _maxScale = new Vector(Core.buffer.width, Core.buffer.height);
         }
 
         public Transform(Vector position, Vector scale){
             _position = position;
             _scale = scale;
-            _maxScale = new Vector(ScreenBufferParam.width, ScreenBufferParam.height);
+            _maxScale = new Vector(Core.buffer.width, Core.buffer.height);
         }
 
         public void SetScale(Vector scale){

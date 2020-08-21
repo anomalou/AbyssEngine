@@ -26,6 +26,5 @@ namespace AbyssBehavior{
         void SetVisible(bool state);
         void SetFocus(bool state);
         void SetPosition(Vector position);
-        // void SetData(object data);
     }
 }

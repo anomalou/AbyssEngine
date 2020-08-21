@@ -12,13 +12,7 @@ namespace AbyssBehavior{
                         }
                     }
                 }
-            }/* else
-                Core.ThrowError(8); */
+            }
         }
-
-        // public override void SetData(object data){
-        //     camera = (Camera)data;
-        //     transform.SetScale(camera.scale);
-        // }
     }
 }

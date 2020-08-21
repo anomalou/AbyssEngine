@@ -101,9 +101,8 @@ namespace AbyssBehavior{
 
         public TWidget GetWidget<TWidget>(string identificator) where TWidget : IWidget{
             foreach(IWidget w in widgets){
-                if(w.identificator == identificator){
+                if(w.identificator == identificator)
                     return (TWidget)w;
-                }
             }
             return default(TWidget);
         }

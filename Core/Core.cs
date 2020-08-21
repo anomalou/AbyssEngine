@@ -4,7 +4,7 @@ using System;
 
 namespace AbyssBehavior{
     static class Core{
-        public static Buffer buffer;
+        public static ScreenBuffer buffer;
         static GraphicRender graphicCore;
 
         public static List<IWindow> windowQueue;
@@ -27,7 +27,7 @@ namespace AbyssBehavior{
         ///Major initialization method. This method will start all required process.
         ///</summary>
         public static void Initialization(){
-            buffer = new Buffer();
+            buffer = new ScreenBuffer();
             _systemFont = new Font();
             _errorList = new List<Exception>();
             SwapBuffer.Initialization();

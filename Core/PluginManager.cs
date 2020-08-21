@@ -46,9 +46,9 @@ namespace AbyssBehavior{
                                     GameCore.mapsList.Add((IMap)Activator.CreateInstance(type));
                                 }
                             }catch(Exception ex){
-                                Exception exception = new Exception("Error with load plugin content!");
-                                exception.Source = lib.Location;
-                                Core.ThrowError(exception);
+                                ex = new Exception("Error with load plugin content!");
+                                ex.Source = lib.Location;
+                                Core.ThrowError(ex);
                             }
                         }
                     }else

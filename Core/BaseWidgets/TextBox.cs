@@ -26,9 +26,5 @@ namespace AbyssBehavior{
         public void SizeToText(){
             SetSize(new Vector(text.Length, 1));
         }
-
-        // public override void SetData(object data){
-        //     _text = data.ToString();
-        // }
     }
 }

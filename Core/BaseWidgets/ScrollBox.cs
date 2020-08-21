@@ -55,15 +55,6 @@ namespace AbyssBehavior{
                     }
                 }
             }
-            // foreach(Widget w in items){
-            //     w.SetVisible(true);
-            //     if((w.transform.scale.x <= transform.scale.x) && (w.transform.scale.y <= transform.scale.y) && (prevPosition.y + spacing < (transform.position.y + transform.scale.y))){
-            //         w.transform.position = new Vector(prevPosition.x, prevPosition.y + spacing);
-            //         prevPosition = new Vector(w.transform.position.ToVector().x, w.transform.position.ToVector().y + w.transform.scale.y);
-            //     }else{
-            //         w.SetVisible(false);
-            //     }
-            // }
         }
 
         protected override void Render(){
@@ -80,8 +71,7 @@ namespace AbyssBehavior{
                 int index = items.IndexOf(item);
                 items.Remove(item);
                 maxScroll--;
-            }/* else
-                Core.ThrowError(9); */
+            }
         }
 
         public void SetSpacing(int width){

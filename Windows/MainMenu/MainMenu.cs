@@ -6,7 +6,7 @@ namespace AbyssBehavior{
             TextBox title = new TextBox("Main menu");
             title.SetPosition(new Vector(1,1));
             title.SetSize(new Vector(Core.buffer.scale.x - 2, 1));
-            Image icon = new Image("player");
+            ImageView icon = new ImageView("player");
             icon.SetPosition(new Vector(11,1));
             ScrollBox menuList = new ScrollBox();
             menuList.SetPosition(new Vector(1,4));

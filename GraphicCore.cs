@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Threading;
 
 namespace AbyssBehavior
 {
@@ -60,24 +59,17 @@ namespace AbyssBehavior
             spriteBatch.Begin();
             
             
-            for(int x = 0; x < ScreenBufferParam.width; x++){
-                for(int y = 0; y < ScreenBufferParam.height; y++){
-                    for(int l = 0; l < ScreenBufferParam.depth; l++){
-                        if(textures.textures.ContainsKey(Core.buffer.Get(x,y,l).texture)){
-                            spriteBatch.Draw(textures._textures[Core.buffer.Get(x,y,l).texture], new Vector2(x*30, y*30), new Color(Core.buffer.Get(x,y,l).color.color));
+            for(int x = 0; x < Core.buffer.width; x++){
+                for(int y = 0; y < Core.buffer.height; y++){
+                    for(int d = 0; d < Core.buffer.depth; d++){
+                        if(textures.textures.ContainsKey(Core.buffer.Get(x,y,d).texture)){
+                            spriteBatch.Draw(textures._textures[Core.buffer.Get(x,y,d).texture], new Vector2(x*30, y*30), new Color(Core.buffer.Get(x,y,d).color.color));
                         }else{
                             spriteBatch.Draw(textures._textures["notexture"], new Vector2(x*30, y*30), Color.White);
                         }
-                        //spriteBatch.Draw(textures.textures.(Core.buffer.Texture(new Vector(x,y), l)), new Vector2(x*30,y*30),Color.White);
                     }
                 }
             }
-
-            // spriteBatch.DrawString(debugFont, Control.action.ToString(), new Vector2(0,0), Color.Black);
-            // //spriteBatch.DrawString(debugFont, Time.msc.ToString(), new Vector2(0,40), Color.White);
-            // spriteBatch.DrawString(debugFont, Control.couldownTime.ToString(), new Vector2(0,40), Color.Black);
-            // spriteBatch.DrawString(debugFont, Control.couldown.ToString(), new Vector2(0,60), Color.Black);
-            // spriteBatch.DrawString(debugFont, Core.testWindow.selectedElement, new Vector2(0,20), Color.Black);
 
             spriteBatch.End();
             // TODO: Add your drawing code here

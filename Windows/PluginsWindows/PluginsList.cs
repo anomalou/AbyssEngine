@@ -11,7 +11,7 @@ namespace AbyssBehavior{
 
             ScrollBox group = new ScrollBox();
             group.SetPosition(new Vector(1,3));
-            group.SetSize(new Vector(ScreenBufferParam.width - 2, ScreenBufferParam.height - 2));
+            group.SetSize(new Vector(Core.buffer.width - 2, Core.buffer.height - 2));
             AddWidget("group", group);
             AddWidget("window",window);
             if(PluginManager.plugins.Count > 0){

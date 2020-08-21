@@ -3,14 +3,14 @@ namespace AbyssBehavior{
     public static class CanvasFactory{
         public static Canvas CreateCanvas(int width = 0, int height = 0){
             if(width > 0 && height > 0)
-                return new Canvas(width, height, ScreenBufferParam.depth);
+                return new Canvas(width, height, Core.buffer.depth);
             else
                 return null;
         }
 
         public static WidgetCanvas CreateWidgetCanvas(int width = 0, int height = 0){
             if(width > 0 && height > 0)
-                return new WidgetCanvas(width, height, ScreenBufferParam.depth - 2);
+                return new WidgetCanvas(width, height, Core.buffer.depth - 2);
             else
                 return null;
         }

@@ -1,16 +1,16 @@
 namespace AbyssBehavior{
-    public class Buffer{
+    public class ScreenBuffer{
 
-        // int _width; //ширина
-        // int _height; //высота
+        int _width; //ширина
+        int _height; //высота
 
-        // public int width{get{return _width;}}
-        // public int height{get{return _height;}}
+        public int width{get{return _width;}}
+        public int height{get{return _height;}}
         
         public Vector scale{get;}
 
-        // int _layers; //слои
-        // public int layers{get{return _layers;}}
+        int _depth; //слои
+        public int depth{get{return _depth;}}
 
         Cursore cursore;
 
@@ -21,14 +21,17 @@ namespace AbyssBehavior{
         public Point Get(int x, int y, int depth){
             return buffer[x, y, depth];
         }
-        public Buffer(){
+        public ScreenBuffer(){
+            _width = 64;
+            _height = 36;
+            _depth = 4;
             cursore = new Cursore();
-            buffer = new Point[ScreenBufferParam.width, ScreenBufferParam.height, ScreenBufferParam.depth];
-            scale = new Vector(ScreenBufferParam.width, ScreenBufferParam.height);
+            buffer = new Point[width, height, depth];
+            scale = new Vector(width, height);
             consoleLike = false;
-            for(int i = 0; i < ScreenBufferParam.width; i++){
-                for(int t = 0; t < ScreenBufferParam.height; t++){
-                    for(int f = 0; f < ScreenBufferParam.depth; f++){
+            for(int i = 0; i < width; i++){
+                for(int t = 0; t < height; t++){
+                    for(int f = 0; f < depth; f++){
                         buffer[i,t,f] = new Point();
                     }
                 }
@@ -47,32 +50,24 @@ namespace AbyssBehavior{
             }
         }
 
-        // public void SetPoint(Point p){
-        //     buffer[cursore.x, cursore.y, cursore.layer].SetupPoint(p);
-            
-        //     if(consoleLike == true){
-        //         cursore.Move();
-        //     }
-        // }
-
         public void SetCursore(int x, int y, int layer){
-            while(x >= ScreenBufferParam.width || x < 0){
-                if(x >= ScreenBufferParam.width){
-                    x = x - ScreenBufferParam.width;
+            while(x >= width || x < 0){
+                if(x >= width){
+                    x = x - width;
                     y++;
                 }else if(x < 0){
                     x = 0;
                 }
             }
             
-            if(y >= ScreenBufferParam.height){
-                y = ScreenBufferParam.height;
+            if(y >= height){
+                y = height;
             }else if(y < 0){
                 y = 0;
             }
 
-            if(layer >= ScreenBufferParam.depth)
-                layer = ScreenBufferParam.depth;
+            if(layer >= depth)
+                layer = depth;
             else if(layer < 0)
                 layer = 0;
             cursore.chPos(x,y,layer);
@@ -81,23 +76,23 @@ namespace AbyssBehavior{
         public void SetCursore(Vector v, int layer){
             int x = v.x;
             int y = v.y;
-            while(x >= ScreenBufferParam.width || x < 0){
-                if(x > ScreenBufferParam.width){
-                    x = x - ScreenBufferParam.width;
+            while(x >= width || x < 0){
+                if(x > width){
+                    x = x - width;
                     y++;
                 }else if(x < 0){
                     x = 0;
                 }
             }
             
-            if(y >= ScreenBufferParam.height){
-                y = ScreenBufferParam.height;
+            if(y >= height){
+                y = height;
             }else if(y < 0){
                 y = 0;
             }
 
-            if(layer >= ScreenBufferParam.depth)
-                layer = ScreenBufferParam.depth;
+            if(layer >= depth)
+                layer = depth;
             else if(layer < 0)
                 layer = 0;
             cursore.chPos(x,y,layer);
@@ -105,9 +100,9 @@ namespace AbyssBehavior{
         }
 
         public void Clear(){
-            for(int x = 0; x < ScreenBufferParam.width; x++){
-                for(int y = 0; y < ScreenBufferParam.height; y++){
-                    for(int l = 0; l < ScreenBufferParam.depth; l++){
+            for(int x = 0; x < width; x++){
+                for(int y = 0; y < height; y++){
+                    for(int l = 0; l < depth; l++){
                         SetCursore(x, y, l);
                         Set();
                     }
@@ -133,7 +128,6 @@ namespace AbyssBehavior{
             _x = x;
             _y = y;
             _layer = layer;
-            //Console.WriteLine(x+" "+y+" "+layer);
         }
         public void Move(){
             _x++;

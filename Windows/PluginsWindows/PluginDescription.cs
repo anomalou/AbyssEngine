@@ -13,9 +13,9 @@ namespace AbyssBehavior{
             TextBox description = new TextBox("");
             
             name.SetPosition(new Vector(1,1));
-            name.SetSize(new Vector(ScreenBufferParam.width - 2, 1));
+            name.SetSize(new Vector(Core.buffer.width - 2, 1));
             description.SetPosition(new Vector(1,3));
-            description.SetSize(new Vector(ScreenBufferParam.width - 2, ScreenBufferParam.height - 5));
+            description.SetSize(new Vector(Core.buffer.width - 2, Core.buffer.height - 5));
 
             AddWidget("name", name);
             AddWidget("description", description);

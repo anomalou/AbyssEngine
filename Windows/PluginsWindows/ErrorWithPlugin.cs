@@ -8,7 +8,7 @@ namespace AbyssBehavior{
 
             TextBox excep1 = new TextBox("WARNING!!! Detected error with some of yours plugins!");
             TextBox excep2 = new TextBox("Please check you plugins folder, on contact with plagin's developer.");
-            excep2.SetSize(new Vector(ScreenBufferParam.width - 2, 2));
+            excep2.SetSize(new Vector(Core.buffer.width - 2, 2));
             TextBox excep3 = new TextBox("Maybe you should install one of this plugins?");
             TextBox excep4 = new TextBox("Text of error:");
 
