@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using AbyssLibraries;
+using System;
 
 namespace AbyssBehavior{
     static class Core{
@@ -11,17 +11,28 @@ namespace AbyssBehavior{
         public static IWindow currentWindow;
 
         public static bool active;
+
+        static Font _systemFont;
+        public static Font systemFont{get{return _systemFont;}}
+
+        static List<Exception> _errorList;
+        public static List<Exception> errorList{get{return _errorList;}}
         
         static void Main(string[] arg)
         {
             Initialization();
         }
 
-        static void Initialization(){
+        ///<summary>
+        ///Major initialization method. This method will start all required process.
+        ///</summary>
+        public static void Initialization(){
             buffer = new Buffer();
+            _systemFont = new Font();
+            _errorList = new List<Exception>();
+            SwapBuffer.Initialization();
             windowQueue = new List<IWindow>();
             active = true;
-            SwapBuffer.Initialization();
             GameCore.Initialization();
             PluginManager.PrepareSpace();
             PluginManager.LoadPlugins();
@@ -47,7 +58,7 @@ namespace AbyssBehavior{
                 for(int t = 0; t < currentWindow.transform.scale.x; t++){
                     for(int f = 0; f < currentWindow.canvas.depth; f++){
                         buffer.SetCursore(t+currentWindow.transform.position.x,i+currentWindow.transform.position.y,f);
-                        buffer.SetPoint(currentWindow.canvas.Get(t,i,f));
+                        buffer.Set(currentWindow.canvas.Get(t,i,f));
                     }
                 }
             }
@@ -65,7 +76,7 @@ namespace AbyssBehavior{
         }
 
         public static void OpenInfo(string text){
-
+            
         }
 
         public static void CloseWindow(IWindow window){
@@ -84,8 +95,13 @@ namespace AbyssBehavior{
             buffer.Clear();
         }
 
-        public static void ThrowError(int errorCode){
-
+        public static void ThrowError(Exception exception){
+            _errorList.Add(exception);
+            // if(windowQueue.Count > 0)
+            //     OpenWindow(new ExceptionDesc(), windowQueue[windowQueue.Count - 1]);
+            // else
+            //     OpenWindow(new ExceptionDesc());
+            // SwapBuffer.AddInfo("errorMsg", exception);
         }
 
         public static void Exit(){

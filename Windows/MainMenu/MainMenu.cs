@@ -1,12 +1,10 @@
-using AbyssLibraries;
-
 namespace AbyssBehavior{
     class MainMenu: Window{
         protected override void Initialization(){
             transform.SetScale(Core.buffer.scale);
             SetLogic(new MenuLogic(this));
             // logic = new MenuLogic(this);
-            TextBox title = new TextBox("main menu");
+            TextBox title = new TextBox("Main menu");
             title.SetPosition(new Vector(1,1));
             title.SetSize(new Vector(Core.buffer.scale.x - 2, 1));
             Image icon = new Image("player");
@@ -17,11 +15,11 @@ namespace AbyssBehavior{
             menuList.SetSize(new Vector(10, 12));
 
             AddWidget("menu", menuList);
-            TextBox start = new TextBox("start");
-            TextBox plugins = new TextBox("plugins");
+            TextBox start = new TextBox("Start");
+            TextBox plugins = new TextBox("Plugins ...");
             
             
-            TextBox exit = new TextBox("exit");
+            TextBox exit = new TextBox("Exit");
             
             AddWidget("title", title);
             AddWidget("icon", icon);

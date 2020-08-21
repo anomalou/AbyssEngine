@@ -8,6 +8,7 @@ namespace AbyssBehavior{
         List<IGameRule> gameRules;
         List<IMap> maps;
 
+
         IMap _currentMap;
         IMap currentMap{get{return _currentMap;}}
 

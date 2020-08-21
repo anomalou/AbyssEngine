@@ -1,5 +1,3 @@
-using AbyssLibraries;
-
 namespace AbyssBehavior{
     class MenuLogic:Logic{
 
@@ -19,6 +17,7 @@ namespace AbyssBehavior{
 
         protected void Start(){
             Core.OpenWindow(new GameWindow(), window);
+            // Core.ThrowError("oshibka");
         }
 
         protected void Plugins(){

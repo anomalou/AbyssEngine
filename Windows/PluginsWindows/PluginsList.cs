@@ -1,5 +1,3 @@
-using AbyssLibraries;
-
 namespace AbyssBehavior{
     class PluginsList:Window{
         protected override void Initialization(){
@@ -8,7 +6,7 @@ namespace AbyssBehavior{
             transform.SetScale(Core.buffer.scale);
             SetupBackground(FillBackground());
 
-            TextBox window = new TextBox("plugins list");
+            TextBox window = new TextBox("Installed plugins:");
             window.SetPosition(new Vector(1,1));
 
             ScrollBox group = new ScrollBox();

@@ -1,5 +1,3 @@
-using AbyssLibraries;
-
 namespace AbyssBehavior{
     class GameLogic:Logic{
         action exit, up, down, left, right, setBlock;
@@ -40,17 +38,17 @@ namespace AbyssBehavior{
 
         protected override void Update(){
             camera.Update();
-            if(GameCore.controller.GetStat("hp") != null)
-                window.GetWidget("hpBar").SetData(GameCore.controller.GetStat("hp").value);
-            else{
-                Core.CloseWindow(window);
-                Core.OpenWindow(new ErrorWithPlugin(), window.parent);
-            }
+            // if(GameCore.controller.GetStat("hp") != null)
+            //     window.GetWidget("hpBar").SetData(GameCore.controller.GetStat("hp").value);
+            // else{
+            //     Core.CloseWindow(window);
+            //     Core.OpenWindow(new ErrorWithPlugin(), window.parent);
+            // }
         }
 
         void SetBlock(){
             // location.Set(new Vector(player.position.x, player.position.y - 1), 1, new Object("bench", "benchH", 10));
-            GameCore.controller.GetStat("hp").SubValue(1);
+            // GameCore.controller.GetStat("hp").SubValue(1);
         }
 
         void MoveUp(){

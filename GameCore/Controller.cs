@@ -10,5 +10,11 @@ namespace AbyssBehavior{
                 }
             return null;
         }
+
+        public void MovePlayer(Vector direction){
+            if(GameCore.currentSession != null){
+                
+            }
+        }
     }
 }

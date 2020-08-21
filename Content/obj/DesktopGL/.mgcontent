@@ -7,6 +7,101 @@
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/baseFont.spritefont</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/cursoreL.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/cursoreR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/alert.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/ampersant.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/apostrof.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/codebegin.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/codeend.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/comma.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/crossup.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/dollar.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/dot.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/dotcomma.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/doubledot.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/doublequotes.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/downline.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/equle.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/hashtag.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/leftbrakket.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/leftcross.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/leftobliqueline.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/leftsqurebrakket.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/line.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/mail.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/percent.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/plus.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/question.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/quotes.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/rightbrakket.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/rightcross.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/rightobliqueline.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/rightsqurebrakket.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/space.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/star.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/tilda.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/verticalline.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word0.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word1.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word2.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word3.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word4.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word5.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word6.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word7.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word8.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/word9.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordA.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordA_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordB.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordB_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordC.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordC_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordD.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordD_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordE.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordE_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordF.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordF_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordG.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordG_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordH.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordH_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordI.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordI_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordJ.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordJ_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordK.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordK_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordL.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordL_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordM.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordM_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordN.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordN_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordO.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordO_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordP.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordP_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordQ.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordQ_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordR.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordR_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordS.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordS_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordT.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordT_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordU.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordU_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordV.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordV_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordW.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordW_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordX.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordX_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordY.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordY_.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordZ.png</File>
+    <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/font/wordZ_.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/notexture.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/null.png</File>
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/textures/abyss.png</File>
@@ -82,6 +177,101 @@
     <File>C:/Users/John/Documents/GitHub/AbyssEngine/Content/words/wordz.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

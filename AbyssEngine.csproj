@@ -14,11 +14,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AbyssLibraries">
-      <HintPath>./Libraries/AbyssLibraries.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="AbyssPlugins">
       <HintPath>./Libraries/AbyssPlugins.dll</HintPath>
     </Reference>
