@@ -40,16 +40,16 @@ namespace AbyssBehavior{
 
         protected void SetErrors(object msg){
             List<Exception> msgs = (List<Exception>)msg;
-            ScrollBox eL = (ScrollBox)window.GetWidget("errorList");
+            ScrollBox eL = window.GetWidget<ScrollBox>("errorList");
             foreach(IWidget w in eL.children){
                 eL.RemoveItem(w);
-                window.RemoveWidget(w.name);
+                window.RemoveWidget(w.identificator);
             }
             int i = 1;
             foreach(Exception e in msgs){
                 TextBox error = new TextBox(i+":"+e.Message+" in "+e.Source);
                 error.SetSize(new Vector(ScreenBufferParam.width - 2, 1));
-                window.GetWidget("errorList").AddChild(error);
+                window.GetWidget<ScrollBox>("errorList").AddChild(error);
                 eL.AddItem(error);
                 window.AddMenu("e"+i, error);
                 i++;

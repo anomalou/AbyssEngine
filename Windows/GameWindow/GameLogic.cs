@@ -33,7 +33,7 @@ namespace AbyssBehavior{
             }
             
             location.Set(new Vector(1,1),1, player);
-            window.GetWidget("screen").SetData(camera);
+            window.GetWidget<DisplayBox>("screen").camera = camera;
         }
 
         protected override void Update(){

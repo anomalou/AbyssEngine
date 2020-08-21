@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace AbyssBehavior{
     public interface IWidget{
 
-        string name{get;set;}
+        string identificator{get;set;}
         Transform transform{get;}
         WidgetCanvas canvas{get;}
 
@@ -26,6 +26,6 @@ namespace AbyssBehavior{
         void SetVisible(bool state);
         void SetFocus(bool state);
         void SetPosition(Vector position);
-        void SetData(object data);
+        // void SetData(object data);
     }
 }

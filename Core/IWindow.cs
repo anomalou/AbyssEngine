@@ -16,7 +16,7 @@ namespace AbyssBehavior{
         void SetFocus(bool state);
         void AddWidget(string name, IWidget widget);
         void AddMenu(string name, IWidget widget);
-        IWidget GetWidget(string name);
+        TWidget GetWidget<TWidget>(string name) where TWidget: IWidget;
         void RemoveWidget(string name);
     }
 }

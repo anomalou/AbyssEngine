@@ -81,35 +81,36 @@ namespace AbyssBehavior{
         //Метод добавления нового виджета на окно
         public void AddWidget(string name, IWidget widget){
             foreach(IWidget w in widgets){
-                if(w.name == name)
+                if(w.identificator == name)
                     return;
             }
-            widget.name = name;
+            widget.identificator = name;
             widgets.Add(widget);
         }
 
         public void AddMenu(string name, IWidget widget){
             foreach(IWidget w in widgets){
-                if(w.name == name)
+                if(w.identificator == name)
                     return;
             }
-            widget.name = name;
+            widget.identificator = name;
             widgets.Add(widget);
             menu.Add(widget);
         }
 
 
-        public IWidget GetWidget(string name){
+        public TWidget GetWidget<TWidget>(string identificator) where TWidget : IWidget{
             foreach(IWidget w in widgets){
-                if(w.name == name)
-                    return w;
+                if(w.identificator == identificator){
+                    return (TWidget)w;
+                }
             }
-            return null;
+            return default(TWidget);
         }
 
         public void RemoveWidget(string name){
             foreach(IWidget w in widgets){
-                if(w.name == name){
+                if(w.identificator == name){
                     foreach(IWidget child in w.children){
                         child.parent = null;
                     }

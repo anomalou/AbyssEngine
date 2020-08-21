@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace AbyssBehavior{
     public class Widget:IWidget{
 
-        public string name{get;set;}
+        public string identificator{get;set;}
         public Transform transform{get;}
         public WidgetCanvas canvas{get;}
 
@@ -58,9 +58,9 @@ namespace AbyssBehavior{
             transform.position = position;
         }
 
-        public virtual void SetData(object data){
+        // public virtual void SetData(object data){
             
-        }
+        // }
 
         protected virtual void Behaviour(){
 
@@ -73,7 +73,7 @@ namespace AbyssBehavior{
         public void SetParent(IWidget parent){
             if(parent != null){
                 if(this.parent != null){
-                    if(this.parent.name == parent.name)
+                    if(this.parent.identificator == parent.identificator)
                         return;
                 }
                 this.parent = parent;
@@ -100,7 +100,7 @@ namespace AbyssBehavior{
 
         public void RemoveChild(string childName){
             foreach(IWidget w in children){
-                if(w.name == childName){
+                if(w.identificator == childName){
                     w.parent = null;
                     children.Remove(w);
                 }
@@ -116,7 +116,7 @@ namespace AbyssBehavior{
 
         public IWidget GetChild(string name){
             foreach(IWidget w in children){
-                if(w.name == name)
+                if(w.identificator == name)
                     return w;
             }
             return null;

@@ -50,7 +50,7 @@ namespace AbyssBehavior{
                 if(window.selectedElement == null && window.menu.Count > 0)
                     window.selectedElement = window.menu[0];
                 if(window.selectedElement != null)
-                    currentMenu = window.selectedElement.name;
+                    currentMenu = window.selectedElement.identificator;
                 else
                     currentMenu = "";
                 Update();
@@ -195,8 +195,8 @@ namespace AbyssBehavior{
 
         protected void Select(){
             if(window.selectedElement != null)
-                if(menu.ContainsKey(window.selectedElement.name))
-                    menu[window.selectedElement.name]();
+                if(menu.ContainsKey(window.selectedElement.identificator))
+                    menu[window.selectedElement.identificator]();
         }
 
         protected void EmitSignal(string name){

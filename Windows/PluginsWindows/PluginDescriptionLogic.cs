@@ -14,8 +14,8 @@ namespace AbyssBehavior{
         }
 
         protected override void Update(){
-            window.GetWidget("name").SetData(name);
-            window.GetWidget("description").SetData(description);
+            window.GetWidget<TextBox>("name").text = name;
+            window.GetWidget<TextBox>("description").text = description;
         }
 
         protected void SetData(object pluginInfo){
