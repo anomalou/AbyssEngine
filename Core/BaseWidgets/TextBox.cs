@@ -8,7 +8,6 @@ namespace AbyssBehavior{
 
         protected override void Render(){
             int height = (int)System.Math.Ceiling((double)((double)text.Length / (double)transform.scale.x));
-            System.Console.WriteLine(height);
             if(height > 0 && height < transform.maxScale.y && height > transform.scale.y)
                 SetSize(new Vector(transform.scale.x, height));
             for(int x = 0, y = 0, l = 0; l < text.Length;){
