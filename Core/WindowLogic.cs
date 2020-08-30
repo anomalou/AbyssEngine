@@ -76,10 +76,10 @@ namespace AbyssBehavior{
                 uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
                 Vector position;
                 Vector currentPosition;
-                currentPosition = new Vector(window.selectedElement.transform.position.x, window.selectedElement.transform.position.y);
+                currentPosition = new Vector((int)window.selectedElement.transform.position.x, (int)window.selectedElement.transform.position.y);
                 foreach(IWidget widget in window.menu){
                     if(widget.isVisible == true){
-                        position = new Vector(widget.transform.position.x, widget.transform.position.y);
+                        position = new Vector((int)widget.transform.position.x, (int)widget.transform.position.y);
                         if(position.y < currentPosition.y){
                             x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                             y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
@@ -107,10 +107,10 @@ namespace AbyssBehavior{
                 uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
                 Vector position;
                 Vector currentPosition;
-                currentPosition = new Vector(window.selectedElement.transform.position.x, window.selectedElement.transform.position.y);
+                currentPosition = new Vector((int)window.selectedElement.transform.position.x, (int)window.selectedElement.transform.position.y);
                 foreach(IWidget widget in window.menu){
                     if(widget.isVisible == true){
-                        position = new Vector(widget.transform.position.x, widget.transform.position.y);
+                        position = new Vector((int)widget.transform.position.x, (int)widget.transform.position.y);
                         if(position.y > currentPosition.y){
                             x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                             y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
@@ -137,10 +137,10 @@ namespace AbyssBehavior{
                 uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
                 Vector position;
                 Vector currentPosition;
-                currentPosition = new Vector(window.selectedElement.transform.position.x, window.selectedElement.transform.position.y);
+                currentPosition = new Vector((int)window.selectedElement.transform.position.x, (int)window.selectedElement.transform.position.y);
                 foreach(IWidget widget in window.menu){
                     if(widget.isVisible == true){
-                        position = new Vector(widget.transform.position.x, widget.transform.position.y);
+                        position = new Vector((int)widget.transform.position.x, (int)widget.transform.position.y);
                         if(position.x < currentPosition.x){
                             x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                             y_d = (uint)System.Math.Abs(currentPosition.y - position.y);
@@ -168,10 +168,10 @@ namespace AbyssBehavior{
                 uint x_d, mx_d = System.Int32.MaxValue, y_d, my_d = System.Int32.MaxValue;
                 Vector position;
                 Vector currentPosition;
-                currentPosition = new Vector(window.selectedElement.transform.position.x, window.selectedElement.transform.position.y);
+                currentPosition = new Vector((int)window.selectedElement.transform.position.x, (int)window.selectedElement.transform.position.y);
                 foreach(IWidget widget in window.menu){
                     if(widget.isVisible == true){
-                        position = new Vector(widget.transform.position.x, widget.transform.position.y);
+                        position = new Vector((int)widget.transform.position.x, (int)widget.transform.position.y);
                         if(position.x > currentPosition.x){
                             x_d = (uint)System.Math.Abs(currentPosition.x - position.x);
                             y_d = (uint)System.Math.Abs(currentPosition.y - position.y);

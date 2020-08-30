@@ -3,12 +3,10 @@ namespace AbyssBehavior{
         protected override void Initialization(){
             SetLogic(new ErrorWithPluginLogic(this));
             // logic = new ErrorWithPluginLogic(this);
-            transform.SetScale(Core.buffer.scale);
-            SetupBackground(FillBackground());
 
             TextBox excep1 = new TextBox("WARNING!!! Detected error with some of yours plugins!");
             TextBox excep2 = new TextBox("Please check you plugins folder, on contact with plagin's developer.");
-            excep2.SetSize(new Vector(Core.buffer.width - 2, 2));
+            excep2.SetSize(new Vector(62, 2));
             TextBox excep3 = new TextBox("Maybe you should install one of this plugins?");
             TextBox excep4 = new TextBox("Text of error:");
 

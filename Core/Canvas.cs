@@ -1,21 +1,17 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace AbyssBehavior{
 
     public static class CanvasFactory{
-        public static Canvas CreateCanvas(int width = 0, int height = 0){
-            if(width > 0 && height > 0)
-                return new Canvas(width, height, Core.buffer.depth);
-            else
-                return null;
-        }
-
-        public static WidgetCanvas CreateWidgetCanvas(int width = 0, int height = 0){
-            if(width > 0 && height > 0)
-                return new WidgetCanvas(width, height, Core.buffer.depth - 2);
+        public static WidgetCanvas CreateCanvas(Vector size, Vector cellSize){
+            if(size.x > 0 && size.y > 0)
+                return new WidgetCanvas(size, cellSize);
             else
                 return null;
         }
     }
-    public class Canvas{
+    public class WidgetCanvas{
 
         protected int _depth;
         public int depth{get{return _depth;}}
@@ -24,86 +20,92 @@ namespace AbyssBehavior{
         public int height{get{return _height;}}
         protected int _width;
         public int width{get{return _width;}}
-        protected Point[,,] canvas;
 
-        protected Vector _scale;
-        public Vector scale{get{return _scale;}}
+        protected Layer[] layers;
 
-        Canvas(){}
-        public Canvas(int width, int height, int depth){//инициальзация сетки
-            this._height = height;
-            this._width = width;
-            _scale = new Vector(width, height);
-            _depth = depth;
-            canvas = new Point[width, height, depth];
-            for(int i = 0; i < width; i++){
-                for(int t = 0; t < height; t++){
-                    for(int f = 0; f < depth; f++){
-                        canvas[i,t,f] = new Point();
-                    }
+        protected Vector _size;
+        public Vector size{get{return _size;}}
+
+        protected Vector _cellSize;
+        public Vector cellSize{get{return _cellSize;}}
+
+        protected Dictionary<byte, byte> _layersEmploy;
+        public byte[] layersEmploy{get{return _layersEmploy.Keys.ToArray();}}
+
+        WidgetCanvas(){}
+        public WidgetCanvas(Vector size, Vector cellSize){//инициальзация сетки
+            _width = size.x;
+            _height = size.y;
+            _size = new Vector(size);
+            _cellSize = new Vector(cellSize);
+            _layersEmploy = new Dictionary<byte, byte>();
+        }
+
+        public void ReInitialization(Vector size){
+            _width = size.x;
+            _height = size.y;
+            _size = new Vector(size);
+            _layersEmploy.Clear();
+            layers = null;
+        }
+
+        public void ReInitialization(Vector size, Vector cellSize){
+            _width = size.x;
+            _height = size.y;
+            _size = new Vector(size);
+            _cellSize = new Vector(cellSize);
+            _layersEmploy.Clear();
+            layers = null;
+        }
+
+        public void Set(int x, int y, byte depth, string texture_name){
+            Set(x, y, depth, texture_name, new RGBA());
+        }
+
+        public void Set(int x, int y, byte depth, string texture_name, RGBA color){
+            if(_layersEmploy.ContainsKey(depth)){
+                byte layer = _layersEmploy[depth];
+                layers[layer].Set(new Vector(x,y), texture_name, color);
+            }else{
+                if(layers != null){
+                    Layer[] temp = new Layer[layers.Length];
+                    for(int i = 0; i < layers.Length; i++)
+                        temp[i] = layers[i];
+                    layers = new Layer[temp.Length + 1];
+                    for(int i = 0; i < temp.Length; i++)
+                        layers[i] = temp[i];
+                    layers[temp.Length] = new Layer(size);
+                    _layersEmploy.Add(depth, (byte)temp.Length);
+                }else{
+                    layers = new Layer[1];
+                    layers[0] = new Layer(size);
+                    _layersEmploy.Add(depth, 0);
                 }
+                byte layer = _layersEmploy[depth];
+                layers[layer].Set(new Vector(x,y), texture_name, color);
+                _layersEmploy = _layersEmploy.OrderBy(lay => lay.Key).ToDictionary(lay => lay.Key, lay => lay.Value);
             }
         }
 
-        public void ReInitialization(int width, int height){//инициальзация сетки
-            this._height = height;
-            this._width = width;
-            _scale = new Vector(width, height);
-            canvas = new Point[width, height, depth];
-            for(int i = 0; i < width; i++){
-                for(int t = 0; t < height; t++){
-                    for(int f = 0; f < depth; f++){
-                        canvas[i,t,f] = new Point();
-                    }
-                }
-            }
+        public void Set(int x, int y, byte depth, Point point){
+            Set(x, y, depth, point.texture, point.color);
         }
 
-        public void LoadCanvas(string[,] textures){
-            if(textures.Length == canvas.Length / depth){
-                for(int x = 0; x < width; x++){
-                    for(int y = 0; y < height; y++){
-                        canvas[x,y,0].Setup(textures[x,y]);
-                    }
-                }
-            }
-        }
-
-        public void Set(int x, int y, int depth, string texture_name){
-            if(x > -1 && x < scale.x && y > -1 && y < scale.y && depth > -1 && depth < this.depth)
-                canvas[x, y, depth].Setup(texture_name);
-        }
-
-        public void Set(int x, int y, int depth, string texture_name, RGBA color){
-            if(x > -1 && x < scale.x && y > -1 && y < scale.y && depth > -1 && depth < this.depth)
-                canvas[x, y, depth].Setup(texture_name, color);
-        }
-
-        public void Set(int x, int y, int depth, Point point){
-            if(x > -1 && x < scale.x && y > -1 && y < scale.y && depth > -1 && depth < this.depth)
-                canvas[x, y, depth].Setup(point.texture, point.color);
-        }
-
-        public Point Get(int x, int y, int depth){
-            if(x > -1 && x < scale.x && y > -1 && y < scale.y && depth > -1 && depth < this.depth)
-                return canvas[x, y, depth];
-            else
+        public Point Get(int x, int y, byte depth){
+            if(_layersEmploy.ContainsKey(depth)){
+                byte layer = _layersEmploy[depth];
+                return layers[layer].Get(new Vector(x,y));
+            }else
                 return new Point();
         }
 
         public void Clear(){
-            for(int x = 0; x < width; x++){
-                for(int y = 0; y < height; y++){
-                    for(int depth = 0; depth < this.depth; depth++){
-                        canvas[x,y,depth].Setup();
-                    }
+            if(layers != null){
+                for(int i = 0; i < layers.Length; i++){
+                    layers[i] = new Layer(size);
                 }
             }
         }
-    }
-
-    public class WidgetCanvas:Canvas{
-        public WidgetCanvas(int width, int height, int depth):base(width, height, depth){}
     }
 
 
@@ -162,6 +164,36 @@ namespace AbyssBehavior{
             g = color.G;
             b = color.B;
             _color = color.color;
+        }
+    }
+
+    public class Layer{
+        protected Point[,] grid;
+
+        protected Vector size;
+
+        Layer(){}
+
+        public Layer(Vector size){
+            this.size = size;
+            grid = new Point[size.x, size.y];
+            for(int x = 0; x < size.x; x++){
+                for(int y = 0; y < size.y; y++){
+                    grid[x,y] = new Point();
+                }
+            }
+        }
+
+        public void Set(Vector position, string texture, RGBA color){
+            if(position < size == true && position >= Vector.zero == true)
+                grid[position.x, position.y] = new Point(texture, color);
+        }
+
+        public Point Get(Vector position){
+            if(position < size && position >= Vector.zero)
+                return grid[position.x, position.y];
+            else
+                return new Point();
         }
     }
 

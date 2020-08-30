@@ -12,7 +12,7 @@ namespace AbyssBehavior{
         bool isVisible{get;}
         bool inFocus{get;}
         int layer{get;}
-        Point GetPoint(int x, int y, int l);
+        Point GetPoint(int x, int y, byte depth);
 
         void SetParent(IWidget parent);
         void RemoveParent();
@@ -23,6 +23,7 @@ namespace AbyssBehavior{
         IWidget[] GetChildren();
         void Update();
         void SetSize(Vector size);
+        void SetCellSize(Vector size);
         void SetVisible(bool state);
         void SetFocus(bool state);
         void SetPosition(Vector position);

@@ -2,11 +2,6 @@ using System.Collections.Generic;
 
 namespace AbyssBehavior{
     public class Window:IWindow{
-        public Transform transform{get;}
-
-        protected string[,] background;
-        public Canvas canvas{get;}
-
         protected Logic _logic;
         public Logic logic{get{return _logic;}}
         public IWindow parent{get;set;}
@@ -18,18 +13,16 @@ namespace AbyssBehavior{
         public List<IWidget> menu{get;}
         public IWidget selectedElement{get;set;}
 
+        protected Vector _cursorePos;
+        protected Vector _cursoreLength;
+        public Vector cursorePos{get{return _cursorePos;}}
+        public Vector cursoreLength{get{return _cursoreLength;}}
 
-        public Window():this(Vector.zero()){}
 
-        public Window(Vector position){
-            transform = new Transform(position);
+        public Window(){
             widgets = new List<IWidget>();
             menu = new List<IWidget>();
             Initialization();
-            if(transform.scale != null)
-                canvas = CanvasFactory.CreateCanvas(transform.scale.x, transform.scale.y);
-            else
-                canvas = CanvasFactory.CreateCanvas(1, 1);
             if(logic == null){
                 // Core.ThrowError(1);
                 // Core.CloseWindow(this);
@@ -37,11 +30,11 @@ namespace AbyssBehavior{
             if(menu.Count != 0){
                 selectedElement = menu[0];
                 selectedElement.SetFocus(true);
+                RenderCursore();
             }else{
                 selectedElement = null;
             }
             logic.Initialization();
-            canvas.LoadCanvas(background);
         }
 
         //Пользовательский метод инциальзации. Его можно переписать под себя
@@ -60,9 +53,8 @@ namespace AbyssBehavior{
                     w.Update();
                 }
                 Update();
-                ClearLayers();
-                RenderWidgets();
                 RenderCursore();
+                RenderWidgets();
             }
         }
 
@@ -122,81 +114,23 @@ namespace AbyssBehavior{
 
         }
 
-        void ClearLayers(){
-            for(int x = 0; x < transform.scale.x; x++){
-                for(int y = 0; y < transform.scale.y; y++){
-                    for(int l = 1; l < canvas.depth; l++){
-                        canvas.Set(x,y,l,"null");
-                    }
-                }
-            }
-        }
-
         void RenderWidgets(){
-            foreach(IWidget w in widgets){
-                if(w.isVisible == true){
-                    for(int x = 0; x < w.transform.scale.x; x++){
-                        if(x+w.transform.position.x < transform.scale.x){
-                            for(int y = 0; y < w.transform.scale.y; y++){
-                                if(y+w.transform.position.y < transform.scale.y){
-                                    for(int l = 0; l < w.canvas.depth; l++){
-                                        canvas.Set(x+w.transform.position.x,y+w.transform.position.y, l+1, w.GetPoint(x,y,l));
-                                    }
-
-                                }
-                                else
-                                    break;
-                            }
-                        }else
-                            break;
-                    }
-                }
-            }
+            
         }
 
         void RenderCursore(){
             if(selectedElement != null && menu.Contains(selectedElement)){
                 Vector pos,scale;
-                pos = new Vector(selectedElement.transform.position.x, selectedElement.transform.position.y);
+                pos = new Vector((int)selectedElement.transform.position.x, (int)selectedElement.transform.position.y);
                 scale = new Vector(selectedElement.transform.scale.x, selectedElement.transform.scale.y);
-                canvas.Set(pos.x, pos.y + scale.y - 1, 3, "cursoreL");
-                canvas.Set(pos.x+scale.x - 1, pos.y+scale.y - 1, 3, "cursoreR");
+                _cursorePos = new Vector(pos + new Vector(0, scale.y * selectedElement.canvas.cellSize.y - selectedElement.canvas.cellSize.y));
+                _cursoreLength =  new Vector(pos + scale * selectedElement.canvas.cellSize - selectedElement.canvas.cellSize);
             }
         }
 
         protected void SetupBackground(string[,] canvas){
-            background = new string[transform.scale.x, transform.scale.y];
-            if(canvas.Length <= transform.scale.x * transform.scale.y)
-            for(int x = 0; x < transform.scale.x; x++){
-                for(int y = 0; y < transform.scale.y; y++){
-                    background[x,y] = canvas[x,y];
-                }
-            }
+            
         }
 
-        protected string[,] FillBackground(){
-            string[,] canvas = new string[transform.scale.x, transform.scale.y];
-            for(int x = 0; x < transform.scale.x; x++){
-                for(int y = 0; y < transform.scale.y; y++){
-                    if(x == 0){
-                        canvas[x, y] = "L";
-                    }else if(x == transform.scale.x - 1){
-                        canvas[x, y] = "R";
-                    }else if(y == 0){
-                        canvas[x, y] = "U";
-                    }else if(y == transform.scale.y - 1){
-                        canvas[x, y] = "D";
-                    }else{
-                        canvas[x, y] = "F";
-                    }
-                }
-            }
-
-            canvas[0, 0] = "UL";
-            canvas[transform.scale.x - 1, 0] = "UR";
-            canvas[0, transform.scale.y - 1] = "DL";
-            canvas[transform.scale.x - 1, transform.scale.y - 1] = "DR";
-            return canvas;
-        }
     }
 }

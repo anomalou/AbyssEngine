@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 namespace AbyssBehavior{
     public interface IWindow{
-        Transform transform{get;}
-        Canvas canvas{get;}
         Logic logic{get;}
         IWindow parent{get;set;}
         bool inFocus{get;}
@@ -11,6 +9,8 @@ namespace AbyssBehavior{
         List<IWidget> widgets{get;}
         List<IWidget> menu{get;}
         IWidget selectedElement{get;set;}
+        Vector cursorePos{get;}
+        Vector cursoreLength{get;}
         
         void DefaultUpdate();
         void SetFocus(bool state);

@@ -3,7 +3,7 @@ namespace AbyssBehavior{
 
         public string text;
 
-        public TextBox(string text):base(){ this.text = text; SizeToText();}
+        public TextBox(string text):base(){ this.text = text; SizeToText(); canvas.ReInitialization(transform.scale.ToVector(), new Vector(20, 30));}
 
         protected override void Render(){
             int height = (int)System.Math.Ceiling((double)((double)text.Length / (double)transform.scale.x));

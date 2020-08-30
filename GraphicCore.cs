@@ -55,19 +55,27 @@ namespace AbyssBehavior
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.DarkSlateGray);
             spriteBatch.Begin();
             
             
-            for(int x = 0; x < Core.buffer.width; x++){
-                for(int y = 0; y < Core.buffer.height; y++){
-                    for(int d = 0; d < Core.buffer.depth; d++){
-                        if(textures.textures.ContainsKey(Core.buffer.Get(x,y,d).texture)){
-                            spriteBatch.Draw(textures._textures[Core.buffer.Get(x,y,d).texture], new Vector2(x*30, y*30), new Color(Core.buffer.Get(x,y,d).color.color));
-                        }else{
-                            spriteBatch.Draw(textures._textures["notexture"], new Vector2(x*30, y*30), Color.White);
+            if(Core.currentWindow != null){
+                foreach(IWidget widget in Core.currentWindow.widgets){
+                    if(widget.isVisible)
+                    foreach(byte layer in widget.canvas.layersEmploy){
+                        for(int x = 0; x < widget.transform.scale.x; x++){
+                            for(int y = 0; y < widget.transform.scale.y; y++){
+                                if(textures.textures.ContainsKey(widget.canvas.Get(x, y, layer).texture))
+                                    spriteBatch.Draw(textures._textures[widget.canvas.Get(x, y, layer).texture], new Vector2(x * widget.canvas.cellSize.x + (int)widget.transform.position.x, y * widget.canvas.cellSize.y + (int)widget.transform.position.y), new Color(widget.canvas.Get(x, y, layer).color.color));
+                                else
+                                    spriteBatch.Draw(textures._textures["notexture"], new Vector2(x * widget.canvas.cellSize.x, y * widget.canvas.cellSize.y), Color.White);
+                            }
                         }
                     }
+                }
+                if(Core.currentWindow.selectedElement != null){
+                    spriteBatch.Draw(textures._textures["cursoreL"], new Vector2(Core.currentWindow.cursorePos.x, Core.currentWindow.cursorePos.y), Color.White);
+                    spriteBatch.Draw(textures._textures["cursoreR"], new Vector2(Core.currentWindow.cursoreLength.x, Core.currentWindow.cursoreLength.y), Color.White);
                 }
             }
 

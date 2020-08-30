@@ -4,8 +4,8 @@ using System;
 
 namespace AbyssBehavior{
     static class Core{
-        public static ScreenBuffer buffer;
         static GraphicRender graphicCore;
+        public static Vector resolution;
 
         public static List<IWindow> windowQueue;
         public static IWindow currentWindow;
@@ -27,7 +27,7 @@ namespace AbyssBehavior{
         ///Major initialization method. This method will start all required process.
         ///</summary>
         public static void Initialization(){
-            buffer = new ScreenBuffer();
+            resolution = new Vector(1920, 1080);
             _systemFont = new Font();
             _errorList = new List<Exception>();
             SwapBuffer.Initialization();
@@ -54,14 +54,7 @@ namespace AbyssBehavior{
         }
 
         static void Render(){
-            for(int i = 0; i < currentWindow.transform.scale.y; i++){
-                for(int t = 0; t < currentWindow.transform.scale.x; t++){
-                    for(int f = 0; f < currentWindow.canvas.depth; f++){
-                        buffer.SetCursore(t+currentWindow.transform.position.x,i+currentWindow.transform.position.y,f);
-                        buffer.Set(currentWindow.canvas.Get(t,i,f));
-                    }
-                }
-            }
+            
         }
 
         public static void OpenWindow(IWindow window, IWindow parent = null){
@@ -92,7 +85,6 @@ namespace AbyssBehavior{
                         currentWindow = null;
             window.SetFocus(false);
             windowQueue.Remove(window);
-            buffer.Clear();
         }
 
         public static void ThrowError(Exception exception){

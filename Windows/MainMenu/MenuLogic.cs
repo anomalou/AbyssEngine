@@ -16,7 +16,6 @@ namespace AbyssBehavior{
         }
 
         protected void Start(){
-            Core.OpenWindow(new GameWindow(), window);
             // Core.ThrowError("oshibka");
         }
 

@@ -28,10 +28,10 @@ namespace AbyssBehavior{
             _isVisible = true;
             _inFocus = false;
             _layer = 0;
-            canvas = CanvasFactory.CreateWidgetCanvas(transform.scale.x, transform.scale.y);
+            canvas = CanvasFactory.CreateCanvas(transform.scale.ToVector(), new Vector(30,30));
         }
 
-        public Point GetPoint(int x, int y, int depth){
+        public Point GetPoint(int x, int y, byte depth){
             return canvas.Get(x,y,depth);
         }
 
@@ -43,7 +43,11 @@ namespace AbyssBehavior{
 
         public void SetSize(Vector size){
             transform.SetScale(size);
-            canvas.ReInitialization(size.x, size.y);
+            canvas.ReInitialization(size);
+        }
+
+        public void SetCellSize(Vector size){
+            canvas.ReInitialization(transform.scale.ToVector(), size);
         }
 
         public void SetVisible(bool state){

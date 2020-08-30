@@ -8,9 +8,6 @@ namespace AbyssBehavior{
         int maxScroll;
         int spacing;
 
-        
-
-
         public ScrollBox():base(){
             spacing = 0; 
             currentScroll = 0;
@@ -20,7 +17,7 @@ namespace AbyssBehavior{
         }
 
         protected override void Behaviour(){
-            Vector prevPosition = new Vector(transform.position.x, transform.position.y - spacing);
+            Vector prevPosition = new Vector((int)transform.position.x, (int)transform.position.y - spacing * canvas.cellSize.y);
             foreach(Widget w in items){
                 if(w.transform.scale.x > transform.scale.x)
                     SetSize(new Vector(w.transform.scale.x, transform.scale.y));
@@ -34,9 +31,9 @@ namespace AbyssBehavior{
             int index = currentScroll - 1;
             if(index > -1){
                 for(int i = index; i < maxScroll; i++){
-                    if((items[i].transform.scale.x <= transform.scale.x) && (items[i].transform.scale.y <= transform.scale.y) && (prevPosition.y + spacing < (transform.position.y + transform.scale.y))){
-                        items[i].transform.position = new Vector(prevPosition.x, prevPosition.y + spacing);
-                        prevPosition = new Vector(items[i].transform.position.ToVector().x, items[i].transform.position.ToVector().y + items[i].transform.scale.y);
+                    if((items[i].transform.scale.x <= transform.scale.x) && (items[i].transform.scale.y <= transform.scale.y) && (prevPosition.y + spacing * canvas.cellSize.y < (transform.position.y + transform.scale.y * canvas.cellSize.y))){
+                        items[i].transform.position = new Vector(prevPosition.x, prevPosition.y + spacing * canvas.cellSize.y);
+                        prevPosition = new Vector(items[i].transform.position.ToVector().x, items[i].transform.position.ToVector().y + items[i].transform.scale.y * canvas.cellSize.y);
                     }else{
                         items[i].SetVisible(false);
                     }
@@ -47,9 +44,9 @@ namespace AbyssBehavior{
             }else{
                 foreach(Widget w in items){
                     w.SetVisible(true);
-                    if((w.transform.scale.x <= transform.scale.x) && (w.transform.scale.y <= transform.scale.y) && (prevPosition.y + spacing < (transform.position.y + transform.scale.y))){
-                        w.transform.position = new Vector(prevPosition.x, prevPosition.y + spacing);
-                        prevPosition = new Vector(w.transform.position.ToVector().x, w.transform.position.ToVector().y + w.transform.scale.y);
+                    if((w.transform.scale.x <= transform.scale.x) && (w.transform.scale.y <= transform.scale.y) && (prevPosition.y + spacing * canvas.cellSize.y < (transform.position.y + transform.scale.y * canvas.cellSize.y))){
+                        w.transform.position = new Vector(prevPosition.x, prevPosition.y + spacing * canvas.cellSize.y);
+                        prevPosition = new Vector(w.transform.position.ToVector().x, w.transform.position.ToVector().y + w.transform.scale.y * canvas.cellSize.y);
                     }else{
                         w.SetVisible(false);
                     }

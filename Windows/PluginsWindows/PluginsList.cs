@@ -3,15 +3,13 @@ namespace AbyssBehavior{
         protected override void Initialization(){
             SetLogic(new PluginsListLogic(this));
             // logic = new PluginsListLogic(this);
-            transform.SetScale(Core.buffer.scale);
-            SetupBackground(FillBackground());
 
             TextBox window = new TextBox("Installed plugins:");
             window.SetPosition(new Vector(1,1));
 
             ScrollBox group = new ScrollBox();
             group.SetPosition(new Vector(1,3));
-            group.SetSize(new Vector(Core.buffer.width - 2, Core.buffer.height - 2));
+            group.SetSize(new Vector(62, 34));
             AddWidget("group", group);
             AddWidget("window",window);
             if(PluginManager.plugins.Count > 0){
